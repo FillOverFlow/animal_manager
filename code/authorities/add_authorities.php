@@ -24,7 +24,8 @@
   checkValueExport($var); //call from helper.php
   //creat sql
   $sql_insert = "INSERT INTO authorities VALUES (
-  '".$var['id']."',
+  0,
+  '2',
   'aresst_deparment',
   '".$var['idcard']."',
   '".$var['username']."',
@@ -49,7 +50,7 @@
     echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
   }else{
     echo "<script>alert('ข้อมูลผิดพลาด ชื่อรหัสหน่วยงานอาจจะซ่่้ำกัน');</script>";
-    //echo ($conn -> error);
+    echo ($conn -> error);
     echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
   }
 
