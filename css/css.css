@@ -1,0 +1,16 @@
+
+
+
+.decoration{
+
+text-align:center; /* ตำแหน่งที่จะให้เส้นอยู่ Left/Right/Center */
+
+}
+
+.decoration .decoration-inside{
+
+height: 100px; /* ความสูงของเส้น */
+width: 1px; /* ความหนาของเส้น */
+background-color: black; /* สีของเส้น */
+
+}
