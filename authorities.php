@@ -1,3 +1,6 @@
+<?php
+  require 'code/connect.php';
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,13 +27,13 @@
       <hr class="float-left" width="94%" size="20" color="black">
 
     </div>
-    
+
   </div>
 
   <?php include('menu.php');  ?>
 
 
-  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100">
 
     <div class="row mt-5">
       <div class="col-12">
@@ -51,16 +54,24 @@
               </tr>
             </thead>
             <tbody>
+              <?php
+                $sql_all_authorities = "SELECT * FROM authorities WHERE Authorities_Status = '1'";
+                $result = $conn->query($sql_all_authorities);
+                echo ($conn-> error);
+                $i = 1;
+                  while($row = $result->fetch_assoc()) {
+                    ?>
               <tr>
-                <td>-</td>
-                <th>-</th>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td><a href="authoritiessee.php" class="btn btn-light"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
-                <td><a href="authoritiesedit.php" class="btn btn-light"><img src="picture/gg.png" width="20px" height="20px"></a></td>
+                <td><?php echo $i; ?></td>
+                <th><?php echo $row['Authorities_First_Name']; ?></th>
+                <td><?php echo $row['Authorities_Last_Name']; ?></td>
+                <td><?php echo $row['ID_Arrest_Deparment']; ?></td>
+                <td><?php echo $row['Position']; ?></td>
+                <td><a href="authoritiessee.php?id=<?php echo $row['ID_Arrest_Deparment']; ?>" class="btn btn-light"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
+                <td><a href="authoritiesedit.php?id=<?php echo $row['ID_Arrest_Deparment']; ?>" class="btn btn-light"><img src="picture/gg.png" width="20px" height="20px"></a></td>
                 <td><a class="btn btn-light deleteegg"><img src="picture/delete.png" width="20px" height="20px"></a></td>
               </tr>
+              <?php $i++; } ?>
             </tbody>
           </table>
 

@@ -24,13 +24,13 @@
       <hr class="float-left" width="94%" size="20" color="black">
 
     </div>
-    
+
   </div>
 
   <?php include('menu.php');?>
 
 
-  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100">
 
     <div class="row">
       <div class="col-sm"><label>&nbsp;&nbsp;เพิ่มข้อมูลเจ้าหน้าที่</label></div>
@@ -38,6 +38,8 @@
       </div>
       <div class="col-sm"></div>
     </div>
+    <form action="code/authorities/add_authorities.php" method="post">
+     
 
     <div class="row p-2">
       <div class="col-sm">
@@ -45,104 +47,109 @@
           <thead>
           </thead>
           <tbody>
-            <tr>
-              <th><label class="float-right">รหัสเจ้าหน้าที่ :</label>
-              </th>
-              <td><input style="width:100%;" type="text" name=""></td>
-            </tr>
+           
 
             <tr>
               <th><label class="float-right">รหัสบัตรประชาชน :</label>
               </th>
-              <td><input style="width:100%;" type="text" name=""></td>
+              <td><input style="width:100%;" type="text" name="idcard"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ชื่อผู้ใช้ :</label>
               </th>
-              <td><input style="width:100%;" type="text"   name=""></td>
+              <td><input style="width:100%;" type="text"   name="username"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รหัสผ่าน :</label>
               </th>
-              <td><input style="width:100%;"  type="text"   name=""></td>
+              <td><input style="width:100%;"  type="text"   name="password"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ตำแหน่ง :</label>
               </th>
-              <td><select style="width:100%;">
-                <option>กรุณาเลือกเพศ</option>
-              </select></td>
+              <td>
+              <select name="position" style="width:100%;">
+                    <option >กรุณาเลือกตำแหน่ง</option>
+                    <option value="1">เจ้าหน้าที่</option>
+                    <option value="2">แพทย์</option>
+                </select>
+              </td>
             </tr>
 
             <tr>
               <th><label class="float-right">เพศ :</label>
               </th>
-              <td><select style="width:100%;">
-                <option>กรุณาเลือกเพศ</option>
+              <td>
+                <select name="gender" style="width:100%;">
+                    <option >กรุณาเลือกเพศ</option>
+                    <option value="1">ชาย</option>
+                    <option value="2">หญิง</option>
+                </select>
               </select></td>
             </tr>
             <tr>
               <th><label class="float-right" disabled="">ชื่อ :</label>
               </th>
-              <td><input  style="width:100%;"  type="text"></td>
+              <td><input  style="width:100%;"  name="first_name" type="text"></td>
             </tr>
 
             <tr>
               <th><label class="float-right" disabled="">นามสกุล :</label>
               </th>
-              <td><input style="width:100%;" type="text"></td>
+              <td><input style="width:100%;" name="last_name" type="text"></td>
             </tr>
 
-           <tr>
-                <th><label class="float-right">วันที่ :</label>
-                </th>
-                <td>
+          
+             <tr>
+                  <th><label class="float-right">วันที่ :</label>
+                  </th>
+                  <td>
 
+                    <span>
+                      <select name="birth_day" >
+                        <?php
+                        $start_date = 1;
+                        $end_date   = 31;
+                        for( $j=$start_date; $j<=$end_date; $j++ ) {
+                          echo '<option value='.$j.'>'.$j.'</option>';
+                        }
+                        ?>
+                      </select>
+                    </span>
+                    <span>
+                     <select name="birth_month" >
+                      <?php
+                      $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+                      for($i=0; $i<=11; $i++) {
+                        ?>
+                        <option value="<?php echo $thaimonth[$i]; ?>"><?php echo $thaimonth[$i]; ?></option>
+                      <?php } ?>
+                    </select>
+                  </span>
                   <span>
-                    <select name="birth_day" >
-                      <?php 
-                      $start_date = 1;
-                      $end_date   = 31;
-                      for( $j=$start_date; $j<=$end_date; $j++ ) {
-                        echo '<option value='.$j.'>'.$j.'</option>';
+                    <select name="birth_year" >
+                      <?php
+                      $year = date('Y')+543;
+                      $min = $year - 60;
+                      $max = $year;
+                      for( $i=$max; $i>=$min; $i-- ) {
+                        echo '<option value='.$i.'>'.$i.'</option>';
                       }
                       ?>
                     </select>
                   </span>
-                  <span>
-                   <select name="birth_month" >
-                    <?php 
-                    $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-                    for($i=0; $i<=11; $i++) { 
-                      ?>
-                      <option value="<?php echo $thaimonth[$i]; ?>"><?php echo $thaimonth[$i]; ?></option>
-                    <?php } ?>
-                  </select> 
-                </span>
-                <span>
-                  <select name="birth_year" >
-                    <?php 
-                    $year = date('Y')+543;
-                    $min = $year - 60;
-                    $max = $year;
-                    for( $i=$max; $i>=$min; $i-- ) {
-                      echo '<option value='.$i.'>'.$i.'</option>';
-                    }
-                    ?>
-                  </select>
-                </span>
 
-              </td>
-            </tr>
+                </td>
+              </tr>
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+    </form>
 
-
-    </div>
 
     <div class="col-sm">
 
@@ -153,21 +160,23 @@
           <tr>
             <th><label class="float-right">เบอร์โทร :</label>
             </th>
-            <td><input style="width:100%;" type="text" name=""></td>
+            <td><input style="width:100%;" type="text" name="phone"></td>
           </tr>
 
           <tr>
             <th><label class="float-right"  style="width:100%;">สถานะการทำงาน :</label>
             </th>
-            <td><select class="" style="width:100%;">
+            <td><select name ="status" style="width:100%;">
               <option selected>เลือกสถานะ</option>
+              <option value="1">ทำงานอยู่</option>
+              <option value="2">ลาออก</option>
             </select></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ที่อยู่ :</label>
             </th>
-            <td><textarea style="width:100%;">--</textarea></td>
+            <td><textarea style="width:100%;" name="address">--</textarea></td>
           </tr>
         </tbody>
       </table>
@@ -182,8 +191,8 @@
             </th>
           </tr>
           <tr>
-            <th> <input width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*">
-            </th>
+           <!--  <th> <input width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*">
+            </th> -->
           </tr>
         </tbody>
       </table>
