@@ -1,3 +1,4 @@
+<?php include 'code/connect.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,25 +54,25 @@
               <tr>
                 <th><label class="float-right">รหัสคดี :</label>
                 </th>
-                <td><input type="text"   placeholder="" style="width: 100%;"></td>
+                <td><input type="text" disabled   placeholder="" style="width: 100%;"></td>
               </tr>
 
               <tr>
                 <th><label class="float-right">คดีอาญาที่ :</label>
                 </th>
-                <td><input type="text"   placeholder="" style="width: 100%;"></td>
+                <td><input type="text" name="Criminal_Case_No"   placeholder="" style="width: 100%;"></td>
               </tr>
 
               <tr>
                 <th><label class="float-right">ยึดทรัพท์ที่ :</label>
                 </th>
-                <td><input type="text"   placeholder="" style="width: 100%;"></td>
+                <td><input type="text" name="Confiscation_Case_No"   placeholder="" style="width: 100%;"></td>
               </tr>
 
               <tr>
                 <th><label class="float-right">ปวจ.ข้อที่ :</label>
                 </th>
-                <td><input type="text"   placeholder="" style="width: 100%;"></td>
+                <td><input type="text" name="Daily_No"   placeholder="" style="width: 100%;"></td>
               </tr>
 
               <tr>
@@ -80,7 +81,7 @@
                 <td>
 
                   <span>
-                    <select name="birth_day" >
+                    <select name="day" >
                       <?php 
                       $start_date = 1;
                       $end_date   = 31;
@@ -91,7 +92,7 @@
                     </select>
                   </span>
                   <span>
-                   <select name="birth_month" >
+                   <select name="month" >
                     <?php 
                     $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
                     for($i=0; $i<=11; $i++) { 
@@ -101,7 +102,7 @@
                   </select> 
                 </span>
                 <span>
-                  <select name="birth_year" >
+                  <select name="year" >
                     <?php 
                     $year = date('Y')+543;
                     $min = $year - 60;
@@ -119,30 +120,33 @@
             <tr>
               <th><label class="float-right">เวลา :</label>
               </th>
-              <td><input type="text"   placeholder="" style="width: 100%;"></td>
+              <td><input type="text" name="Time_Case_Animal"   placeholder="" style="width: 100%;"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ผู้ต้องหา :</label>
               </th>
-              <td><input type="text"   placeholder="" style="width: 100%;"></td>
+              <td><input type="text" name="Suspect"   placeholder="" style="width: 100%;"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">หน่วยงานเจ้าของคดี :</label>
               </th>
-              <td><select style="width: 100%;">
-                <?php
-                $sql = "SELECT * FROM "; 
-                  ?>
-                <option>เลือกหน่วยงานเจ้าของคดี</option>
+              <td>
+               <?php
+               $sql = "SELECT * FROM deliver_department WHERE status = '1'"; 
+               $query = $conn->query($sql);?>
+               <select style="width: 100%;" nmae="Department_Case_Animal">
+                 <?php  while($row = $query->fetch_assoc()) { ?>
+                 <option value="<?php echo $row['ID_Deliver_Department']; ?>"><?php echo $row['Deliver_Department']; ?></option> 
+             <?php   } ?>
               </select></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
               </th>
-              <td><textarea style="width: 100%;"></textarea></td>
+              <td><textarea style="width: 100%;" name="Description_exhibit"></textarea></td>
             </tr>
           </tbody>
         </table>
@@ -165,17 +169,17 @@
             <tr>
               <th><label class="float-right">สะถานะคดี :</label>
               </th>
-              <td><select style="width: 210px;">
+              <td><select style="width: 210px;" name="Status_Case_Animal">
                 <option value="0" selected >เลือกสะถานะคดี</option>
-                <option value="1">ระหว่างดำเนเนคดี</option>
-                <option value="2">ถึงที่สุดแล้ว</option>
+                <option value="1">ระหว่ถึงที่สุดแล้วางดำเนเนคดี</option>
+                <option value="2"></option>
               </select></td>
             </tr>
 
             <tr>
               <th><label class="float-right">พิพากษาโดย :</label>
               </th>
-              <td><input type="text"   placeholder="" style="width: 210px;"></td>
+              <td><input type="text" name="Judged_by" placeholder="" style="width: 210px;"></td>
             </tr>
 
             <tr>
@@ -185,7 +189,7 @@
                 <!-- $thaiweek=array("วันอาทิตย์","วันจันทร์","วันอังคาร","วันพุธ","วันพฤหัส","วันศุกร์","วันเสาร์"); -->
 
                 <span>
-                  <select name="birth_day" >
+                  <select name="day1" >
                     <?php 
                     $start_date = 1;
                     $end_date   = 31;
@@ -196,7 +200,7 @@
                   </select>
                 </span>
                 <span>
-                  <select name="birth_month" >
+                  <select name="mont1" >
                     <?php 
                     $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
                     for($i=0; $i<=11; $i++) { 
@@ -206,7 +210,7 @@
                   </select> 
                 </span>
                 <span>
-                  <select name="birth_year" >
+                  <select name="year1" >
                     <?php 
                     $year = date('Y')+543;
                     $min = $year - 60;
@@ -224,31 +228,25 @@
             <tr>
               <th><label class="float-right">คดีดำที่ :</label>
               </th>
-              <td><input type="text"   placeholder="" style="width: 210px;"></td>
+              <td><input type="text" name="Undecided_Case_No"   placeholder="" style="width: 210px;"></td>
             </tr>
 
             <tr>
               <th><label class="float-right" >คดีแดงที่ :</label>
               </th>
-              <td><input type="text"   placeholder="" style="width: 210px;"></td>
+              <td><input type="text" name="Dong_Case_No"   placeholder="" style="width: 210px;"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">คำสั่งศาล :</label>
               </th>
-              <td><input type="text"   placeholder="" style="width: 210px;"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">ผู้ต้องหา :</label>
-              </th>
-              <td><input type="text"   placeholder="" style="width: 210px;"></td>
+              <td><input type="text" name="Injunction"   placeholder="" style="width: 210px;"></td>
             </tr>
 
             <tr class="mt-2">
               <th><label class="float-right">เอกสารบันทึกประจำวัน :</label>
               </th>
-              <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="addcase[]" style="width: 210px;"></td>
+              <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Recording_Document[]" style="width: 210px;"></td>
             </tr>
           </tbody>
         </table>
@@ -323,10 +321,10 @@
    $(document).ready(function() {
 
     $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageannimalcenter.php");
+      e.preventDefault()
+      window.location.replace("http://localhost/animal_manager/mannageannimalcenter.php");
 
-            })
+    })
     $('#myTab a').on('click', function (e) {
       e.preventDefault()
       $(this).tab('show')
