@@ -15,10 +15,16 @@
   'birth_year' => $_POST['birth_year'],
   'phone' => $_POST['phone'],
   'address' => $_POST['address'],
-  'status' => $_POST['status']
+  'status' => $_POST['status'],
+  'photo' =>  $_FILES['photo']
 );
 
+
   $birth_day = $var['birth_day'].$var['birth_month'].$var['birth_year'];
+  $target_dir = "../pictureAuthorities/";
+  $target_file = $target_dir.basename($_FILES['photo']['name']);
+
+
 
   checkValueExport($var); //call from helper.php
   //creat sql
@@ -38,13 +44,19 @@
   'email',
   '".$birth_day."',
   '".$var['phone']."',
-  'photo',
+  '".$_FILES['photo']['name']."',
   '".$var['status']."'
   )";
   echo "<br> show sql $sql_insert";
+  echo "<br>";
+  echo "<br> path tempath".$var['photo']['tmp_name'];
+  echo "<br> path_insert: $path_insert";
+
 
   //query
   if ($conn->query($sql_insert) === TRUE) {
+    //copy file to photo_path
+    checkUploadImage($target_dir,$var['photo']);
     echo "<script>alert('บันทึกข้อมูลสำเร็จ');</script>";
     echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
   }else{
@@ -52,6 +64,7 @@
     echo ($conn -> error);
     echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
   }
+
 
 
 
