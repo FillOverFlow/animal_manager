@@ -70,7 +70,7 @@
             </tr>
 
             <tr>
-              <th><label class="float-right">ตำแหน่ง :</label>
+              <th><label class="float-right" style="witdh:100%;">ตำแหน่ง :</label>
               </th>
               <td><select>
                 <option>กรุณาเลือกเพศ</option>
@@ -78,7 +78,7 @@
             </tr>
 
             <tr>
-              <th><label class="float-right">เพศ :</label>
+              <th><label class="float-right" style="witdh:100%;">เพศ :</label>
               </th>
               <td><select>
                 <option>กรุณาเลือกเพศ</option>
@@ -157,7 +157,7 @@
           </tr>
 
           <tr>
-            <th><label class="float-right"><font size="2px">สถานะการทำงาน :</font></label>
+            <th><label class="float-right" style="witdh:100%;"><font size="2px">สถานะการทำงาน :</font></label>
             </th>
             <td><select class="">
               <option selected>เลือกสถานะ</option>
