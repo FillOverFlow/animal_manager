@@ -121,8 +121,8 @@
 
         <div class="col-4" align="center">
           <div class="col-auto"><img src="picture/heart.png" width="250px" height="250px" ></div>
-          <div class="col-auto"><button class="btn btn-dark">ข้อมูลไข่</button></div>
-          <div class="col-auto"><button class="btn btn-dark" style="margin-top: 155px;">บันทึก</button></div>
+          <div class="col-auto"><button class="btn btn-light">ข้อมูลไข่</button></div>
+          <div class="col-auto"><button class="btn btn-light" style="margin-top: 155px;">บันทึก</button></div>
 
         </div>
 
@@ -221,7 +221,7 @@
 
         </div>
         <div>
-          <button class="btn btn-dark float-left">ย้อนกลับ</button>
+          <button class="btn btn-light float-left back">ย้อนกลับ</button>
         </div>
         <div class="float-right">
           <input class="float-right" type="text"   placeholder="" disabled=""><label class="float-right">ผู้กรอกข้อมูล :</label>
@@ -312,7 +312,10 @@
 
 
             $(document).ready(function() {
-
+              $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/mannageBreeder3.php");
+              })
 
               $('#myTab a').on('click', function (e) {
                 e.preventDefault()

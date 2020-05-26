@@ -235,7 +235,7 @@
 
            $('.back').on('click', function (e) {
             e.preventDefault()
-            window.location.replace("http://localhost/project/annimalmannage.php");
+            window.location.replace("http://localhost/animal_manager/annimalmannage.php");
 
           })
        

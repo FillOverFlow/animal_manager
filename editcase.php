@@ -53,25 +53,25 @@
           <tr>
             <th><label class="float-right">รหัสคดี :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">คดีอาญาที่ :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ยึดทรัพท์ที่ :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ปวจ.ข้อที่ :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
@@ -117,19 +117,19 @@
           <tr>
             <th><label class="float-right">เวลา :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ผู้ต้องหา :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">หน่วยงานเจ้าของคดี :</label>
             </th>
-            <td><select >
+            <td><select style="width:100%;">
               <option selected>เลือกหน่วยงานเจ้าของคดี</option>
               <option value="1">A</option>
               <option value="2">B</option>
@@ -140,7 +140,7 @@
           <tr>
             <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
             </th>
-            <td><textarea></textarea></td>
+            <td><textarea style="width:100%;"></textarea></td>
           </tr>
         </tbody>
       </table>
@@ -164,7 +164,7 @@
           <tr>
             <th><label class="float-right">สะถานะคดี :</label>
             </th>
-            <td><select >
+            <td><select style="width:100%;">
               <option selected>เลือกสะถานะคดี</option>
               <option value="1">A</option>
               <option value="2">B</option>
@@ -175,7 +175,7 @@
           <tr>
             <th><label class="float-right">พิพากษาโดย :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
@@ -192,7 +192,7 @@
                 </select> 
               </span>
               <span>
-                <select name="birth_day">
+                <select name="birth_day" >
                   <?php 
                   $start_date = 1;
                   $end_date   = 31;
@@ -221,25 +221,25 @@
           <tr>
             <th><label class="float-right">คดีดำที่ :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">คดีแดงที่ :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">คำสั่งศาล :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ผู้ต้องหา :</label>
             </th>
-            <td><input type="text"   placeholder=""></td>
+            <td><input style="width:100%;" type="text"   placeholder=""></td>
           </tr>
 
           <tr class="mt-2">
@@ -268,8 +268,8 @@
   </div>
 
 
-  <center><button class="btn btn-dark">บันทึก</button></center>
-  <button class="btn btn-dark float-left">ย้อนกลับ</button>
+  <center><button class="btn btn-light">บันทึก</button></center>
+  <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -326,7 +326,12 @@
 
 
      $(document).ready(function() {
+      
+         $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageannimalcenter.php");
 
+            })
           
           $('#myTab a').on('click', function (e) {
             e.preventDefault()

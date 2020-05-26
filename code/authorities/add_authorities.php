@@ -3,7 +3,6 @@
   include '../utils/basic_include.php';
 
   $var  = array(
-  'id'   => $_POST['id'],
   'idcard'=>$_POST['idcard'],
   'username' => $_POST['username'],
   'password' => $_POST['password'],

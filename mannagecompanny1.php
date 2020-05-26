@@ -168,7 +168,7 @@
           $(document).ready(function() {
             $('.back').on('click', function (e) {
               e.preventDefault()
-              window.location.replace("http://localhost/project/mannageuser.php");
+              window.location.replace("http://localhost/animal_manager/mannageuser.php");
 
             })
 

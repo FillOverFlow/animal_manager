@@ -39,71 +39,70 @@
       <div class="col-sm"></div>
     </div>
     <form action="code/authorities/add_authorities.php" method="post">
-      <div class="row p-2">
-        <div class="col-sm">
-          <table>
-            <thead>
-            </thead>
-            <tbody>
-              <tr>
-                <th><label class="float-right"><font size="2px">รหัสเจ้าหน้าที่ :</label>
-                </th>
-                <td><input type="text" name="id"></td>
-              </tr>
+     
 
-              <tr>
-                <th><label class="float-right"><font size="2px">รหัสบัตรประชาชน :</font></label>
-                </th>
-                <td><input type="text" name="idcard"></td>
-              </tr>
+    <div class="row p-2">
+      <div class="col-sm">
+        <table>
+          <thead>
+          </thead>
+          <tbody>
+           
 
-              <tr>
-                <th><label class="float-right">ชื่อผู้ใช้ :</label>
-                </th>
-                <td><input type="text"   name="username"></td>
-              </tr>
+            <tr>
+              <th><label class="float-right">รหัสบัตรประชาชน :</label>
+              </th>
+              <td><input style="width:100%;" type="text" name="idcard"></td>
+            </tr>
 
-              <tr>
-                <th><label class="float-right">รหัสผ่าน :</label>
-                </th>
-                <td><input type="text"   name="password"></td>
-              </tr>
+            <tr>
+              <th><label class="float-right">ชื่อผู้ใช้ :</label>
+              </th>
+              <td><input style="width:100%;" type="text"   name="username"></td>
+            </tr>
 
-              <tr>
-                <th><label class="float-right" style="witdh:100%;">ตำแหน่ง :</label>
-                </th>
-                <td>
-                  <select name="gender">
-                    <option >กรุณาเลือกเพศ</option>
-                    <option value="1">ชาย</option>
-                    <option value="2">หญิง</option>
-                </select>
-              </td>
-              </tr>
-              <tr>
-                <th><label class="float-right" style="witdh:100%;">เพศ :</label>
-                </th>
-                <td>
-                  <select name="position">
+            <tr>
+              <th><label class="float-right">รหัสผ่าน :</label>
+              </th>
+              <td><input style="width:100%;"  type="text"   name="password"></td>
+            </tr>
+
+            <tr>
+              <th><label class="float-right">ตำแหน่ง :</label>
+              </th>
+              <td>
+              <select name="position" style="width:100%;">
                     <option >กรุณาเลือกตำแหน่ง</option>
                     <option value="1">เจ้าหน้าที่</option>
                     <option value="2">แพทย์</option>
                 </select>
               </td>
+            </tr>
 
-              </tr>
-              <tr>
-                <th><label class="float-right" disabled="">ชื่อ :</label>
-                </th>
-                <td><input type="text" name="first_name"></td>
-              </tr>
+            <tr>
+              <th><label class="float-right">เพศ :</label>
+              </th>
+              <td>
+                <select name="gender" style="width:100%;">
+                    <option >กรุณาเลือกเพศ</option>
+                    <option value="1">ชาย</option>
+                    <option value="2">หญิง</option>
+                </select>
+              </select></td>
+            </tr>
+            <tr>
+              <th><label class="float-right" disabled="">ชื่อ :</label>
+              </th>
+              <td><input  style="width:100%;"  name="first_name" type="text"></td>
+            </tr>
 
-              <tr>
-                <th><label class="float-right" disabled="">นามสกุล :</label>
-                </th>
-                <td><input type="text" name="last_name"></td>
-              </tr>
+            <tr>
+              <th><label class="float-right" disabled="">นามสกุล :</label>
+              </th>
+              <td><input style="width:100%;" name="last_name" type="text"></td>
+            </tr>
 
+          
              <tr>
                   <th><label class="float-right">วันที่ :</label>
                   </th>
@@ -161,16 +160,15 @@
           <tr>
             <th><label class="float-right">เบอร์โทร :</label>
             </th>
-            <td><input type="text" name="phone"></td>
+            <td><input style="width:100%;" type="text" name="phone"></td>
           </tr>
 
           <tr>
-            <th><label class="float-right" style="witdh:100%;"><font size="2px">สถานะการทำงาน :</font></label>
+            <th><label class="float-right"  style="width:100%;">สถานะการทำงาน :</label>
             </th>
-            <td><select name ="status">
+            <td><select name ="status" style="width:100%;">
               <option selected>เลือกสถานะ</option>
               <option value="1">ทำงานอยู่</option>
-
               <option value="2">ลาออก</option>
             </select></td>
           </tr>
@@ -178,7 +176,7 @@
           <tr>
             <th><label class="float-right">ที่อยู่ :</label>
             </th>
-            <td><textarea name="address">--</textarea></td>
+            <td><textarea style="width:100%;" name="address">--</textarea></td>
           </tr>
         </tbody>
       </table>
@@ -211,7 +209,7 @@
     </div>
     <div class="row container-fluid mt-5">
       <div class="col-sm-4">
-        <button class="btn btn-light float-left">ย้อนกลับ</button>
+        <button class="btn btn-light float-left back">ย้อนกลับ</button>
       </div>
       <div class="col-sm-4" align="center">
       </div>
@@ -345,7 +343,10 @@
 
 
       $(document).ready(function() {
-
+        $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/authorities.php");
+              })
 
         $('#myTab a').on('click', function (e) {
           e.preventDefault()

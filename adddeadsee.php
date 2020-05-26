@@ -270,8 +270,8 @@
           </tbody>
         </table>
 
-        <button class="btn btn-dark">แก้ไข</button>&nbsp;
-        <button class="btn btn-dark">ลบ</button>
+        <button class="btn btn-light">แก้ไข</button>&nbsp;
+        <button class="btn btn-light">ลบ</button>
       </div>
 
 
@@ -281,7 +281,7 @@
     </div>
 
     <div class="mt-5 row">
-      <div class="col float-left"><button class="btn btn-dark ">ย้อนกลับ</button></div>
+      <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
       <div class="col float-right" align="right"><img class="" src="picture/prin.png" width="50" height="50">  </div>
     </div>
 
@@ -341,6 +341,11 @@
 
       $(document).ready(function() {
 
+        $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageannimaleditdead1.php");
+
+            })
 
         $('#myTab a').on('click', function (e) {
           e.preventDefault()

@@ -38,7 +38,7 @@
     <div class="row mt-5">
       <div class="col-12">
 
-       <center><a href="authoritiesadd.php" class="btn btn-dark">เพิ่มข้อมุลเจ้าหน้าที่</a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-dark" value="ค้นหา"></center>
+       <center><a href="authoritiesadd.php" class="btn btn-light">เพิ่มข้อมุลเจ้าหน้าที่</a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา"></center>
         <p>ค้นหาข้อมูลเจ้าหน้าที่</p>
           <table class="table table-bordered  mt-2">
             <thead>
@@ -78,7 +78,7 @@
         </div>
       </div>
 
-      <button class="btn btn-dark float-left">ย้อนกลับ</button>
+      <button class="btn btn-light float-left back">กลับ</button>
 
 
     </div>
@@ -313,7 +313,10 @@
   <script type="text/javascript">
 
     $(document).ready(function() {
-
+      $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/mannageuser.php");
+              })
 
       $('#myTab a').on('click', function (e) {
         e.preventDefault()

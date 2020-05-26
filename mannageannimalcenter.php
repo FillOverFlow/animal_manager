@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <button class="btn btn-light float-left">ย้อนกลับ</button>
+  <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -136,7 +136,12 @@
 
   $(document).ready(function() {
 
-          
+          $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageuser.php");
+
+            })
+
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

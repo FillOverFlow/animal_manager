@@ -273,7 +273,7 @@
         <img src="picture/logo.png" width="200px" height="200px" class="border border-dark">
       </div>
       <div class="row mt-2" style="padding-left: 90px;">
-        <button class="btn btn-dark float-right">แก้ไข</button>&nbsp;&nbsp;<button style="margin-left: 80px;" class="btn btn-dark float-right">ลบ</button>
+        <button class="btn btn-light float-right">แก้ไข</button>&nbsp;&nbsp;<button style="margin-left: 80px;" class="btn btn-light float-right">ลบ</button>
       </div>
     </div>
 
@@ -281,7 +281,7 @@
 
 
 
-    <button class="btn btn-dark float-left">ย้อนกลับ</button>
+    <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
   </div>
   <div class="col-1">
@@ -341,7 +341,10 @@
 
     $(document).ready(function() {
 
-
+      $('.back').on('click', function (e) {
+          e.preventDefault()
+          window.location.replace("http://localhost/animal_manager/mannageBreeder2.php");
+        })
       $('#myTab a').on('click', function (e) {
         e.preventDefault()
         $(this).tab('show')

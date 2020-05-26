@@ -261,7 +261,7 @@
       <div class="row mt-2">
 
         <tr>
-          <th><button class="btn btn-dark float-right">เพิ่มรูป</button>
+          <th><button class="btn btn-light float-right">เพิ่มรูป</button>
           </th>
         </tr>
 
@@ -281,8 +281,8 @@
   </div>
 
 
-  <center><button class="btn btn-dark">บันทึก</button><button class="btn btn-dark m-2">ยกเลิก</button></center>
-  <button class="btn btn-dark float-left">ย้อนกลับ</button>
+  <center><button class="btn btn-light">บันทึก</button><button class="btn btn-light m-2">ยกเลิก</button></center>
+  <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -339,7 +339,11 @@
 
 
      $(document).ready(function() {
+        $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageannimalcenterhdead1.php");
 
+            })
           
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
