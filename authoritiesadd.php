@@ -38,8 +38,8 @@
       </div>
       <div class="col-sm"></div>
     </div>
-    <form action="code/authorities/add_authorities.php" method="post">
-     
+    <form action="code/authorities/add_authorities.php" method="post" enctype="multipart/form-data">
+
 
     <div class="row p-2">
       <div class="col-sm">
@@ -47,7 +47,7 @@
           <thead>
           </thead>
           <tbody>
-           
+
 
             <tr>
               <th><label class="float-right">รหัสบัตรประชาชน :</label>
@@ -102,7 +102,7 @@
               <td><input style="width:100%;" name="last_name" type="text"></td>
             </tr>
 
-          
+
              <tr>
                   <th><label class="float-right">วันที่ :</label>
                   </th>
@@ -191,8 +191,8 @@
             </th>
           </tr>
           <tr>
-           <!--  <th> <input width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*">
-            </th> -->
+            <th> <input width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="photo" accept="image/*">
+            </th>
           </tr>
         </tbody>
       </table>
