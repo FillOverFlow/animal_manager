@@ -20,7 +20,6 @@
 
   $birth_day = $var['birth_day'].$var['birth_month'].$var['birth_year'];
 
-
   checkValueExport($var); //call from helper.php
   //creat sql
   $sql_insert = "INSERT INTO authorities VALUES (
