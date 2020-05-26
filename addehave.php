@@ -226,7 +226,7 @@
       </tbody>
     </table>
 
-    <button class="btn btn-dark">เพิ่มรูป</button>
+    <button class="btn btn-light">เพิ่มรูป</button>
 
     <div style="margin-top: 160px;" class="col-sm" align="center" position="relative" top="100px">
       <label class="float-left">ผู้กรอกข้อมูล :</label>
@@ -238,11 +238,11 @@
 
   <div class="row container-fluid mt-5">
     <div class="col-sm-4">
-      <button class="btn btn-dark float-left">ย้อนกลับ</button>
+      <button class="btn btn-light float-left back">ย้อนกลับ</button>
     </div>
     <div class="col-sm-4" align="center">
-      <button class="btn btn-dark" >บันทึก</button>
-      <button class="btn btn-dark" >ยกเลิก</button>
+      <button class="btn btn-light" >บันทึก</button>
+      <button class="btn btn-light" >ยกเลิก</button>
     </div>
     <div class="col-auto"></div>
   </div>
@@ -306,7 +306,11 @@
 
       $(document).ready(function() {
 
-          
+        $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageannimaledit.php");
+
+            })
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

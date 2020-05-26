@@ -300,14 +300,14 @@
           </tr>
 
           <tr>
-            <th><button class="btn btn-dark float-left">เพิ่มรูป</button>
+            <th><button class="btn btn-light float-left">เพิ่มรูป</button>
             </th>
-            <td><button class="btn btn-dark float-left showqr1">สร้าง QR-code</button>
+            <td><button class="btn btn-light float-left showqr1">สร้าง QR-code</button>
             </tr>
             <tr>
               <th>
               </th>
-              <td><button class="btn btn-dark float-left" >พิมพ์ QR-code</button>
+              <td><button class="btn btn-light float-left" >พิมพ์ QR-code</button>
               </tr>
               <tr class="mt-5">
                 <td></td>
@@ -328,12 +328,12 @@
 
             </tbody>
           </table>
-          <center><button class="btn btn-dark mt-5 m-5" >บันทึก</button></center>
+          <center><button class="btn btn-light mt-5 m-5" >บันทึก</button></center>
         </div>
 
 
 
-        <button class="btn btn-dark float-left">ย้อนกลับ</button>
+        <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
       </div>
       <div class="col-1">
@@ -393,7 +393,11 @@
 
     $(document).ready(function() {
 
-          
+            $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageannimalcenterhdead.php");
+
+            })
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

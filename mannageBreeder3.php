@@ -37,7 +37,7 @@
     <div class="col-10">
 
       <center><form>
-        <a class="btn btn-dark" href="mannageBreeder3_Match.php">เพิ่มข้อมูลจับคู่</a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-dark" value="ค้นหา">
+        <a class="btn btn-light" href="mannageBreeder3_Match.php">เพิ่มข้อมูลจับคู่</a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา">
       </form></center>
 
       <p>ค้นหาข้อมูลการจับคู่พ่อ-แม่พันธุ์</p>
@@ -68,7 +68,7 @@
     <div class="col-1"></div>
   </div>
 
-  <button class="btn btn-dark float-left">ย้อนกลับ</button>
+  <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -144,7 +144,10 @@
 
   $(document).ready(function() {
 
-          
+      $('.back').on('click', function (e) {
+          e.preventDefault()
+          window.location.replace("http://localhost/animal_manager/mannageuser.php");
+        })
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

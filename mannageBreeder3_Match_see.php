@@ -117,8 +117,8 @@
 
       <div class="col-4" align="center">
         <div class="col-auto"><img src="picture/heart.png" width="250px" height="250px" ></div>
-        <div class="col-auto"><button class="btn btn-dark" style="width: 20%;">ข้อมูลไข่</button></div>
-        <div class="col-auto"><button class="btn btn-dark" style="margin-top: 155px; width: 20%;">แก้ไข</button><br><button style="margin-top: 5px;width: 20%;" class="btn btn-dark">ลบ</button></div>
+        <div class="col-auto"><button class="btn btn-light" style="width: 20%;">ข้อมูลไข่</button></div>
+        <div class="col-auto"><button class="btn btn-light" style="margin-top: 155px; width: 20%;">แก้ไข</button><br><button style="margin-top: 5px;width: 20%;" class="btn btn-light">ลบ</button></div>
 
       </div>
 
@@ -214,7 +214,7 @@
     </div>
     <div class="row">
       <div class="col-sm float-left">
-        <button class="btn btn-dark"  style="width: 10%;">ย้อนกลับ</button>
+        <button class="btn btn-light back"  style="width: 10%;" >ย้อนกลับ</button>
       </div>
       <div class="col-sm ">
         <input class="float-right" type="text" placeholder="" disabled=""><label class="float-right">ผู้กรอกข้อมูล :&nbsp;</label>
@@ -312,7 +312,10 @@
 
         $(document).ready(function() {
 
-
+          $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/mannageBreeder3.php");
+              })
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

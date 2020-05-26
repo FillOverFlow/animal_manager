@@ -206,18 +206,18 @@
         </tbody>
       </table>
 
-      <button class="btn btn-dark">เพิ่มรูป</button>
+      <button class="btn btn-light">เพิ่มรูป</button>
 
     </div>
 
 
     <div class="row container-fluid mt-5">
       <div class="col-sm-4">
-        <button class="btn btn-dark float-left">ย้อนกลับ</button>
+        <button class="btn btn-light float-left back">ย้อนกลับ</button>
       </div>
       <div class="col-sm-4" align="center">
-        <button class="btn btn-dark" >บันทึก</button>
-        <button class="btn btn-dark" >ยกเลิก</button>
+        <button class="btn btn-light" >บันทึก</button>
+        <button class="btn btn-light" >ยกเลิก</button>
       </div>
       <div class="col-auto"></div>
     </div>
@@ -246,7 +246,7 @@
         <img src="picture/logo.png" width="100%" height="100%" class="border border-dark">
       </div>
       <div class="mt-2">
-        <center><button type="button" class="btn btn-light">ยืนยัน</button></center>
+        <center><button type="button" class="btn btn-light ">ยืนยัน</button></center>
       </div>
     </div>
   </div>
@@ -356,7 +356,10 @@
 
     $(document).ready(function() {
 
-
+      $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageBreeder.php");
+            })
       $('#myTab a').on('click', function (e) {
         e.preventDefault()
         $(this).tab('show')

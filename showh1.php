@@ -237,7 +237,7 @@
       <div class="row mt-2">
 
         <tr>
-          <th><a href="edith1.php" class="btn btn-dark float-right">แก้ไข</a>
+          <th><a href="edith1.php" class="btn btn-light float-right">แก้ไข</a>
           </th>
 
         </tr>
@@ -250,7 +250,7 @@
       <div class="row mt-2">
 
         <tr>
-          <th><button class="btn btn-dark float-right deleteannimal">ลบ</button>
+          <th><button class="btn btn-light float-right deleteannimal">ลบ</button>
           </th>
         </tr>
 
@@ -270,7 +270,7 @@
 
   
   <div class="mt-5 row">
-    <div class="col float-left"><button class="btn btn-dark ">ย้อนกลับ</button></div>
+    <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
     <div class="col float-right" align="right"><img class="" src="picture/prin.png" width="50" height="50">  </div>
   </div>
 
@@ -331,7 +331,11 @@
 
      $(document).ready(function() {
 
-          
+          $('.back').on('click', function (e) {
+              e.preventDefault()
+              window.location.replace("http://localhost/animal_manager/mannageannimalcenterhlive1.php");
+
+            })
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

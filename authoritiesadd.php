@@ -46,54 +46,54 @@
           </thead>
           <tbody>
             <tr>
-              <th><label class="float-right"><font size="2px">รหัสเจ้าหน้าที่ :</label>
+              <th><label class="float-right">รหัสเจ้าหน้าที่ :</label>
               </th>
-              <td><input type="text" name=""></td>
+              <td><input style="width:100%;" type="text" name=""></td>
             </tr>
 
             <tr>
-              <th><label class="float-right"><font size="2px">รหัสบัตรประชาชน :</font></label>
+              <th><label class="float-right">รหัสบัตรประชาชน :</label>
               </th>
-              <td><input type="text" name=""></td>
+              <td><input style="width:100%;" type="text" name=""></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ชื่อผู้ใช้ :</label>
               </th>
-              <td><input type="text"   name=""></td>
+              <td><input style="width:100%;" type="text"   name=""></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รหัสผ่าน :</label>
               </th>
-              <td><input type="text"   name=""></td>
+              <td><input style="width:100%;"  type="text"   name=""></td>
             </tr>
 
             <tr>
-              <th><label class="float-right" style="witdh:100%;">ตำแหน่ง :</label>
+              <th><label class="float-right">ตำแหน่ง :</label>
               </th>
-              <td><select>
+              <td><select style="width:100%;">
                 <option>กรุณาเลือกเพศ</option>
               </select></td>
             </tr>
 
             <tr>
-              <th><label class="float-right" style="witdh:100%;">เพศ :</label>
+              <th><label class="float-right">เพศ :</label>
               </th>
-              <td><select>
+              <td><select style="width:100%;">
                 <option>กรุณาเลือกเพศ</option>
               </select></td>
             </tr>
             <tr>
               <th><label class="float-right" disabled="">ชื่อ :</label>
               </th>
-              <td><input type="text"></td>
+              <td><input  style="width:100%;"  type="text"></td>
             </tr>
 
             <tr>
               <th><label class="float-right" disabled="">นามสกุล :</label>
               </th>
-              <td><input type="text"></td>
+              <td><input style="width:100%;" type="text"></td>
             </tr>
 
            <tr>
@@ -153,13 +153,13 @@
           <tr>
             <th><label class="float-right">เบอร์โทร :</label>
             </th>
-            <td><input type="text" name=""></td>
+            <td><input style="width:100%;" type="text" name=""></td>
           </tr>
 
           <tr>
-            <th><label class="float-right" style="witdh:100%;"><font size="2px">สถานะการทำงาน :</font></label>
+            <th><label class="float-right"  style="width:100%;">สถานะการทำงาน :</label>
             </th>
-            <td><select class="">
+            <td><select class="" style="width:100%;">
               <option selected>เลือกสถานะ</option>
             </select></td>
           </tr>
@@ -167,7 +167,7 @@
           <tr>
             <th><label class="float-right">ที่อยู่ :</label>
             </th>
-            <td><textarea>--</textarea></td>
+            <td><textarea style="width:100%;">--</textarea></td>
           </tr>
         </tbody>
       </table>
@@ -200,7 +200,7 @@
     </div>
     <div class="row container-fluid mt-5">
       <div class="col-sm-4">
-        <button class="btn btn-light float-left">ย้อนกลับ</button>
+        <button class="btn btn-light float-left back">ย้อนกลับ</button>
       </div>
       <div class="col-sm-4" align="center">
       </div>
@@ -334,7 +334,10 @@
 
 
       $(document).ready(function() {
-
+        $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/authorities.php");
+              })
 
         $('#myTab a').on('click', function (e) {
           e.preventDefault()

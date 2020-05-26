@@ -141,7 +141,7 @@
           </tbody>
         </table>
 
-        <button class="btn btn-dark" style="margin-top: 10px;">แก้ไข</button>&nbsp;<button class="btn btn-dark" style="margin-top: 10px;">ลบ</button>
+        <button class="btn btn-light" style="margin-top: 10px;">แก้ไข</button>&nbsp;<button class="btn btn-light" style="margin-top: 10px;">ลบ</button>
 
       </div>
 
@@ -149,14 +149,14 @@
         <div class="col-sm-4">
         </div>
         <div class="col-sm-4" align="center">
-          <button class="btn btn-dark" >กลับ</button>&nbsp;
-          <button class="btn btn-dark" >ถัดไป</button>
+          <button class="btn btn-light" >กลับ</button>&nbsp;
+          <button class="btn btn-light" >ถัดไป</button>
         </div>
         <div class="col-sm-4"></div>
       </div>
       <div class="row container-fluid mt-5">
         <div class="col-sm-4">
-          <button class="btn btn-dark float-left">ย้อนกลับ</button>
+          <button class="btn btn-light float-left back">ย้อนกลับ</button>
         </div>
         <div class="col-sm-4" align="center">
         </div>
@@ -291,6 +291,10 @@
 
         $(document).ready(function() {
 
+          $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/authorities.php");
+              })
 
           $('#myTab a').on('click', function (e) {
             e.preventDefault()

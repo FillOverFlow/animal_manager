@@ -72,7 +72,7 @@
             <tr>
               <th><label class="float-right">ตำแหน่ง :</label>
               </th>
-              <td><select>
+              <td><select style="width:100%;">
                 <option>กรุณาเลือกเพศ</option>
               </select></td>
             </tr>
@@ -80,7 +80,7 @@
             <tr>
               <th><label class="float-right">เพศ :</label>
               </th>
-              <td><select>
+              <td><select style="width:100%;">
                 <option>กรุณาเลือกเพศ</option>
               </select></td>
             </tr>
@@ -99,7 +99,7 @@
             <tr>
               <th><label class="float-right">ว/ด/ป เกิด :</label>
               </th>
-              <td><select>
+              <td><select style="width:100%;">
                 <option>วัน/เดือน/ปี</option>
               </select></td>
             </tr>
@@ -124,7 +124,7 @@
             <tr>
               <th><label class="float-right">สถานะการทำงาน :</label>
               </th>
-              <td><select class="">
+              <td><select class="" style="width:100%;">
                 <option selected>เลือกสถานะ</option>
               </select></td>
             </tr>
@@ -149,7 +149,7 @@
           </tbody>
         </table>
 
-        <button class="btn btn-dark" style="margin-top: 10px;">เพิ่มรูป</button>
+        <button class="btn btn-light" style="margin-top: 10px;">เพิ่มรูป</button>
 
       </div>
 
@@ -157,14 +157,14 @@
           <div class="col-sm-4">
           </div>
           <div class="col-sm-4" align="center">
-            <button class="btn btn-dark" >บันทึก</button>
-            <button class="btn btn-dark" >ยกเลิก</button>
+            <button class="btn btn-light" >บันทึก</button>
+            <button class="btn btn-light" >ยกเลิก</button>
           </div>
           <div class="col-sm-4"></div>
         </div>
          <div class="row container-fluid mt-5">
           <div class="col-sm-4">
-            <button class="btn btn-dark float-left">ย้อนกลับ</button>
+            <button class="btn btn-light float-left back">ย้อนกลับ</button>
           </div>
           <div class="col-sm-4" align="center">
           </div>
@@ -298,7 +298,10 @@
 
 
         $(document).ready(function() {
-
+          $('.back').on('click', function (e) {
+               e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/authorities.php");
+              })
 
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
