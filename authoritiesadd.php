@@ -1,3 +1,4 @@
+<?php require_once "code/connect.php"; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -78,6 +79,24 @@
                 </select>
               </td>
             </tr>
+
+             <tr>
+              <th><label class="float-right">หน่วยงานนำส่ง :</label>
+              </th>
+              <td>
+              <select name="id_deparment" style="width:100%;">
+              <?php
+                $somesql = "SELECT * FROM arrest_deparment  WHERE status = 1";
+                $result = $conn->query($somesql);
+                $i =1;
+                while ($row = $result->fetch_assoc()) {
+               ?>
+               <option value="<?php echo $row['ID_Arrest_Deparment']; ?>"><?php echo $row['Arrest_Deparment']; ?></option>
+               <?php $i++;} ?>
+                </select>
+              </td>
+            </tr>
+
 
             <tr>
               <th><label class="float-right">เพศ :</label>

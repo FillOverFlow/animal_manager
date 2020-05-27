@@ -4,6 +4,7 @@
 
   $var  = array(
   'idcard'=>$_POST['idcard'],
+  'id_deparment' => $_POST['id_deparment'],
   'username' => $_POST['username'],
   'password' => $_POST['password'],
   'position' => $_POST['position'],
@@ -30,9 +31,9 @@
   //creat sql
   $sql_insert = "INSERT INTO authorities VALUES (
   0,
-  '2',
-  'aresst_deparment',
   '".$var['idcard']."',
+  'aresst_deparment',
+  '".$var['id_deparment']."',
   '".$var['username']."',
   '".md5($var['password'])."',
   'Noun_prefix',
@@ -52,8 +53,7 @@
   echo "<br> path tempath".$var['photo']['tmp_name'];
   echo "<br> path_insert: $path_insert";
 
-
-  //query
+   //query
   if ($conn->query($sql_insert) === TRUE) {
     //copy file to photo_path
     checkUploadImage($target_dir,$var['photo']);
