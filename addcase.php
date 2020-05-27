@@ -38,7 +38,7 @@
       </div>
       <div class="col-4"></div>
     </div>
-    <form action="code/addcase_add.php" method="POST" enctype="multipart/form-data">
+    <form action="code/mannageannimalcenter/addcase_add.php" method="POST" enctype="multipart/form-data">
       <div class="row p-5">
         <div class="col-6">
 
@@ -136,7 +136,7 @@
                <?php
                $sql = "SELECT * FROM deliver_department WHERE status = '1'"; 
                $query = $conn->query($sql);?>
-               <select style="width: 100%;" nmae="Department_Case_Animal">
+               <select style="width: 100%;" name="Department_Case_Animal">
                  <?php  while($row = $query->fetch_assoc()) { ?>
                  <option value="<?php echo $row['ID_Deliver_Department']; ?>"><?php echo $row['Deliver_Department']; ?></option> 
              <?php   } ?>
@@ -171,8 +171,8 @@
               </th>
               <td><select style="width: 210px;" name="Status_Case_Animal">
                 <option value="0" selected >เลือกสะถานะคดี</option>
-                <option value="1">ระหว่ถึงที่สุดแล้วางดำเนเนคดี</option>
-                <option value="2"></option>
+                <option value="1">ระหว่างดำเนินคดี</option>
+                <option value="2">ถึงที่สุดแล้ว</option>
               </select></td>
             </tr>
 
@@ -247,6 +247,16 @@
               <th><label class="float-right">เอกสารบันทึกประจำวัน :</label>
               </th>
               <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Recording_Document[]" style="width: 210px;"></td>
+            </tr>
+             <tr class="mt-2">
+              <th><label class="float-right"></label>
+              </th>
+              <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Arrest_Document[]" style="width: 210px;"></td>
+            </tr>
+             <tr class="mt-2">
+              <th><label class="float-right"></label>
+              </th>
+              <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Deliver_Document[]" style="width: 210px;"></td>
             </tr>
           </tbody>
         </table>
