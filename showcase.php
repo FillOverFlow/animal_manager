@@ -1,3 +1,4 @@
+<?php include 'code/connect.php'; ?> 
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,166 +28,169 @@
     
   </div>
 
-<?php include('menu.php');  ?>
+  <?php include('menu.php');  ?>
 
-<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
 
-  <div class="row">
-    <div class="col-4"><label>&nbsp;&nbsp;เพิ่มข้อมูลคดี</label></div>
-    <div class="col-4">
-    </div>
-    <div class="col-4"></div>
-  </div>
-
-  <div class="row p-5">
-    <div class="col-6">
-
-
-      <table>
-        <thead>
-          <tr>
-
-          </tr>
-        </thead>
-        <tbody>
-
-          <tr>
-            <th><label class="float-right">รหัสคดี :</label>
-            </th>
-            <td>001</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">คดีอาญาที่ :</label>
-            </th>
-            <td>35/2553</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">ยึดทรัพท์ที่ :</label>
-            </th>
-            <td>36/2553</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">ปวจ.ข้อที่ :</label>
-            </th>
-            <td>2</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">วันที่ :</label>
-            </th>
-            <td>
-              10/10/2020
-            </td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">เวลา :</label>
-            </th>
-            <td>11:00</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">ผู้ต้องหา :</label>
-            </th>
-            <td>-</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">หน่วยงานเจ้าของคดี :</label>
-            </th>
-            <td>-</td>
-          </tr>
-
-          <tr>
-            <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
-            </th>
-            <td>-</td>
-          </tr>
-        </tbody>
-      </table>
-
-
+    <div class="row">
+      <div class="col-4"><label>&nbsp;&nbsp;ดูข้อมูลคดี</label></div>
+      <div class="col-4">
+      </div>
+      <div class="col-4"></div>
     </div>
 
+    <div class="row p-5">
+      <div class="col-6">
 
+        <?php $id = $_GET['id']; 
+        $sql = "SELECT * FROM case_animal JOIN deliver_department on case_animal.Department_Case_Animal = deliver_department.ID_Deliver_Department  WHERE case_animal.Case_Animal_ID  = '".$id."' AND case_animal.status = '1'";
+        // echo $sql;
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()){
+          ?>
 
+          <table>
+            <thead>
+              <tr>
 
-    <div class="col-6">
+              </tr>
+            </thead>
+            <tbody>
 
-      <table>
-        <thead>
-          <tr>
+              <tr>
+                <th><label class="float-right">รหัสคดี :</label>
+                </th>
+                <td><?php echo $row['Case_Animal_ID'];?></td>
+              </tr>
 
-          </tr>
-        </thead>
-        <tbody>
+              <tr>
+                <th><label class="float-right">คดีอาญาที่ :</label>
+                </th>
+                <td><?php echo $row['Criminal_Case_No'];?></td>
+              </tr>
 
-          <tr>
-            <th><label class="float-right">สะถานะคดี :</label>
-            </th>
-            <td>ระหว่างดำเนินคดี</td>
-          </tr>
+              <tr>
+                <th><label class="float-right">ยึดทรัพท์ที่ :</label>
+                </th>
+                <td><?php echo $row['Confiscation_Case_No'];?></td>
+              </tr>
 
-          <tr>
-            <th><label class="float-right">พิพากษาโดย :</label>
-            </th>
-            <td>ชื่อผู้พิพากษา</td>
-          </tr>
+              <tr>
+                <th><label class="float-right">ปวจ.ข้อที่ :</label>
+                </th>
+                <td><?php echo $row['Daily_No'];?></td>
+              </tr>
 
-          <tr>
-            <th><label class="float-right">เมื่อวันที่ :</label>
-            </th>
-            <td>
-              10/10/2563
+              <tr>
+                <th><label class="float-right">วันที่ :</label>
+                </th>
+                <td>
+                 <?php echo $row['Date_Case_Animal'];?>
+               </td>
+             </tr>
 
-            </td>
-          </tr>
+             <tr>
+              <th><label class="float-right">เวลา :</label>
+              </th>
+              <td><?php echo $row['Time_Case_Animal'];?></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">คดีดำที่ :</label>
-            </th>
-            <td>-</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">ผู้ต้องหา :</label>
+              </th>
+              <td><?php echo $row['Suspect'];?></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">คดีแดงที่ :</label>
-            </th>
-            <td>-</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">หน่วยงานเจ้าของคดี :</label>
+              </th>
+              <td><?php echo $row['Deliver_Department'];?></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">คำสั่งศาล :</label>
-            </th>
-            <td>-</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
+              </th>
+              <td><?php echo $row['Description_exhibit'];?></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-          <tr>
-            <th><label class="float-right">ผู้ต้องหา :</label>
-            </th>
-            <td>-</td>
-          </tr>
+      <div class="col-6">
 
-          <tr class="mt-2">
-            <th><label class="float-right">เพิ่มไฟล์เอกสารของคดี :</label>
-            </th>
-            <td>-</td>
-          </tr>
-          <tr>
-            <th>
-            </th>
-            <td>-</td>
-          </tr>
-          <tr>
-            <th>
-            </th>
-            <td>-</td>
-          </tr>
-        </tbody>
-      </table>
+        <table>
+          <thead>
+            <tr>
 
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <th><label class="float-right">สะถานะคดี :</label>
+              </th>
+              <td><?php 
+              if($row['Status_Case_Animal'] == 1){
+                  echo "ระหว่างดำเนินคดี";
+              }else if($row['Status_Case_Animal'] == 2){
+               echo "ถึงที่สุดแล้ว";}
+              else{
+                echo "-";}?></td>
+            </tr>
+
+            <tr>
+              <th><label class="float-right">พิพากษาโดย :</label>
+              </th>
+              <td><?php echo $row['Judged_by'];?></td>
+            </tr>
+
+            <tr>
+              <th><label class="float-right">เมื่อวันที่ :</label>
+              </th>
+              <td>
+                <?php echo $row['Date_Judged'];?>
+              </td>
+            </tr>
+
+            <tr>
+              <th><label class="float-right">คดีดำที่ :</label>
+              </th>
+              <td><?php echo $row['Undecided_Case_No'];?></td>
+            </tr>
+
+            <tr>
+              <th><label class="float-right">คดีแดงที่ :</label>
+              </th>
+              <td><?php echo $row['Dong_Case_No'];?></td>
+            </tr>
+
+            <tr>
+              <th><label class="float-right">คำสั่งศาล :</label>
+              </th>
+              <td><?php echo $row['Injunction'];?></td>
+            </tr>
+
+            <tr class="mt-2">
+              <th><label class="float-right">เพิ่มไฟล์เอกสารของคดี :</label>
+              </th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>
+              </th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>
+              </th>
+              <td></td>
+            </tr>
+          </tbody>
+        </table> 
+
+      <?php } ?> 
+
+      
 
 
     </div>
@@ -256,56 +260,56 @@
 
    $(document).ready(function() {
 
-          $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageannimalcenter.php");
+    $('.back').on('click', function (e) {
+      e.preventDefault()
+      window.location.replace("http://localhost/animal_manager/mannageannimalcenter.php");
 
-            })
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+    })
+    $('#myTab a').on('click', function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
 
-          $('.deleteannimal').on('click', function () {
-            $('#deleteannimal').modal('show');
-          })
+    $('.deleteannimal').on('click', function () {
+      $('#deleteannimal').modal('show');
+    })
 
-           $('.showeditannimal').on('click', function () {
-            $('#showeditannimal').modal('show');
-          })
-           $('.showqr1').on('click', function () {
-            $('#showqr1').modal('show');
-          })
+    $('.showeditannimal').on('click', function () {
+      $('#showeditannimal').modal('show');
+    })
+    $('.showqr1').on('click', function () {
+      $('#showqr1').modal('show');
+    })
 
-          $('.mnl').click(function(event) {
+    $('.mnl').click(function(event) {
 
-            var page = 0;
-            var id = $(this).data('id');
-            var dism = document.getElementById("display-m");
-            var dis1 = document.getElementById("display-1");
-            var dis2 = document.getElementById("display-2");
-
-
-
-            if (id==1) {
-              dis1.style.display = 'block';
-              dism.style.display = 'none';
-              dis2.style.display = 'none';
-              page == 1 ;
-            }
-            if (id==2) {
-              dism.style.display = 'none';
-              dis1.style.display = 'none';
-              dis2.style.display = 'block';
-            }
-            else{
-
-            }
-
-          });
-        });
+      var page = 0;
+      var id = $(this).data('id');
+      var dism = document.getElementById("display-m");
+      var dis1 = document.getElementById("display-1");
+      var dis2 = document.getElementById("display-2");
 
 
-  </script>
+
+      if (id==1) {
+        dis1.style.display = 'block';
+        dism.style.display = 'none';
+        dis2.style.display = 'none';
+        page == 1 ;
+      }
+      if (id==2) {
+        dism.style.display = 'none';
+        dis1.style.display = 'none';
+        dis2.style.display = 'block';
+      }
+      else{
+
+      }
+
+    });
+  });
+
+
+</script>
 </body>
 </html>
