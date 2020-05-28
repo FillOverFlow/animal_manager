@@ -67,8 +67,8 @@
                 <td><?php echo $row['Authorities_Last_Name']; ?></td>
                 <td><?php echo $row['ID_Arrest_Deparment']; ?></td>
                 <td><?php echo $row['Position']; ?></td>
-                <td><a href="authoritiessee.php?id=<?php echo $row['ID_Arrest_Deparment']; ?>" class="btn btn-light"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
-                <td><a href="authoritiesedit.php?id=<?php echo $row['ID_Arrest_Deparment']; ?>" class="btn btn-light"><img src="picture/gg.png" width="20px" height="20px"></a></td>
+                <td><a href="authoritiessee.php?id=<?php echo $row['Authorities_ID']; ?>" class="btn btn-light"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
+                <td><a href="authoritiesedit.php?id=<?php echo $row['Authorities_ID']; ?>" class="btn btn-light"><img src="picture/gg.png" width="20px" height="20px"></a></td>
                 <td><a class="btn btn-light deleteegg"><img src="picture/delete.png" width="20px" height="20px"></a></td>
               </tr>
               <?php $i++; } ?>

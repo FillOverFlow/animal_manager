@@ -1,3 +1,8 @@
+<?php
+  require_once('code/connect.php');
+
+
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,14 +29,28 @@
       <hr class="float-left" width="94%" size="20" color="black">
 
     </div>
-    
+
   </div>
 
   <?php include('menu.php');?>
 
 
-  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100">
+    <?php
+        //check last Data
+      $sql_check_maxID = "SELECT max(Authorities_ID) from authorities";
+      $query_check_maxID = $conn->query($sql_check_maxID);
+      $result = $query_check_maxID->fetch_assoc();
+      $maxID  = $result['max(Authorities_ID)'];
 
+      //check show view
+      $id = $_GET['id'];
+      $sql_view = "SELECT * FROM authorities WHERE Authorities_ID = '".$id."'";
+      $query = $conn->query($sql_view);
+      $data  = $query->fetch_assoc();
+
+
+     ?>
     <div class="row">
       <div class="col-sm"><label>&nbsp;&nbsp;เพิ่มข้อมูลเจ้าหน้าที่</label></div>
       <div class="col-sm">
@@ -41,6 +60,7 @@
 
     <div class="row p-2">
       <div class="col-sm">
+        <form action="code/authorities/update_authorities.php" method="post">
         <table>
           <thead>
           </thead>
@@ -48,60 +68,109 @@
             <tr>
               <th><label class="float-right">รหัสเจ้าหน้าที่ :</label>
               </th>
-              <td><input type="text" name=""></td>
+              <td><input type="text" name="id" value="<?php echo $data['Authorities_ID']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รหัสบัตรประชาชน :</label>
               </th>
-              <td><input type="text" name=""></td>
+              <td><input type="text" name="idcard" value="<?php echo $data['ID_card']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ชื่อผู้ใช้ :</label>
               </th>
-              <td><input type="text"   name=""></td>
+              <td><input type="text"   name="username" value="<?php echo $data['Username']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รหัสผ่าน :</label>
               </th>
-              <td><input type="text"   name=""></td>
+              <td><input type="text"   name="password" value="<?php echo $data['Password']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ตำแหน่ง :</label>
               </th>
-              <td><select style="width:100%;">
-                <option>กรุณาเลือกเพศ</option>
-              </select></td>
+            <td>
+              <select name="position" style="width:100%;">
+
+                      <?php if($data['Position'] == 1){?>
+                        <option value="1">เจ้าหน้าที่</option>
+                      <?php } ?>
+                      <?php if($data['Position'] == 2){?>
+                        <option value="2">แพทย์</option>
+                      <?php } ?>
+                    <option value="1">เจ้าหน้าที่</option>
+                    <option value="2">แพทย์</option>
+                </select>
+              </td>
             </tr>
 
             <tr>
               <th><label class="float-right">เพศ :</label>
               </th>
-              <td><select style="width:100%;">
-                <option>กรุณาเลือกเพศ</option>
+              <td><select style="width:100%;" name="gender">
+                <?php if($data['Authorities_Sex'] == 1){?>
+                 <option value="1">ชาย</option>
+                <?php } ?>
+                <?php if($data['Authorities_Sex'] == 2){?>
+                 <option value="2">หญิง</option>
+                <?php } ?>
+                <option value="1">ชาย</option>
+                <option value="2">หญิง</option>
               </select></td>
             </tr>
             <tr>
               <th><label class="float-right" disabled="">ชื่อ :</label>
               </th>
-              <td><input type="text"></td>
+              <td><input  style="width:100%;"  name="first_name" type="text" value="<?php echo $data['Authorities_First_Name']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right" disabled="">นามสกุล :</label>
               </th>
-              <td><input type="text"></td>
+              <td><input style="width:100%;" name="last_name" type="text" value="<?php echo $data['Authorities_Last_Name']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ว/ด/ป เกิด :</label>
               </th>
-              <td><select style="width:100%;">
-                <option>วัน/เดือน/ปี</option>
-              </select></td>
+              <td>
+                    <span>
+                      <select name="birth_day"  >
+                        <?php
+                        $start_date = 1;
+                        $end_date   = 31;
+                        for( $j=$start_date; $j<=$end_date; $j++ ) {
+                          echo '<option value='.$j.'>'.$j.'</option>';
+                        }
+                        ?>
+                      </select>
+                    </span>
+                    <span>
+                     <select name="birth_month" >
+                      <?php
+                      $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+                      for($i=0; $i<=11; $i++) {
+                        ?>
+                        <option value="<?php echo $thaimonth[$i]; ?>"><?php echo $thaimonth[$i]; ?></option>
+                      <?php } ?>
+                    </select>
+                  </span>
+                  <span>
+                    <select name="birth_year" >
+                      <?php
+                      $year = date('Y')+543;
+                      $min = $year - 60;
+                      $max = $year;
+                      for( $i=$max; $i>=$min; $i-- ) {
+                        echo '<option value='.$i.'>'.$i.'</option>';
+                      }
+                      ?>
+                    </select>
+                  </span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -118,21 +187,29 @@
             <tr>
               <th><label class="float-right">เบอร์โทร :</label>
               </th>
-              <td><input type="text" name=""></td>
+              <td><input style="width:100%;" type="text" name="phone" value="<?php echo $data['Telephone_Number']; ?>"></td>
             </tr>
 
             <tr>
               <th><label class="float-right">สถานะการทำงาน :</label>
               </th>
-              <td><select class="" style="width:100%;">
-                <option selected>เลือกสถานะ</option>
-              </select></td>
+              <td><select name="status" style="width:100%;">
+
+                      <?php if($data['Authorities_Status'] == 1){?>
+                         <option value="1">ทำงานอยู่</option>
+                      <?php } ?>
+                      <?php if($data['Authorities_Status'] == 2){?>
+                        <option value="2">ลาออก</option>
+                      <?php } ?>
+                    <option value="1">ทำงานอยู่</option>
+                    <option value="2">ลาออก</option>
+                </select></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ที่อยู่ :</label>
               </th>
-              <td><textarea>--</textarea></td>
+              <td><textarea style="width:100%;" name="address"><?php echo $data['Authorities_Address']; ?></textarea></td>
             </tr>
           </tbody>
         </table>
@@ -143,13 +220,13 @@
           </thead>
           <tbody>
             <tr>
-              <th><img src="picture/logo.png" width="200px" class="border border-dark">
+              <th><img src="code/pictureAuthorities/<?php echo $data['Authorities_Photo']; ?>" width="200px" class="border border-dark">
               </th>
             </tr>
           </tbody>
         </table>
-
-        <button class="btn btn-light" style="margin-top: 10px;">เพิ่มรูป</button>
+        <input width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="photo" accept="image/*">
+       <!--  <button class="btn btn-light" style="margin-top: 10px;">เพิ่มรูป</button> -->
 
       </div>
 
@@ -171,6 +248,8 @@
           <div class="col-sm-4"></div>
         </div>
     </div>
+  </form>
+
 
 
 

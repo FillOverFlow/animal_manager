@@ -48,21 +48,21 @@
   '".$_FILES['photo']['name']."',
   '".$var['status']."'
   )";
-  echo "<br> show sql $sql_insert";
-  echo "<br>";
-  echo "<br> path tempath".$var['photo']['tmp_name'];
-  echo "<br> path_insert: $path_insert";
+  // echo "<br> show sql $sql_insert";
+  // echo "<br>";
+  // echo "<br> path tempath".$var['photo']['tmp_name'];
+  // echo "<br> path_insert: $path_insert";
 
    //query
-  if ($conn->query($sql_insert) === TRUE) {
+  if ($conn->query($sql_insert) === TRUE ) {
     //copy file to photo_path
     checkUploadImage($target_dir,$var['photo']);
     echo "<script>alert('บันทึกข้อมูลสำเร็จ');</script>";
     echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
   }else{
-    echo "<script>alert('ข้อมูลผิดพลาด ชื่อรหัสหน่วยงานอาจจะซ่่้ำกัน');</script>";
+    echo "<script>alert('ข้อมูลผิดพลาด ไม่สามารถเพิ่มข้อมูลได้');</script>";
     echo ($conn -> error);
-    echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
+    // echo "<meta http-equiv='refresh' content='0;url=../../authorities.php'>";
   }
 
 

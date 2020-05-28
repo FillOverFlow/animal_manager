@@ -1,3 +1,6 @@
+<?php
+  require_once('code/connect.php');
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,13 +27,25 @@
       <hr class="float-left" width="94%" size="20" color="black">
 
     </div>
-    
+
   </div>
 
   <?php include('menu.php');?>
 
+  <?php
+      //check last Data
+      $sql_check_maxID = "SELECT max(Authorities_ID) from authorities";
+      $query_check_maxID = $conn->query($sql_check_maxID);
+      $result = $query_check_maxID->fetch_assoc();
+      $maxID  = $result['max(Authorities_ID)'];
 
-  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100"> 
+      //check show view
+      $id = $_GET['id'];
+      $sql_view = "SELECT * FROM authorities WHERE Authorities_ID = '".$id."'";
+      $query = $conn->query($sql_view);
+      $data  = $query->fetch_assoc();
+   ?>
+  <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100">
 
     <div class="row">
       <div class="col-sm"><label>&nbsp;&nbsp;เพิ่มข้อมูลเจ้าหน้าที่</label></div>
@@ -46,56 +61,61 @@
           </thead>
           <tbody>
             <tr>
+              <td>
+                 <label> test:  <?php echo $maxID; ?></label>
+              </td>
+            </tr>
+            <tr>
               <th><label class="float-right">รหัสเจ้าหน้าที่ :</label>
               </th>
-              <td><label>-</label></td>
+              <td><label><?php echo $data['Authorities_ID']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รหัสบัตรประชาชน :</label>
               </th>
-              <td><label>-</label></td>
+              <td><label><?php echo $data['ID_card']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ชื่อผู้ใช้ :</label>
               </th>
-              <td><label>-</label></td>
+              <td><label><?php echo $data['Username']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">รหัสผ่าน :</label>
               </th>
-             <td><label>-</label></td>
+             <td><label><?php echo $data['Password']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ตำแหน่ง :</label>
               </th>
-             <td><label>-</label></td>
+             <td><label><?php echo $data['Position']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">เพศ :</label>
               </th>
-              <td><label>-</label></td>
+              <td><label><?php echo $data['Authorities_Sex']; ?></label></td>
             </tr>
             <tr>
               <th><label class="float-right" disabled="">ชื่อ :</label>
               </th>
-              <td><label>-</label></td>
+              <td><label><?php echo $data['Authorities_First_Name']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right" disabled="">นามสกุล :</label>
               </th>
-              <td><label>-</label></td>
+              <td><label><?php echo $data['Authorities_Last_Name']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ว/ด/ป เกิด :</label>
               </th>
-             <td><label>-</label></td>
+             <td><label><?php echo $data['Birthday']; ?></label></td>
             </tr>
           </tbody>
         </table>
@@ -112,19 +132,19 @@
             <tr>
               <th><label class="float-right">เบอร์โทร :</label>
               </th>
-            <td><label>-</label></td>
+            <td><label><?php echo $data['Telephone_Number']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">สถานะการทำงาน :</label>
               </th>
-             <td><label>-</label></td>
+             <td><label><?php echo $data['Authorities_Status']; ?></label></td>
             </tr>
 
             <tr>
               <th><label class="float-right">ที่อยู่ :</label>
               </th>
-              <td><textarea>--</textarea></td>
+              <td><textarea><?php echo $data['Authorities_Address']; ?></textarea></td>
             </tr>
           </tbody>
         </table>
@@ -135,7 +155,8 @@
           </thead>
           <tbody>
             <tr>
-              <th><img src="picture/logo.png" width="200px" class="border border-dark">
+              <th>
+                <img src="code/pictureAuthorities/<?php echo $data['Authorities_Photo']; ?>" width="200px" class="border border-dark">
               </th>
             </tr>
           </tbody>
@@ -149,14 +170,14 @@
         <div class="col-sm-4">
         </div>
         <div class="col-sm-4" align="center">
-          <button class="btn btn-light" >กลับ</button>&nbsp;
-          <button class="btn btn-light" >ถัดไป</button>
+          <button class="btn btn-light backButton" >กลับ</button>&nbsp;
+          <button class="btn btn-light nextButton" >ถัดไป</button>
         </div>
         <div class="col-sm-4"></div>
       </div>
       <div class="row container-fluid mt-5">
         <div class="col-sm-4">
-          <button class="btn btn-light float-left back">ย้อนกลับ</button>
+          <button class="btn btn-light float-left ">ย้อนกลับ</button>
         </div>
         <div class="col-sm-4" align="center">
         </div>
@@ -295,6 +316,27 @@
                e.preventDefault()
                 window.location.replace("http://localhost/animal_manager/authorities.php");
               })
+
+          $('.nextButton').on('click',function (e){
+            //call next Query Here
+             <?php
+              if($id < $maxID){
+                $id++;
+              }
+             ?>
+             window.location.replace("http://localhost/animal_manager/authoritiessee.php?id="+<?php echo $id; ?>);
+          })
+
+          $('.backButton').on('click',function (e){
+            //call back Query Here
+            <?php
+              $checkID = $_GET['id'];
+              if($checkID > 1){
+                $checkID--;
+              }
+             ?>
+            window.location.replace("http://localhost/animal_manager/authoritiessee.php?id="+<?php echo $checkID; ?>);
+          })
 
           $('#myTab a').on('click', function (e) {
             e.preventDefault()

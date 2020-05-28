@@ -85,5 +85,7 @@ function delete($tbl,$id){
   return $sql;
 }
 
+  return $uploadOK;
+
 
 ?>
