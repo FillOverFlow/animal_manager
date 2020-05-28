@@ -93,7 +93,7 @@
                 <td><a class="btn btn-light" href="#"><img src="picture/plus.png" width="25px" ></a></td>
                 <th><?php echo $i;?></th>
                 <td><a class="btn btn-light" href="editcase.php?id=<?php echo $row['Case_Animal_ID']; ?>"><img src="picture/gg.png" width="20px" ></a></td>
-                <td><button class="btn btn-light delete#annimal"><img src="picture/delete.png" width="20px" ></button></td>
+                <td><button class="btn btn-light deleteannimal" data-id="<?php echo $row['Case_Animal_ID']; ?>"><img src="picture/delete.png" width="20px" ></button></td>
               </tr>
               <?php $i++; } ?>
             </tr>
@@ -143,13 +143,16 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form action="code/mannageannimalcenter/delete.php" method="GET">
         <div class="modal-body">
           <center><img src="picture/unnamed.png" width="100px" height="100px">
+            <input type="hidden" name="id" id="iddelete">
             <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
           </div>
           <div class="mt-2">
-            <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+            <button type="submit" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -174,7 +177,10 @@
         })
 
         $('.deleteannimal').on('click', function () {
+          var id = $(this).data('id');
+          $('#iddelete').val(id);
           $('#deleteannimal').modal('show');
+
         })
 
         $('.showeditannimal').on('click', function () {

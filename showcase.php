@@ -200,7 +200,7 @@
 
 
   </div>
-  <center><a class="btn btn-light" href="editcase.php">แก้ไข</a>&nbsp;&nbsp;<button class="btn btn-light deleteannimal">ลบ</button></center>
+  <center><a class="btn btn-light" href="editcase.php?id=<?php echo $_GET['id'];?>">แก้ไข</a>&nbsp;&nbsp;<a class="btn btn-light" href="code/mannageannimalcenter/delete.php?id=<?php echo $_GET['id'];?>">ลบ</a></center>
 
   <button class="btn btn-light float-left back">ย้อนกลับ</button>
 

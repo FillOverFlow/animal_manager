@@ -39,298 +39,325 @@
       </div>
       <div class="col-4"></div>
     </div>
+    <form action="code/mannageannimalcenter/editcase.php" method="POST" enctype="multipart/form-data">
+      <div class="row p-5">
+        <div class="col-6">
 
-    <div class="row p-5">
-      <div class="col-6">
+         <?php $id = $_GET['id']; 
+         $sql = "SELECT * FROM case_animal JOIN deliver_department on case_animal.Department_Case_Animal = deliver_department.ID_Deliver_Department  WHERE case_animal.Case_Animal_ID  = '".$id."' AND case_animal.status = '1'";
+         $result = $conn->query($sql);
+         while ($row = $result->fetch_assoc()){
 
-       <?php $id = $_GET['id']; 
-       $sql = "SELECT * FROM case_animal JOIN deliver_department on case_animal.Department_Case_Animal = deliver_department.ID_Deliver_Department  WHERE case_animal.Case_Animal_ID  = '".$id."' AND case_animal.status = '1'";
-       $result = $conn->query($sql);
-       while ($row = $result->fetch_assoc()){
+          ?>
 
-        ?>
+          <table>
+            <thead>
+              <tr>
 
-        <table>
-          <thead>
-            <tr>
-
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr>
-              <th><label class="float-right">รหัสคดี :</label>
-              </th>
-              <td><input style="width:100%;" type="text
-                " disabled   placeholder="" value="<?php echo $row['Case_Animal_ID']; ?>" name="Case_Animal_ID"></td>
               </tr>
+            </thead>
+            <tbody>
 
               <tr>
-                <th><label class="float-right">คดีอาญาที่ :</label>
+                <th><label class="float-right">รหัสคดี :</label>
                 </th>
-                <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Criminal_Case_No']; ?>" name="Criminal_Case_No"></td>
+                <td><input style="width:100%;" type="text
+                  " disabled   placeholder="" value="<?php echo $row['Case_Animal_ID']; ?>">
+                <input style="width:100%;" type="hidden" placeholder="" value="<?php echo $row['Case_Animal_ID']; ?>" name="Case_Animal_ID"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">คดีอาญาที่ :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Criminal_Case_No']; ?>" name="Criminal_Case_No"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">ยึดทรัพท์ที่ :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Confiscation_Case_No']; ?>" name="Confiscation_Case_No"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">ปวจ.ข้อที่ :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Daily_No']; ?>" name="Daily_No"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">วันที่ :</label>
+                  </th>
+                  <td>
+                    <?php 
+                    $date = explode(':', $row['Date_Case_Animal']);
+                    $datenum = $date[0];
+                    $montnum = $date[1];
+                    $yearnum = $date[2];
+                    ?>
+                    <span>
+                      <select name="day">
+
+                        <?php
+                        for( $m=1; $m<=31; ++$m ) { 
+                          if ($m == $datenum) {?>
+                            <option value="<?php echo $datenum; ?>" selected><?php echo $datenum; ?></option>
+                          <?php }else{ ?>
+                            <option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+                          <?php } 
+                        } ?>
+
+                      </select> 
+                    </span>
+                    <span>
+                      <select name="month">
+                        <?php
+                        $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+                        for( $j=0; $j<=12; $j++ ){
+                         if(strcmp($thaimonth[$j],$montnum) == 0){
+                          echo '<option value='.$montnum.' selected>'.$montnum.'</option>';
+                        }else{
+                          echo '<option value='.$thaimonth[$j].'>'.$thaimonth[$j].'</option>';
+                        }
+                      }
+                      ?>
+                    </select>
+                  </span>
+                  <span>
+                    <select name="year">
+                      <?php 
+                      $year = date('Y');
+                      $min = $yearnum - 60;
+                      $max = $year+543;
+                      for($i=$max; $i>=$min; $i--){
+
+                        if(strcmp($i,$yearnum) == 0){
+                          echo '<option value='.$yearnum.' selected>'.$yearnum.'</option>';
+                        }else{
+                          echo '<option value='.$i.'>'.$i.'</option>';
+                        }
+                      }
+                      ?>
+                    </select>
+                  </span>
+
+                </td>
               </tr>
 
               <tr>
-                <th><label class="float-right">ยึดทรัพท์ที่ :</label>
+                <th><label class="float-right">เวลา :</label>
                 </th>
-                <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Confiscation_Case_No']; ?>" name="Confiscation_Case_No"></td>
+                <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Time_Case_Animal']; ?>" name="Time_Case_Animal"></td>
               </tr>
 
               <tr>
-                <th><label class="float-right">ปวจ.ข้อที่ :</label>
+                <th><label class="float-right">ผู้ต้องหา :</label>
                 </th>
-                <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Daily_No']; ?>" name="Daily_No"></td>
+                <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Suspect']; ?>" name="Suspect"></td>
               </tr>
 
               <tr>
-                <th><label class="float-right">วันที่ :</label>
+                <th><label class="float-right">หน่วยงานเจ้าของคดี :</label>
+                </th>
+                <td><select style="width:100%;" name="Department_Case_Animal">
+                  <?php 
+                  $select = "SELECT * FROM deliver_department WHERE status = 1";
+                  $resultd = $conn->query($select);
+                  while ($rowd = $resultd->fetch_assoc()){
+
+                    if($row['Department_Case_Animal'] == $rowd['ID_Deliver_Department']){ ?>
+                      <option selected value="<?php echo $rowd['ID_Deliver_Department']; ?>"><?php echo $rowd['Deliver_Department'];?></option>
+                    <?php }else{?>
+                      <option value="<?php echo $rowd['ID_Deliver_Department']; ?>"><?php echo $rowd['Deliver_Department'];?></option>
+                    <?php }}?>
+                  </select></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
+                  </th>
+                  <td><textarea style="width:100%;" name="Description_exhibit"><?php echo $row['Description_exhibit']; ?></textarea></td>
+                </tr>
+              </tbody>
+            </table>
+
+
+          </div>
+
+
+
+
+          <div class="col-6">
+
+            <table>
+              <thead>
+                <tr>
+
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <th><label class="float-right">สะถานะคดี :</label>
+                  </th>
+                  <td><select style="width:100%;" name="Status_Case_Animal">
+
+                    <?php if($row['Status_Case_Animal'] == 1){ ?> 
+                      <option value="0">เลือกสะถานะคดี</option>
+                      <option value="1" selected>ระหว่างดำเนินคดี</option>
+                      <option value="2">ถึงที่สุดแล้ว</option>
+                      <?php}else if($row[' Status_Case_Animal'] == 2){?>
+                        <option value="0">เลือกสะถานะคดี</option>
+                        <option value="1">ระหว่างดำเนินคดี</option>
+                        <option value="2" selected>ถึงที่สุดแล้ว</option>
+                      <?php }else{ ?>
+                        <option value="0" selected>เลือกสะถานะคดี</option>
+                        <option value="1">ระหว่างดำเนินคดี</option>
+                        <option value="2">ถึงที่สุดแล้ว</option>
+                      <?php } ?>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">พิพากษาโดย :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"  placeholder="" value="<?php echo $row['Judged_by']; ?>" name="Judged_by"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">เมื่อวันที่ :</label>
+                  </th>
+                  <td>
+                    <span>
+                      <?php 
+                  // $date[1]
+                      $date1 = explode(':', $row['Date_Judged']);
+                      $datenum1 = $date[0];
+                      $montnum1 = $date[1];
+                      $yearnum1 = $date[2];
+
+                      ?>
+                      <span>
+                        <select name="day1">
+
+                          <?php
+                          for( $m=1; $m<=31; ++$m ) { 
+                            if ($m == $datenum1) {?>
+                              <option value="<?php echo $datenum; ?>" selected><?php echo $datenum; ?></option>
+                            <?php }else{ ?>
+                              <option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+                            <?php } 
+                          } ?>
+
+                        </select> 
+                      </span>
+                      <span>
+                        <select name="month1">
+                          <?php
+                          $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+                          for( $j=0; $j<=12; $j++ ){
+
+                           if(strcmp($thaimonth[$j],$montnum1) == 0){
+                            echo '<option value='.$montnum.' selected>'.$montnum.'</option>';
+                          }else{
+                            echo '<option value='.$thaimonth[$j].'>'.$thaimonth[$j].'</option>';
+                          }
+                        }
+                        ?>
+
+
+                      </select>
+                    </span>
+                    <span>
+                      <select name="year1">
+
+                        <?php 
+                        $year = date('Y');
+                        $min = $yearnum - 60;
+                        $max = $year+543;
+                        for($i=$max; $i>=$min; $i--){
+
+                          if(strcmp($i,$yearnum1) == 0){
+                            echo '<option value='.$yearnum.' selected>'.$yearnum.'</option>';
+                          }else{
+                            echo '<option value='.$i.'>'.$i.'</option>';
+                          }
+                        }
+                        ?>
+
+                      </select>
+                    </span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">คดีดำที่ :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Undecided_Case_No']; ?>" name="Undecided_Case_No"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">คดีแดงที่ :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Dong_Case_No']; ?>" name="Dong_Case_No"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">คำสั่งศาล :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Injunction']; ?>" name="Injunction"></td>
+                </tr>
+
+                <tr>
+                  <th><label class="float-right">ผู้ต้องหา :</label>
+                  </th>
+                  <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Suspect']; ?>" name="Suspect"></td>
+                </tr>
+
+                <tr class="mt-2">
+                  <th><label class="float-right">เอกสารบันทึกประจำวัน :</label>
+                  </th>
+                  <td>
+                    <input id="Recording_Document" type="text" value="<?php echo $row['Recording_Document']; ?>" disabled>
+                    <input type="file" id="file" style="display:none;" name="Recording_Document">
+                    <a href="#" class="btn"id="button" name="button" value="Upload" onclick="thisFileUpload('a');"><img class="float-right" src="picture/+file.png" width="20px" height="20px"></a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                  </th>
+                  <td>
+                   <input type="text" value="<?php echo $row['Arrest_Document']; ?>" disabled id="Arrest_Document">
+                   <input type="file" id="fileb" style="display:none ;" name="Arrest_Document">
+                   <a href="#" class="btn" name="button" value="Upload" onclick="thisFileUpload('b');"><img class="float-right" src="picture/+file.png" width="20px" height="20px"></a>
+                 </td>
+               </tr>
+               <tr>
+                <th>
                 </th>
                 <td>
-                  <?php 
-                  // $date[1]
-                  $date = explode(':', $row['Date_Case_Animal']);
-                  $datenum = $date[0];
-                  $montnum = $date[1];
-                  $yearnum = $date[2];
+                 <input id="Deliver_Document" type="text" value="<?php echo $row['Deliver_Document']; ?>" disabled> 
+                 <input type="file" id="filec" style="display:none ;" name="Deliver_Document">
+                 <a href="#" class="btn" name="button" value="Upload" onclick="thisFileUpload('c');"><img class="float-right" src="picture/+file.png" width="20px" height="20px"></a>
+               </td>
+             </tr>
 
-                  ?>
-                  <span>
-                    <select name="day">
+           </tbody>
+         </table>
 
-                      <?php
-                      for( $m=1; $m<=31; ++$m ) { 
-                        if ($m == $datenum) {?>
-                          <option value="<?php echo $datenum; ?>" selected><?php echo $datenum; ?></option>
-                        <?php }else{ ?>
-                          <option value="<?php echo $m; ?>"><?php echo $m; ?></option>
-                        <?php } 
-                      } ?>
-
-                    </select> 
-                  </span>
-                  <span>
-                    <select name="month">
-                      <?php
-                      $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-                      for( $j=0; $j<=12; $j++ ){
-
-                       if(strcmp($thaimonth[$j],$montnum) == 0){
-                        echo '<option value='.$montnum.' selected>'.$montnum.'</option>';
-                      }else{
-                        echo '<option value='.$thaimonth[$j].'>'.$thaimonth[$j].'</option>';
-                      }
-                    }
-                    ?>
+       <?php } ?>
 
 
-                  </select>
-                </span>
-                <span>
-                  <select name="year">
-
-                    <?php 
-                    $year = date('Y');
-                    $min = $yearnum - 60;
-                    $max = $year+543;
-                    for($i=$max; $i>=$min; $i--){
-
-                      if(strcmp($i,$yearnum) == 0){
-                        echo '<option value='.$yearnum.' selected>'.$yearnum.'</option>';
-                      }else{
-                        echo '<option value='.$i.'>'.$i.'</option>';
-                      }
-                    }
-                    ?>
-
-                  </select>
-                </span>
-
-              </td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">เวลา :</label>
-              </th>
-              <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Time_Case_Animal']; ?>" name="Time_Case_Animal"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">ผู้ต้องหา :</label>
-              </th>
-              <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Suspect']; ?>" name="Suspect"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">หน่วยงานเจ้าของคดี :</label>
-              </th>
-              <td><select style="width:100%;">
-                <option selected>เลือกหน่วยงานเจ้าของคดี</option>
-                <option value="1">A</option>
-                <option value="2">B</option>
-                <option value="3">C</option>
-              </select></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
-              </th>
-              <td><textarea style="width:100%;" name="Description_exhibit"><?php echo $row['Description_exhibit']; ?></textarea></td>
-            </tr>
-          </tbody>
-        </table>
+     </div>
 
 
-      </div>
+   </div>
 
 
+   <center><button class="btn btn-light">บันทึก</button></center>
 
-
-      <div class="col-6">
-
-        <table>
-          <thead>
-            <tr>
-
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr>
-              <th><label class="float-right">สะถานะคดี :</label>
-              </th>
-              <td><select style="width:100%;">
-                <option selected>เลือกสะถานะคดี</option>
-                <option value="1">A</option>
-                <option value="2">B</option>
-                <option value="3">C</option>
-              </select></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">พิพากษาโดย :</label>
-              </th>
-              <td><input style="width:100%;" type="text"  placeholder="" value="<?php echo $row['Judged_by']; ?>" name="Judged_by"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">เมื่อวันที่ :</label>
-              </th>
-              <td>
-                <span>
-                  <?php 
-                  // $date[1]
-                  $date1 = explode(':', $row['Date_Judged']);
-                  $datenum1 = $date[0];
-                  $montnum1 = $date[1];
-                  $yearnum1 = $date[2];
-
-                  ?>
-                  <span>
-                    <select name="day">
-
-                      <?php
-                      for( $m=1; $m<=31; ++$m ) { 
-                        if ($m == $datenum1) {?>
-                          <option value="<?php echo $datenum; ?>" selected><?php echo $datenum; ?></option>
-                        <?php }else{ ?>
-                          <option value="<?php echo $m; ?>"><?php echo $m; ?></option>
-                        <?php } 
-                      } ?>
-
-                    </select> 
-                  </span>
-                  <span>
-                    <select name="month">
-                      <?php
-                      $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-                      for( $j=0; $j<=12; $j++ ){
-
-                       if(strcmp($thaimonth[$j],$montnum1) == 0){
-                        echo '<option value='.$montnum.' selected>'.$montnum.'</option>';
-                      }else{
-                        echo '<option value='.$thaimonth[$j].'>'.$thaimonth[$j].'</option>';
-                      }
-                    }
-                    ?>
-
-
-                  </select>
-                </span>
-                <span>
-                  <select name="year">
-
-                    <?php 
-                    $year = date('Y');
-                    $min = $yearnum - 60;
-                    $max = $year+543;
-                    for($i=$max; $i>=$min; $i--){
-
-                      if(strcmp($i,$yearnum1) == 0){
-                        echo '<option value='.$yearnum.' selected>'.$yearnum.'</option>';
-                      }else{
-                        echo '<option value='.$i.'>'.$i.'</option>';
-                      }
-                    }
-                    ?>
-
-                  </select>
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">คดีดำที่ :</label>
-              </th>
-              <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Undecided_Case_No']; ?>" name="Undecided_Case_No"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">คดีแดงที่ :</label>
-              </th>
-              <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Dong_Case_No']; ?>" name="Dong_Case_No"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">คำสั่งศาล :</label>
-              </th>
-              <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Injunction']; ?>" name="Injunction"></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">ผู้ต้องหา :</label>
-              </th>
-              <td><input style="width:100%;" type="text"   placeholder="" value="<?php echo $row['Suspect']; ?>" name="Suspect"></td>
-            </tr>
-
-            <tr class="mt-2">
-              <th><label class="float-right">เอกสารบันทึกประจำวัน :</label>
-              </th>
-              <td><img class="float-right" src="picture/+file.png" width="20px" height="20px"><hr></td>
-            </tr>
-            <tr>
-              <th>
-              </th>
-              <td><img class="float-right" src="picture/+file.png" width="20px" height="20px"><hr></td>
-            </tr>
-            <tr>
-              <th>
-              </th>
-              <td><img class="float-right" src="picture/+file.png" width="20px" height="20px"><hr></td>
-            </tr>
-          </tbody>
-        </table>
-      <?php } ?>
-
-
-    </div>
-
-
-  </div>
-
-
-  <center><button class="btn btn-light">บันทึก</button></center>
-  <button class="btn btn-light float-left back">ย้อนกลับ</button>
+ </form>
+ <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -440,6 +467,16 @@
    });
 
 
+
+
  </script>
+
+ <script>
+   function thisFileUpload(a) {
+    if (a=="a") {document.getElementById("file").click(); var files = $('#file').val(); $('#Recording_Document').html(files); console.log(files.Recording_Document);}
+    if (a=="b") {document.getElementById("fileb").click(); var filesb = $('#fileb').val(); $('#Arrest_Document').html(filesb);}
+    if (a=="c") {document.getElementById("filec").click(); var filesc = $('#filec').val(); $('#Deliver_Document').html(filesc);}
+  }
+</script>
 </body>
 </html>
