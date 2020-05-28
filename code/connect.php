@@ -1,4 +1,7 @@
 <?php
+
+require_once('MysqliDb.php');
+
 $servername = 'localhost';
 $Username = 'root';
 $password = '';
@@ -10,7 +13,9 @@ error_reporting(E_ALL ^ E_NOTICE);
 if ($conn ->connect_error){
 	header("location:server.html");
 	die("connect failed: " . $conn->connect_error);
-} 
+}
+
+//$db = new MysqliDb($servername,$Username,$password,$dbname);
 
 
 ?>
