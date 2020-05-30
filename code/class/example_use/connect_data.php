@@ -19,6 +19,14 @@
         }
     }
 
+    function showAuthorData(){
+      global $db;
+      $db->where("Authorities_ID",16);
+      $user = $db->getOne("authorities");
+      echo $user['Username'];
+
+    }
+
     function action_moddb () {
       global $db;
 
@@ -44,7 +52,7 @@
  </head>
  <body>
   <p>Show All Animal Data</p>
-  <?php echo showAnimalData(); ?>
+  <?php echo showAuthorData(); ?>
 
  </body>
  </html>

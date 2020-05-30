@@ -15,7 +15,7 @@ if ($conn ->connect_error){
 	die("connect failed: " . $conn->connect_error);
 }
 
-//$db = new MysqliDb($servername,$Username,$password,$dbname);
+$db = new MysqliDb($servername,$Username,$password,$dbname);
 
 
 ?>
