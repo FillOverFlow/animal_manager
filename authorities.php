@@ -37,8 +37,19 @@
 
     <div class="row mt-5">
       <div class="col-12">
-
-       <center><a href="authoritiesadd.php" class="btn btn-light">เพิ่มข้อมุลเจ้าหน้าที่</a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา"></center>
+       <?php
+          $search = "";
+          if(isset($_POST['authorities_name_search']))
+          {
+            $search = $_POST['authorities_name_search'];
+          }
+        ?>
+       <center><a href="authoritiesadd.php" class="btn btn-light">เพิ่มข้อมุลเจ้าหน้าที่</a>&nbsp;&nbsp;<label>
+        <form action="authorities.php" method="post">
+          ค้นหา :&nbsp;&nbsp;</label>
+          <input type="text" name="authorities_name_search" class="form" value="<?php echo $search; ?>">&nbsp;&nbsp;
+          <input type="submit" class="btn btn-light" value="ค้นหา"></center>
+        </form>
         <p>ค้นหาข้อมูลเจ้าหน้าที่</p>
           <table class="table table-bordered  mt-2">
             <thead>
@@ -55,23 +66,22 @@
             </thead>
             <tbody>
               <?php
-                $sql_all_authorities = "SELECT * FROM authorities WHERE Authorities_Status = '1'";
+                $sql_all_authorities = "SELECT * FROM authorities WHERE Authorities_Status = '1' and Authorities_First_Name like  '%".$search."%'";
                 $result = $conn->query($sql_all_authorities);
-                echo ($conn-> error);
                 $i = 1;
-                  while($row = $result->fetch_assoc()) {
-                    ?>
+                while($row = $result->fetch_assoc()) {
+              ?>
               <tr>
                 <td><?php echo $i; ?></td>
                 <th><?php echo $row['Authorities_First_Name']; ?></th>
                 <td><?php echo $row['Authorities_Last_Name']; ?></td>
-                <td><?php echo $row['ID_Arrest_Deparment']; ?></td>
+                <td><?php echo $row['Authorities_ID']; ?></td>
                 <td><?php echo $row['Position']; ?></td>
                 <td><a href="authoritiessee.php?id=<?php echo $row['Authorities_ID']; ?>" class="btn btn-light"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
                 <td><a href="authoritiesedit.php?id=<?php echo $row['Authorities_ID']; ?>" class="btn btn-light"><img src="picture/gg.png" width="20px" height="20px"></a></td>
-                <td><a class="btn btn-light deleteegg"><img src="picture/delete.png" width="20px" height="20px"></a></td>
+                <td><button class="btn btn-light deleteegg" data-id="<?php echo $row['Authorities_ID']; ?>"><img src="picture/delete.png" width="20px" height="20px"></button></td>
               </tr>
-              <?php $i++; } ?>
+              <?php $i++; }?>
             </tbody>
           </table>
 
@@ -136,13 +146,16 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form action="code/authorities/delete_authorities.php" method="GET">
           <div class="modal-body">
             <center><img src="picture/unnamed.png" width="100px" height="100px">
+              <input type="hidden" name="id" id='iddelete'>
               <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
             </div>
             <div class="mt-2">
-              <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+              <button type="submit" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
             </div>
+            </form>
           </div>
         </div>
       </div>
@@ -324,7 +337,10 @@
       })
 
       $('.deleteegg').on('click', function () {
+        var id = $(this).data('id');
+        $('#iddelete').val(id);
         $('#deleteegg').modal('show');
+
       })
       $('.addegg').on('click', function () {
         $('#addegg').modal('show');

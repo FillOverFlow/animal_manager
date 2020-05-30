@@ -60,7 +60,7 @@
 
     <div class="row p-2">
       <div class="col-sm">
-        <form action="code/authorities/update_authorities.php" method="post">
+        <form action="code/authorities/update_authorities.php" method="post" enctype="multipart/form-data">
         <table>
           <thead>
           </thead>

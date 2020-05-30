@@ -82,6 +82,7 @@ function update($tbl,$var,$id){
 function delete($tbl,$id){
   $field = array_keys($id);
   $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
+  echo "show sql: $sql";
   return $sql;
 }
 
