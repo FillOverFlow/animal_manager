@@ -1,3 +1,20 @@
+<?php 
+require_once('code/mannageannimalcenter/class.php');
+error_reporting (E_ALL ^ E_NOTICE);
+$tblanimal = 'animal';
+$tblwild_animal_exhibits = 'wild_animal_exhibits';
+
+if($_GET['annimal_name_search']){
+
+  $name = $_GET['annimal_name_search'];
+  $sql = "SELECT * from wild_animal_exhibits JOIN animal on wild_animal_exhibits.Animal_ID = animal.Animal_ID  where wild_animal_exhibits.status = 1 
+  and animal.Thai_Common_Name LIKE '%".$name."%' and wild_animal_exhibits.Animal_Dead_ID != '0'";
+  $datajoin = $db->query($sql);
+
+}else{
+  $datajoin = joinshowdead();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,33 +43,33 @@
     </div>
     
   </div>
-<?php include('menu.php');  ?>
+  <?php include('menu.php');  ?>
 
 
-<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
 
-  <div class="row mt-5">
-    <div class="col-1"></div>
-    <div class="col-10">
+    <div class="row mt-5">
+      <div class="col-1"></div>
+      <div class="col-10">
 
-      <center><form>
-        &nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา">
-      </form></center>
+        <center><form>
+          &nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา">
+        </form></center>
 
-      <p>ค้นหาสัตว์ป่าของกลางรายตัวตาย</p>
-      <table class="table mt-2">
-        <thead>
-          <tr>
-            <th scope="col">ลำดับที่</th>
-            <th scope="col">สะถานะ</th>
-            <th scope="col">หมายเลขสัตว์</th>
-            <th scope="col">ดูข้อมูล</th>
-            <th scope="col">แก้ไข</th>
-            <th scope="col">ลบ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
+        <p>ค้นหาสัตว์ป่าของกลางรายตัวตาย</p>
+        <table class="table mt-2">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับที่</th>
+              <th scope="col">สะถานะ</th>
+              <th scope="col">หมายเลขสัตว์</th>
+              <th scope="col">ดูข้อมูล</th>
+              <th scope="col">แก้ไข</th>
+              <th scope="col">ลบ</th>
+            </tr>
+          </thead>
+          <tbody>
+<!--           <tr>
             <th>1</th>
             <td>-</td>
             <td>001</td>
@@ -60,14 +77,29 @@
             <td><a class="btn btn-light" href="editd1.php"><img src="picture/gg.png" width="20px" height="20px"></a></td>
             <td><button class="btn btn-light deleteannimal"><img src="picture/delete.png" width="20px" height="20px"></button></td>
           </tr>
-        </tbody>
-      </table>
+        </tbody> -->
+        <tbody>
+          <tr>
+            <?php   $i =1; foreach($datajoin as $key => $value) {?>
+              <tr>
+               <th><?php echo $i; ?></th>
+               <td>เสียชีวิต</td>
+               <td><?php echo $value['W_A_E_number'];?></td>
+               <td><a class="btn btn-light" href="showd1.php?id=<?php echo $value['Wild_Animal_Exhibits_ID'];?>"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
+               <td><a class="btn btn-light" href="editd1.php?id=<?php echo $value['Wild_Animal_Exhibits_ID'];?>"><img src="picture/gg.png" width="20px" height="20px"></a></td>
+               <td><button class="btn btn-light deleteannimal" data-id="<?php echo $value['Wild_Animal_Exhibits_ID']; ?>"><img src="picture/delete.png" width="20px" height="20px"></button></td>
+             </tr>
+             <?php $i++;} ?>
+           </tr>
+         </tbody>
+       </table>
+     </table>
 
-    </div>
-    <div class="col-1"></div>
-  </div>
+   </div>
+   <div class="col-1"></div>
+ </div>
 
-  <button class="btn btn-light float-left back">ย้อนกลับ</button>
+ <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -124,13 +156,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <center><img src="picture/unnamed.png" width="100px" height="100px">
-          <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
-        </div>
-        <div class="mt-2">
-          <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
-        </div>
+      <form action="">
+        <div class="modal-body">
+          <input type="" name="">
+          <center><img src="picture/unnamed.png" width="100px" height="100px">
+            <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
+          </div>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -142,57 +177,57 @@
   <script type="text/javascript">
 
 
-      $(document).ready(function() {
+    $(document).ready(function() {
 
-        $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageuser.php");
+      $('.back').on('click', function (e) {
+        e.preventDefault()
+        window.location.replace("http://localhost/animal_manager/mannageuser.php");
 
-            })
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+      })
+      $('#myTab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
 
-          $('.deleteannimal').on('click', function () {
-            $('#deleteannimal').modal('show');
-          })
+      $('.deleteannimal').on('click', function () {
+        $('#deleteannimal').modal('show');
+      })
 
-          $('.addhlive').on('click', function () {
-            $('#addhlive').modal('show');
-          })
+      $('.addhlive').on('click', function () {
+        $('#addhlive').modal('show');
+      })
 
-           $('.showeditannimal').on('click', function () {
-            $('#showeditannimal').modal('show');
-          })
+      $('.showeditannimal').on('click', function () {
+        $('#showeditannimal').modal('show');
+      })
 
-          $('.mnl').click(function(event) {
+      $('.mnl').click(function(event) {
 
-            var page = 0;
-            var id = $(this).data('id');
-            var dism = document.getElementById("display-m");
-            var dis1 = document.getElementById("display-1");
-            var dis2 = document.getElementById("display-2");
+        var page = 0;
+        var id = $(this).data('id');
+        var dism = document.getElementById("display-m");
+        var dis1 = document.getElementById("display-1");
+        var dis2 = document.getElementById("display-2");
 
 
 
-            if (id==1) {
-              dis1.style.display = 'block';
-              dism.style.display = 'none';
-              dis2.style.display = 'none';
-              page == 1 ;
-            }
-            if (id==2) {
-              dism.style.display = 'none';
-              dis1.style.display = 'none';
-              dis2.style.display = 'block';
-            }
-            else{
+        if (id==1) {
+          dis1.style.display = 'block';
+          dism.style.display = 'none';
+          dis2.style.display = 'none';
+          page == 1 ;
+        }
+        if (id==2) {
+          dism.style.display = 'none';
+          dis1.style.display = 'none';
+          dis2.style.display = 'block';
+        }
+        else{
 
-            }
+        }
 
-          });
-        });
+      });
+    });
 
 
   </script>

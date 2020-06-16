@@ -134,7 +134,7 @@
                 </div>
                 <div class="col-6" align="center" id="imgp">
                   <tr>
-                    <th><img  src="<?php echo $data['QR_Code_Name'];?>" width="200px" class="border border-dark">
+                    <th><img  src="<?php echo $data['QR_Code_Name'];?>" width="100%" class="border border-dark">
                     </th>
                   </tr>
                 </div>

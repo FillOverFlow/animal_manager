@@ -1,6 +1,6 @@
 <?php
 include 'connect.php';
-include "phpqrcode/qrlib.php"; 
+include "phpqrcode/qrlib.php";
 $annimal_type_id = $_POST['Animal_Type'];
 $thname = $_POST['thname'];
 $engname = $_POST['engname'];

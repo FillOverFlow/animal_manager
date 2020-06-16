@@ -25,9 +25,9 @@ $var  = array(
 	'Undecided_Case_No' => $_POST['Undecided_Case_No'],
 	'Dong_Case_No' => $_POST['Dong_Case_No']
 );
-echo "<pre>";
-var_dump($var);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($var);
+// echo "</pre>";
 $Date_Judged = $_POST['day1'].':'.$_POST['mont1'].':'.$_POST['year1'];
 $pathfiles = $Recording_Document['tmp_name'][0];
 $path = "files/".$Recording_Document['name'][0];
@@ -79,7 +79,7 @@ $sql_insert = "INSERT INTO case_animal
 // echo $sql_insert;
 // echo $sql_insert;
 if ($conn->query($sql_insert) === TRUE) {
-	echo "<script>alert('บันทึกข้อมูลสำเร็จ');</script>";
+	echo "<script>alert('เพิ่มข้อมูลสำเร็จ');</script>";
 	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimalcenter.php'>";
 }else{
 	echo "<script>alert('ข้อมูลผิดพลาด');</script>";

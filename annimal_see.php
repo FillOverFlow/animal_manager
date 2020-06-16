@@ -111,13 +111,13 @@
       <div class="row">
         <div class="col-6">
           <tr>
-            <th><img src="<?php echo $data['Animal_Photo'];?>" width="200px" class="border border-dark">
+            <th><img src="<?php echo $data['Animal_Photo'];?>" width="300px" class="border border-dark">
             </th>
           </tr>
         </div>
         <div class="col-6" id="imgp">
           <tr>
-            <th><img src="<?php echo $data['QR_Code_Name'];?>" width="200px"  class="border border-dark">
+            <th><img src="<?php echo $data['QR_Code_Name'];?>" width="100%"  class="border border-dark">
             </th>
           </tr>
         </div>

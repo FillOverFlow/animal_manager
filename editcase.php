@@ -230,12 +230,10 @@
                   <td>
                     <span>
                       <?php 
-                  // $date[1]
                       $date1 = explode(':', $row['Date_Judged']);
                       $datenum1 = $date[0];
                       $montnum1 = $date[1];
                       $yearnum1 = $date[2];
-
                       ?>
                       <span>
                         <select name="day1">

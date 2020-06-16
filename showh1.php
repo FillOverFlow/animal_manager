@@ -1,3 +1,14 @@
+<?php 
+require_once('code/mannageannimalcenter/class.php');
+error_reporting (E_ALL ^ E_NOTICE);
+$tblanimal = 'animal';
+$tblwild_animal_exhibits = 'wild_animal_exhibits';
+$id = $_GET['id'];
+$datajoin = joinshowliverow($id);
+// echo "<pre>";
+// var_dump($datajoin);
+// echo "</pre>";
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,103 +36,126 @@
 
     </div>
     
-  </div>
+  </div> 
 
- <?php include('menu.php');  ?>
+  <?php include('menu.php');  ?>
 
-<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
 
-  <div class="row">
-    <div class="col-4"><label>&nbsp;&nbsp;แก้ไขข้อมูลสัตว์ป่าของกลาง-มีชีวิต</label></div>
-    <div class="col-4">
+    <div class="row">
+      <div class="col-4"><label>&nbsp;&nbsp;แก้ไขข้อมูลสัตว์ป่าของกลาง-มีชีวิต</label></div>
+      <div class="col-4">
+      </div>
+      <div class="col-4"></div>
     </div>
-    <div class="col-4"></div>
-  </div>
 
-  <div class="row p-5">
-    <div class="col-4">
+    <div class="row p-5" id="print">
+      <div class="col-3">
 
 
-      <table>
-        <thead>
-          <tr>
+        <table>
+          <thead>
+            <tr>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th><label class="float-right">หมายเลขสัตว์ :</label>
-            </th>
-            <td>001</td>
-          </tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><label class="float-right">หมายเลขสัตว์ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['W_A_E_number'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">ชนิดสัตว์ :</label>
-            </th>
-            <td>บก</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">ชนิดสัตว์ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['Animal_Type_Name'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">ชื่อสามัญไทย :</label>
-            </th>
-            <td>ลิง</td>
-          </tr>
-          <tr>
-            <th><label class="float-right">ชื่อสามัญอังกฤษ :</label>
-            </th>
-            <td>monkey</td>
-          </tr>
-          <tr>
-            <th><label class="float-right" disabled="">ชื่อวิทยาศาสตร์ :</label>
-            </th>
-            <td>monkey</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">ชื่อสามัญไทย :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['Thai_Common_Name'];?></label></td>
+            </tr>
+            <tr>
+              <th><label class="float-right">ชื่อสามัญอังกฤษ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['English_Common_Name'];?></label></td>
+            </tr>
+            <tr>
+              <th><label class="float-right" disabled="">ชื่อวิทยาศาสตร์ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['Scientific_Name'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">สถานที่ :</label>
-            </th>
-            <td>สถานีเลี้ยงนกน้ำบางพระ</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">สถานที่ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['W_A_E_Location'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">วันที่ :</label>
-            </th>
-            <td>10/10/2563</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">วันที่ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['wild_animal_exhibits_date'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">เวลา :</label>
-            </th>
-            <td>10:00</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">เวลา :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['W_A_E_Time'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">กรงที่ :</label>
-            </th>
-            <td>1</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">กรงที่ :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['W_A_E_Cage'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">วันรับเข้า :</label>
-            </th>
-            <td>10/10/2563</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">วันรับเข้า :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['W_A_E_Date_of_admission'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">น้ำหนัก :</label>
-            </th>
-            <td>12 กก.</td>
-          </tr>
+            <tr>
+              <th><label class="float-right">น้ำหนัก :</label>
+              </th>
+              <td><label><?php echo $datajoin[0]['W_A_E_Weight'];?></label></td>
+            </tr>
 
-          <tr>
-            <th><label class="float-right">เพศ :</label>
-            </th>
-            <td>เมีย</td>
-          </tr>
-          <tr>
-            <th><label class="float-right">สะถานะสุขถาพสัตว์ :</label>
-            </th>
-            <td>ของกลาง</td>
+            <tr>
+              <th><label class="float-right">เพศ :</label>
+              </th>
+              <td><label><?php
+              if($datajoin[0]['W_A_E_Sex'] == 1){
+                echo "เพศผู้";
+              }else if($datajoin[0]['W_A_E_Sex'] == 2){
+                echo "เพศเมีย";
+              }else{
+                echo "อื่น ๆ";
+              }
+
+              ?></label></td>
+            </tr>
+            <tr>
+              <th><label class="float-right">สะถานะสุขถาพสัตว์ :</label>
+              </th>
+              <td><label>
+
+                <?php
+                if ($datajoin[0][' W_A_E_Animal_Health_Status'] == 1) {
+                  echo "สมบูรณ์";
+                }else if($datajoin[0][' W_A_E_Animal_Health_Status'] == 2){
+                  echo "อื่น ๆ";
+                }else{
+                  echo "อื่น ๆ";
+                }
+
+                ?>
+                
+              </label>
+            </td>
           </tr>
 
         </tbody>
@@ -130,7 +164,7 @@
 
     </div>
 
-    <div class="col-4">
+    <div class="col-6">
 
 
       <table>
@@ -143,136 +177,164 @@
           <tr>
             <th><label class="float-right">คดีอาญาที่ :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['Criminal_Case_No'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ยึดทรัพย์ที่ :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['Confiscation_Case_No'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">เลขห่วงขา :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['W_A_E_Pin_Number'];?></label></td>
           </tr>
           <tr>
             <th><label class="float-right">DNA :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['W_A_E_DNA_File'];?></label></td>
           </tr>
           <tr>
             <th><label class="float-right" disabled="">ปวจ. ข้อที่ :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['W_A_E_Daily_No'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right" disabled="">เวลา :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['W_A_E_Date_time'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">วันรับเข้า :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['W_A_E_Date'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">หน่วยงานที่จับกุม :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['Deliver_Department'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">หน่วยงานนำส่ง :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['Arrest_Deparment'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">ผู้ที่รับมอบ :</label>
             </th>
-            <td>-</td>
+            <td><label><?php echo $datajoin[0]['Username'];?></label></td>
           </tr>
 
           <tr>
             <th><label class="float-right">สถานะตามกฎหมาย :</label>
             </th>
-            <td>-</td>
-          </tr>
+            <td><label><?php
+            if ($datajoin[0]['W_A_E_Legal_Status'] == 1) {
+              echo "CITES Appendix I";
+            }else if($datajoin[0]['W_A_E_Legal_Status'] == 2){
+              echo "CITES Appendix II";
+            }else if($datajoin[0]['W_A_E_Legal_Status'] == 3){
+              echo "CITES Appendix III";
+            }else if($datajoin[0]['W_A_E_Legal_Status'] == 4){
+              echo "สัตว์ป่าคุ้มครอง";
+            }else{
+              echo "สัตว์ป่านอกบัญชี";
+            }
+            ?>
+          </label>
+        </td>
+      </tr>
 
-          <tr>
-            <th><label class="float-right">สถานะนำไปใช้ประโยชน์ :</label>
-            </th>
-            <td>-</td>
-          </tr>
+      <tr>
+        <th><label class="float-right">สถานะนำไปใช้ประโยชน์ :</label>
+        </th>
+        <td><label><?php
+        if ($datajoin[0]['Utilization_Status'] == 1) {
+          echo "สัตว์พ่อ-แม่พันธุ์";
+        }else if($datajoin[0]['Utilization_Status'] == 2){
+          echo "ปล่อยคืนสู่ธรรมชาติ";
+        }else if($datajoin[0]['Utilization_Status'] == 3){
+          echo "นำไปใช้ทางวิชาการ";
+        }else if($datajoin[0]['Utilization_Status'] == 4){
+          echo "อื่นๆ";
+        }else{
+          echo "-";
+        }
+        ?></label></td>
+      </tr>
 
-          <tr>
-            <th><label class="float-right"></label>
-            </th>
-            <td><img class="float-right" src="picture/+file.png" width="20px" height="20px"><hr></td>
-          </tr>
+<!--       <tr>
+        <th><label class="float-right"></label>
+        </th>
+        <td><img class="float-right" src="picture/+file.png" width="20px" height="20px"><hr></td>
+      </tr> -->
 
-        </tbody>
-      </table>
-
-
-    </div>
-
-
-
-
-    <div class="col-4 ">
-
-      <div class="row m-10 ">
-        <center><tr>
-          <th><img src="picture/logo.png" width="200px" height="200px" class="border border-dark">
-          </th>
-        </tr></center>
-
-      </div>
-      <div class="row mt-2">
-
-        <tr>
-          <th><a href="edith1.php" class="btn btn-light float-right">แก้ไข</a>
-          </th>
-
-        </tr>
-      </div>
-
-      <div class="row m-10 ">
+    </tbody>
+  </table>
 
 
-      </div>
-      <div class="row mt-2">
+</div>
 
-        <tr>
-          <th><button class="btn btn-light float-right deleteannimal">ลบ</button>
-          </th>
-        </tr>
 
-      </div>
 
-      
 
-    </div>
+<div class="col-3">
 
+  <div class="row m-10 ">
+    <center><tr>
+      <th>
+        <img id="img" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $datajoin[0]['W_A_E_Photo_1'] ;?>"  width="300px" class="border border-dark">
+        <?php
+        $img = array(
+          '0'=> $datajoin[0]['W_A_E_Photo_2'],
+          '1'=> $datajoin[0]['W_A_E_Photo_3'],
+          '2'=> $datajoin[0]['W_A_E_Photo_4'],
+          '3'=> $datajoin[0]['W_A_E_Photo_5'],
+        );
+        for ($i=0; $i < 5; $i++) {  
+          if($img[$i] == ""){
+
+          }else{?>
+            <img id="img" style="margin: 2px 0 0 0;" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $img[$i] ;?>"  height="50px" class="border border-dark">
+          <?php  }
+        } ?>
+
+
+      </th>
+    </tr></center>
 
   </div>
-
-  <div class="float-right row">
-    <label class="" disabled="">ผู้กรอกข้อมูล :</label>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    
+  <div class="row mt-2">
+    <a href="edith1.php?" class="btn btn-light" style="margin-left: 125px">แก้ไข</a>
+  </div>
+  <div class="row mt-2">
+    <button class="btn btn-light deleteannimal" style="margin-left: 135px">ลบ</button>
   </div>
 
-  
-  <div class="mt-5 row">
-    <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
-    <div class="col float-right" align="right"><img class="" src="picture/prin.png" width="50" height="50">  </div>
-  </div>
+
+
+</div>
+
+
+</div>
+
+<div class="float-right row">
+  <label class="" disabled="">ผู้กรอกข้อมูล :</label>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+</div>
+
+
+<div class="mt-5 row">
+  <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
+  <div class="col float-right" align="right"><button class="btn btn-light" onclick="PrintDiv();"><img class="" src="picture/prin.png" width="50" height="50"></button></div>
+</div>
 
 </div>
 
@@ -329,59 +391,76 @@
   <script type="text/javascript">
 
 
-     $(document).ready(function() {
+   $(document).ready(function() {
 
-          $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageannimalcenterhlive1.php");
+    $('.back').on('click', function (e) {
+      e.preventDefault()
+      window.location.replace("http://localhost/animal_manager/mannageannimalcenterhlive1.php");
 
-            })
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+    })
+    $('#myTab a').on('click', function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
 
-          $('.deleteannimal').on('click', function () {
-            $('#deleteannimal').modal('show');
-          })
+    $('.deleteannimal').on('click', function () {
+      $('#deleteannimal').modal('show');
+    })
 
-           $('.showeditannimal').on('click', function () {
-            $('#showeditannimal').modal('show');
-          })
+    $('.showeditannimal').on('click', function () {
+      $('#showeditannimal').modal('show');
+    })
 
-           $('.showqr1').on('click', function () {
-            $('#showqr1').modal('show');
-          })
+    $('.showqr1').on('click', function () {
+      $('#showqr1').modal('show');
+    })
 
-          $('.mnl').click(function(event) {
+    $('.mnl').click(function(event) {
 
-            var page = 0;
-            var id = $(this).data('id');
-            var dism = document.getElementById("display-m");
-            var dis1 = document.getElementById("display-1");
-            var dis2 = document.getElementById("display-2");
-
-
-
-            if (id==1) {
-              dis1.style.display = 'block';
-              dism.style.display = 'none';
-              dis2.style.display = 'none';
-              page == 1 ;
-            }
-            if (id==2) {
-              dism.style.display = 'none';
-              dis1.style.display = 'none';
-              dis2.style.display = 'block';
-            }
-            else{
-
-            }
-
-          });
-        });
+      var page = 0;
+      var id = $(this).data('id');
+      var dism = document.getElementById("display-m");
+      var dis1 = document.getElementById("display-1");
+      var dis2 = document.getElementById("display-2");
 
 
-    </script>
-  </body>
-  </html>
+
+      if (id==1) {
+        dis1.style.display = 'block';
+        dism.style.display = 'none';
+        dis2.style.display = 'none';
+        page == 1 ;
+      }
+      if (id==2) {
+        dism.style.display = 'none';
+        dis1.style.display = 'none';
+        dis2.style.display = 'block';
+      }
+      else{
+
+      }
+
+    });
+  });
+
+    function PrintDiv() {
+        var divToPrint = document.getElementById('print'); // เลือก div id ที่เราต้องการพิมพ์
+        var html =  '<html>'+ // 
+        '<head>'+
+        '<link href="css/print.css" rel="stylesheet" type="text/css">'+
+        '</head>'+
+        '<body onload="window.print(); window.close();">'
+        + divToPrint.innerHTML + 
+        '</body>'+
+        '</html>';
+
+        var popupWin = window.open();
+        popupWin.document.open();
+        popupWin.document.write(html); //โหลด print.css ให้ทำงานก่อนสั่งพิมพ์
+        popupWin.document.close();  
+      }
+
+
+</script>
+</body>
+</html>

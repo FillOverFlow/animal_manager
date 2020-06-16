@@ -63,7 +63,6 @@ if ($uploadOK == 0) {
 }
 
 function update($tbl,$var,$id){
-    //ตัวอย่างไฟล์ updatse code/mannageannimalcenter/editcase.php
   $field = array_keys($var);
   $idfield = array_keys($id);
   $set = [];
@@ -80,11 +79,72 @@ function update($tbl,$var,$id){
   $sql = "UPDATE ".$tbl." SET ".$data." WHERE ".$idfield[0]." = ".$id[$idfield[0]];
   return $sql;
 }
-function delete($tbl,$id){
+function delete($tbl,$id){ 
   $field = array_keys($id);
-  $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
-  echo "show sql: $sql";
+
+  if($id[$field[1]] == 0){
+    $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]]." AND ".$field[1]." = 0";
+  }
+  else{
+    $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]]." AND ".$field[1]." != 0";
+  }
+  
   return $sql;
 }
-  return $uploadOK;
+function deletehave($tbl,$id){ 
+ $field = array_keys($id);
+ $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
+ return $sql;
+}
+function deletecase($tbl,$id){
+  $field = array_keys($id);
+  $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
+  return $sql;
+}
+function insert($tbl,$data){
+  global $db;
+  $insert = $db->insert($tbl,$data);
+  if ($insert) {
+    return true;
+  }else{
+   return false;
+ }
+
+
+
+}
+
+function getfield($tbl){
+  global $db;
+  $sql = 'SELECT * from '.$tbl.' where status = 1 ';
+  $dataanimal =  $db->rawQuery($sql);
+  $field = array_keys($dataanimal[0]);
+  return $field;
+}
+// function dataupdate($data,$field,$fieldpk){
+//   $datareturn = [];
+//   foreach ($array as $key => $value) {
+
+//     foreach ($field as $val) {
+//       if($key == $val and $key != $fieldpk)
+//       {
+//         $datareturn[$key] = $value;
+
+//       }else{
+
+//       }
+//     }
+//   }
+
+//   return $datareturn;
+
+// }
+
+
+
+
+return $uploadOK;
+
+
+
 ?>
