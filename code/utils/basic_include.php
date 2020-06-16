@@ -1,5 +1,5 @@
 <?php
   require '../connect.php';
-  include 'helper.php';
+  require 'helper.php';
 
  ?>
