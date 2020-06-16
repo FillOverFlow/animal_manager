@@ -61,6 +61,7 @@ if ($uploadOK == 0) {
 }
 
 }
+
 function update($tbl,$var,$id){
     //ตัวอย่างไฟล์ updatse code/mannageannimalcenter/editcase.php
   $field = array_keys($var);
@@ -85,8 +86,5 @@ function delete($tbl,$id){
   echo "show sql: $sql";
   return $sql;
 }
-
   return $uploadOK;
-
-
 ?>
