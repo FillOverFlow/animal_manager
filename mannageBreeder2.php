@@ -1,3 +1,6 @@
+<?php
+  require_once 'code/connect.php';
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,13 +27,13 @@
       <hr class="float-left" width="94%" size="20" color="black">
 
     </div>
-    
+
   </div>
 
 <?php include('menu.php');  ?>
 
 
-<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
+<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100">
 
   <div class="row mt-5">
     <div class="col-1"></div>
@@ -53,14 +56,23 @@
           </tr>
         </thead>
         <tbody>
+          <!-- count animalDead -->
+          <?php
+            $db->where("Animal_Dead_ID",1);
+            $animals = $db->get('animal_breeder');
+            $i =1;
+            foreach ($animals as $animal ) {
+
+           ?>
           <tr>
-            <th>1</th>
-            <td>-</td>
-            <td>-</td>
+            <th><?php echo $i; ?></th>
+            <td><?php echo $animal['Animal_Breeder_ID']; ?></td>
+            <td><?php echo $animal['Animal_Breeder_Animal_Status']; ?></td>
             <td><a class="btn btn-light" href="mannageBreeder2_see.php"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
             <td><a class="btn btn-light" href="mannageBreeder2_editdead.php"><img src="picture/gg.png" width="20px" height="20px"></a></td>
             <td><button class="btn btn-light deleteannimal"><img src="picture/delete.png" width="20px" height="20px"></button></td>
           </tr>
+          <?php $i++;} ?>
         </tbody>
       </table>
 

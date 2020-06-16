@@ -27,7 +27,7 @@
 
 
 
-  checkValueExport($var); //call from helper.php
+  //checkValueExport($var); //call from helper.php
   //creat sql
   $sql_insert = "INSERT INTO authorities VALUES (
   0,

@@ -1,3 +1,7 @@
+<?php
+ require_once 'code/connect.php';
+
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,13 +28,13 @@
       <hr class="float-left" width="94%" size="20" color="black">
 
     </div>
-    
+
   </div>
 
   <?php include('menu.php');?>
 
 
-  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100">
 
     <div class="row">
       <div class="col-4"><label>&nbsp;&nbsp;เพิ่มข้อมูลสัตว์พ่อ-แม่พันธุ์มีชีวิต</label></div>
@@ -38,94 +42,111 @@
       </div>
       <div class="col-4"></div>
     </div>
+    <?php
+      $animal_id ="";
+      if(isset($_GET['animal_id'])){
+        $animal_id = $_GET['animal_id'];
+      }
+      $db->where("Animal_ID",$animal_id);
+      $data = $db->getOne('animal');
 
+      $db->where("Animal_Type_ID",$data['Animal_Type_ID']);
+      $type = $db->getOne('animal_type');
+     ?>
     <div class="row p-5">
       <div class="col-4">
         <table>
           <thead>
           </thead>
-          <tbody>
-            <tr>
-              <th><label class="float-right">เลือกพ่อพันธ์-แม่พันธ์ :</label>
-              </th>
-              <td><input type="text"   placeholder="" ><a href="#"><img class="addbreeder" src="picture/plus.png" width="30px"></a></td>
-            </tr>
+          <form action="code/animal_breeder/addBreederHavelife.php" method="post" enctype="multipart/form-data">
 
-            <tr>
-              <th><label class="float-right">หมายเลขสัตว์ :</label>
-              </th>
-              <td><input type="text"   placeholder="" ><a href="#"><img class="addbreederedit" src="picture/plus.png" width="30px"></a></td>
-            </tr>
+            <tbody>
+              <tr>
+                <th><label class="float-right">เลือกพ่อพันธ์-แม่พันธ์ :</label>
+                </th>
+                <td><input type="text"   placeholder=""  value="<?php echo $data['Thai_Common_Name']; ?>" ><a href="#" value  ><img class="addbreeder" src="picture/plus.png" width="30px"></a></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">ชื่อสัตว์ :</label>
-              </th>
-              <td><input type="text"   placeholder=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">หมายเลขสัตว์ :</label>
+                </th>
+                <td><input type="text"   placeholder="" name="animal_id" value="<?php echo $data['Animal_ID']; ?>"><a href="#"><img class="addbreederedit" src="picture/plus.png" width="30px"></a></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">ชนิดสัตว์ :</label>
-              </th>
-              <td><input type="text"   placeholder="" disabled=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">ชื่อสัตว์ :</label>
+                </th>
+                <td><input type="text"   placeholder="" name="animal_name" required="true"></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">ชื่อสามัญไทย :</label>
-              </th>
-              <td><input type="text"   placeholder="" disabled=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">ชนิดสัตว์ :</label>
+                </th>
+                <td><input type="text"   placeholder="" disabled="" value="<?php echo $type['Animal_Type_Name']; ?>"></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">ชื่อสามัญอังกฤษ :</label>
-              </th>
-              <td><input type="text"   placeholder="" disabled=""></td>
-            </tr>
-            <tr>
-              <th><label class="float-right" disabled="">ชื่อวิทยาศาสตร์ :</label>
-              </th>
-              <td><input type="text"   placeholder="" disabled=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">ชื่อสามัญไทย :</label>
+                </th>
+                <td><input type="text"   placeholder="" disabled="" value="<?php echo $data['Thai_Common_Name']; ?>"></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right" disabled="">สถานที่ :</label>
-              </th>
-              <td><input type="text"   placeholder=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">ชื่อสามัญอังกฤษ :</label>
+                </th>
+                <td><input type="text"   placeholder="" disabled="" value="<?php echo $data['English_Common_Name']; ?>"></td>
+              </tr>
+              <tr>
+                <th><label class="float-right" disabled="">ชื่อวิทยาศาสตร์ :</label>
+                </th>
+                <td><input type="text"   placeholder="" disabled="" value="<?php echo $data['Scientific_Name']; ?>"></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">เลขห่วงขา :</label>
-              </th>
-              <td><input type="text"   placeholder=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right" disabled="">สถานที่ :</label>
+                </th>
+                <td><input type="text"   name="address"  required="true"></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">DNA :</label>
-              </th>
-              <td><input type="text"   placeholder=""></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">เลขห่วงขา :</label>
+                </th>
+                <td><input type="number"  main="3" max="10" name="pincode" required="true"></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">เพศ :</label>
-              </th>
-              <td><select>
-                <option>กรุณาเลือกเพศ</option>
-              </select></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">DNA :</label>
+                </th>
+                <td><input type="file"   name="dna" placeholder=""></td>
+              </tr>
 
-            <tr>
-              <th><label class="float-right">อายุ :</label>
-              </th>
-              <td><input type="text"   placeholder=""></td>
-            </tr>
-            <tr>
-              <th><label class="float-right">ช่วงวัย :</label>
-              </th>
-              <td><select>
-                <option>กรุณาเลือกช่วงวัย</option>
-              </select></td>
-            </tr>
+              <tr>
+                <th><label class="float-right">เพศ :</label>
+                </th>
+                <td><select name="gender" style="width:100%;">
+                    <option >กรุณาเลือกเพศ</option>
+                    <option value="1">ชาย</option>
+                    <option value="2">หญิง</option>
+                </select></td>
+              </tr>
 
-          </tbody>
+              <tr>
+                <th><label class="float-right">อายุ :</label>
+                </th>
+                <td><input type="number"  name="age" placeholder="" required="true"></td>
+              </tr>
+              <tr>
+                <th><label class="float-right">ช่วงวัย :</label>
+                </th>
+                <td><select name="age_range">
+                  <option>กรุณาเลือกช่วงวัย</option>
+                  <option value="1">วัยเด็ก</option>
+                  <option value="1">โตเต็มวัย</option>
+                </select>
+                </td>
+              </tr>
+            </tbody>
+
         </table>
 
 
@@ -141,44 +162,89 @@
             <tr>
               <th><label class="float-right">สถานะ :</label>
               </th>
-              <td><select class="form-control">
-                <option selected>กรุณาเลือก</option>
+              <td><select class="form-control" name="status">
+                <option value="0" selected>กรุณาเลือก</option>
+                <option value="1">พ่อพันธ์</option>
+                <option value="2">แม่พันธ์</option>
+                <option value="3">ตัวผู้โตเต็มวัย</option>
+                <option value="4">ตัวเมียโตเต็มวัย</option>
+                <option value="5">ลูกเพาะ</option>
+                <option value="6">ปล่อยคืนสู่ธรรมชาติ</option>
               </select></td>
             </tr>
 
             <tr>
               <th><label class="float-right">แหล่งที่มา :</label>
               </th>
-              <td><input type="text"   placeholder="" ></td>
+              <td><input type="text"  name="source" placeholder="" required="true"></td>
             </tr>
+             <tr>
+                <th><label class="float-right">วันที่ีรับมา :</label>
+                  </th>
+                  <td>
 
-            <tr>
-              <th><label class="float-right">วันที่รับมา :</label>
-              </th>
-              <td><select class="form-control">
-                <option selected>วัน/เดือน/ปี</option>
-              </select></td>
-            </tr>
+                    <span>
+                      <select name="birth_day" >
+                        <?php
+                        $start_date = 1;
+                        $end_date   = 31;
+                        for( $j=$start_date; $j<=$end_date; $j++ ) {
+                          echo '<option value='.$j.'>'.$j.'</option>';
+                        }
+                        ?>
+                      </select>
+                    </span>
+                    <span>
+                     <select name="birth_month" >
+                      <?php
+                      $thaimonth=array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+                      for($i=0; $i<=11; $i++) {
+                        ?>
+                        <option value="<?php echo $thaimonth[$i]; ?>"><?php echo $thaimonth[$i]; ?></option>
+                      <?php } ?>
+                    </select>
+                  </span>
+                  <span>
+                    <select name="birth_year" >
+                      <?php
+                      $year = date('Y')+543;
+                      $min = $year - 60;
+                      $max = $year;
+                      for( $i=$max; $i>=$min; $i-- ) {
+                        echo '<option value='.$i.'>'.$i.'</option>';
+                      }
+                      ?>
+                    </select>
+                  </span>
+
+                </td>
+              </tr>
 
             <tr>
               <th><label class="float-right">หมายเหตุ :</label>
               </th>
-              <td><textarea></textarea></td>
+              <td><textarea name="note"></textarea></td>
             </tr>
-
             <tr>
               <th><label class="float-right">ผู้รับมอบ :</label>
               </th>
-              <td><select class="form-control">
-                <option selected>กรุณาเลือกเจ้าหน้าที่</option>
-              </select></td>
+              <td>
+                <select class="form-control" name="authoritie_id">
+                 <?php
+                    $db->where("Authorities_Status",1);
+                    $authorities = $db->get("authorities");
+                    foreach ($authorities as $authoritie) {
+                 ?>
+                  <option value="<?php echo $authoritie['Authorities_ID']; ?>"><?php echo $authoritie['Authorities_First_Name']; ?> <?php echo $authoritie['Authorities_Last_Name']; ?></option>
+                <?php } ?>
+                </select>
+              </td>
             </tr>
-
             <tr>
               <th><label class="float-right">ผู้กรอกข้อมูล :</label>
               </th>
             </th>
-            <td><input type="text" name="" disabled="disabled"></td>
+            <td><input type="text" name="fillers" disabled="disabled"></td>
           </tr>
 
         </tbody>
@@ -216,18 +282,14 @@
         <button class="btn btn-light float-left back">ย้อนกลับ</button>
       </div>
       <div class="col-sm-4" align="center">
-        <button class="btn btn-light" >บันทึก</button>
+        <button type="submit" class="btn btn-light" >บันทึก</button>
         <button class="btn btn-light" >ยกเลิก</button>
       </div>
       <div class="col-auto"></div>
     </div>
-
-
-  </div>
-  <div class="col-1">
-  </div>
-
+    </form>
 </div>
+
 
 
 
@@ -347,6 +409,7 @@
     </div>
   </div>
 </div>
+
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
