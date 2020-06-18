@@ -15,12 +15,20 @@
  	return $animals;
 
  }
- function showcorrection(){
+ function showcorrection($search){
  	global $db;
- 	$correction =  $db->rawQuery('SELECT * from animal_case_correction 
- 		JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
- 		JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
- 		where animal_case_correction.status = 1');
+ 	if($search != ''){
+ 		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 			where animal_case_correction.status = 1 and animal.Thai_Common_Name LIKE "%'.$search.'%" ');
+ 	}else{
+ 		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 			where animal_case_correction.status = 1');
+ 	}
+ 	
  	return $correction;
  }
  function insert($tbl,$data){

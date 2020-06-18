@@ -1,7 +1,14 @@
 <?php
 require_once('code/mannageannimaledit/class.php');
+error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();
-$data = showcorrection();
+if($_GET['annimal_name_search'] != ''){
+$data = showcorrection($_GET['annimal_name_search']);
+}else{
+$search = '';
+$data = showcorrection($search);
+}
+
 ?>
 
 <!doctype html>
@@ -41,8 +48,8 @@ $data = showcorrection();
     <div class="row mt-5">
       <div class="col-1"></div>
       <div class="col-10">
-
-        <center> <a><button class="btn btn-light addhlive">เพิ่มชื่อสามัญ</button></a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา"></center>
+        <form action="mannageannimaledit.php" method="GET">
+        <center> <a><button class="btn btn-light addhlive">เพิ่มชื่อสามัญ</button></a>&nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา"></center></form>
 
         <p class="mt-5">ค้นหาสัตว์กรณีแก้ไข</p>
         <table class="table">
