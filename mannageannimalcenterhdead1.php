@@ -156,9 +156,9 @@ if($_GET['annimal_name_search']){
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="">
+      <form action="code/mannageannimalcenterhdead/delete.php" method="GET">
         <div class="modal-body">
-          <input type="" name="">
+          <input type="hidden" name="Wild_Animal_Exhibits_ID" id="Wild_Animal_Exhibits_ID">
           <center><img src="picture/unnamed.png" width="100px" height="100px">
             <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
           </div>
@@ -191,6 +191,8 @@ if($_GET['annimal_name_search']){
 
       $('.deleteannimal').on('click', function () {
         $('#deleteannimal').modal('show');
+        var id = $(this).data('id');
+        $('#Wild_Animal_Exhibits_ID').val(id);
       })
 
       $('.addhlive').on('click', function () {

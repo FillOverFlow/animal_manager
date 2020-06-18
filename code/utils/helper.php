@@ -96,6 +96,11 @@ function deletehave($tbl,$id){
  $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
  return $sql;
 }
+function deletedead($tbl,$id){ 
+ $field = array_keys($id);
+ $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
+ return $sql;
+}
 function deletecase($tbl,$id){
   $field = array_keys($id);
   $sql = "UPDATE ".$tbl." SET status = '0' WHERE ".$field[0]." = ".$id[$field[0]];
