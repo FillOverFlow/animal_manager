@@ -15,6 +15,11 @@
  	return $animals;
 
  }
+ function insert($tbl,$data){
+ 	global $db;
+ 	$query = $db->insert($tbl,$data);
+ 	return $query;
+}
  // function showAnimalData($tbl,$type){
  // 	global $db;
 
@@ -162,4 +167,4 @@
 
 
 
- ?>
+?>
