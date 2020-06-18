@@ -5,6 +5,7 @@ $tbl = 'animal_case_correction';
 $data = [];
 foreach ($_POST['Animal_ID'] as  $value) {
 	$data['Animal_ID'] = $value;
+	$data['status'] = 1;
 	$insert[] = insert($tbl,$data);
 }
 if (!empty($insert)) {

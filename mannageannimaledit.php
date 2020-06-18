@@ -1,9 +1,7 @@
 <?php
 require_once('code/mannageannimaledit/class.php');
 $listanimal = listanimal();
-// echo "<pre>";
-// var_dump($listanimal);
-// echo "</pre>";
+$data = showcorrection();
 ?>
 
 <!doctype html>
@@ -62,17 +60,32 @@ $listanimal = listanimal();
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td><a href="addehave.php" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
-              <td>-</td>
-              <td><a href="addedead.php" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
-              <td><button class="btn btn-light deleteannimal"><img src="picture/delete.png" width="20px" height="20px"></button></td>
-            </tr>
+            <?php $i = 1; foreach ($data as $key => $value) { ?>
+              <tr>
+                <th><?php echo $i; ?></th>
+                <td><?php echo $value['Thai_Common_Name']; ?></td>
+                <td><?php echo $value['English_Common_Name']; ?></td>
+                <td>-</td>
+                <td>
+                  <?php
+                  $Animal_ID = $value['Animal_ID'];
+                  $datacounthavelife = countlife($Animal_ID);
+                  echo $datacounthavelife; 
+                  ?>
+                </td>
+                <td><a href="addehave.php" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
+                <td>
+                  <?php
+                  $Animal_ID = $value['Animal_ID'];
+                  $datacountdie = countdie($Animal_ID);
+                   echo $datacountdie;
+                    ?>
+                  
+                </td>
+                <td><a href="addedead.php" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
+                <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
+              </tr>
+            <?php } $i++;?>
           </tbody>
         </table>
 
@@ -121,14 +134,14 @@ $listanimal = listanimal();
                     <td><input type="checkbox" name="Animal_ID[]" value="<?php echo $value['Animal_ID'];?>"></td>
                   </tr>
                   <?php $i++; } ?>
-            </tbody>
+                </tbody>
 
-          </table>
-        </div>
-        <div class="mt-2">
-          <button type="submit" class="btn btn-light float-right">เพิ่มลงในตาราง</button>
-        </div>
-        </form>
+              </table>
+            </div>
+            <div class="mt-2">
+              <button type="submit" class="btn btn-light float-right">เพิ่มลงในตาราง</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -167,13 +180,16 @@ $listanimal = listanimal();
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form action="code/mannageannimaledit/delete.php" method="GET">
           <div class="modal-body">
+            <input type="hidden" name="Animal_Case_Correction_ID" id="Animal_Case_Correction_ID">
             <center><img src="picture/unnamed.png" width="100px" height="100px">
               <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
             </div>
             <div class="mt-2">
-              <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+              <button type="submit" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
             </div>
+          </form>
           </div>
         </div>
       </div>
@@ -200,6 +216,8 @@ $listanimal = listanimal();
 
         $('.deleteannimal').on('click', function () {
           $('#deleteannimal').modal('show');
+          var id = $(this).data('id');
+          $('#Animal_Case_Correction_ID').val(id);
         })
 
         $('.addhlive').on('click', function () {
