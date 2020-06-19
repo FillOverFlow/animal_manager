@@ -35,9 +35,9 @@ foreach ($_POST as $key => $value) {
 
 	}
 }
-echo "<pre>";
-var_dump($data);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($data);
+// echo "</pre>";
 $tbl = 'animal_case_correction';
 $insert = insert($tbl,$data);
 

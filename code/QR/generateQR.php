@@ -1,5 +1,3 @@
-
-
 <?php 
 		include "../phpqrcode/qrlib.php";
 		$name = "deadanimal";
@@ -18,8 +16,4 @@
 			$img = $PNG_WEB_DIR.basename($filename);
 			$data['namefile'] = $name.$Wild_Animal_Exhibits_ID.'.png';
 			echo json_encode($data);
-		
-		
-		
-		
 ?>

@@ -94,7 +94,7 @@ $data = showcorrection($search);
                    echo "กรุณาเพิ่มสัตว์มีชีวิต";
                   }else{
                    ?>
-                  <a href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a>
+                  <a href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>&Animal_number=<?php echo $value['Animal_number'];?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a>
                 <?php } ?>
                 </td>
                 <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
