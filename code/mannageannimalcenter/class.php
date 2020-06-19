@@ -131,6 +131,12 @@
  	header ("Location: ".$location."");
  	exit;
  }
+ function animalshow($id){
+ 	global $db;
+ 	$dataanimal =  $db->rawQuery('SELECT * from animal JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID  
+ 		WHERE animal.status = 1 and animal.Animal_ID = '.$id.'');
+ 	return $dataanimal;
+ }
  // function getlocation($location){
 
  // 	$data = explode('/', $location);

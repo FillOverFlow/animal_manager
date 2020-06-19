@@ -80,16 +80,23 @@ $data = showcorrection($search);
                   echo $datacounthavelife; 
                   ?>
                 </td>
-                <td><a href="addehave.php" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
+                <td><a href="addehave.php?Animal_id=<?php echo $Animal_ID; ?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
                 <td>
                   <?php
                   $Animal_ID = $value['Animal_ID'];
                   $datacountdie = countdie($Animal_ID);
                    echo $datacountdie;
                     ?>
-                  
                 </td>
-                <td><a href="addedead.php" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
+                <td>
+                  <?php 
+                  if ($datacounthavelife == 0) {
+                   echo "กรุณาเพิ่มสัตว์มีชีวิต";
+                  }else{
+                   ?>
+                  <a href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a>
+                <?php } ?>
+                </td>
                 <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
               </tr>
             <?php } $i++;?>

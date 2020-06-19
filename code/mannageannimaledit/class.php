@@ -38,16 +38,20 @@
  }
  function countlife($Animal_ID){
  	global $db;
- 	$correction =  $db->rawQuery('SELECT animal_case_correction.Animal_Dead_ID from animal_case_correction 
- 		where animal_case_correction.status = 1 and animal_case_correction.Animal_Dead_ID = 0 and animal_case_correction.Animal_ID = '.$Animal_ID.'');
- 	$sum = count($correction);
+ 	$tbl = "animal_case_correction";
+ 	$db->where("Animal_ID", $Animal_ID);
+ 	$db->where("Animal_Dead_ID", 0);
+ 	$animals = $db->get($tbl);
+ 	$sum = count($animals);
  	return $sum;
  }
  function countdie($Animal_ID){
  	global $db;
- 	$correction =  $db->rawQuery('SELECT animal_case_correction.Animal_Dead_ID from animal_case_correction 
- 		where animal_case_correction.status = 1 and animal_case_correction.Animal_Dead_ID != 0 and animal_case_correction.Animal_ID = '.$Animal_ID.'');
- 	$sum = count($correction);
+ 	$tbl = "animal_case_correction";
+ 	$db->where("Animal_ID", $Animal_ID);
+ 	$db->where("Animal_Dead_ID",0,">");
+ 	$animals = $db->get($tbl);
+ 	$sum = count($animals);
  	return $sum;
  }
 
