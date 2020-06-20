@@ -31,6 +31,14 @@
  	
  	return $correction;
  }
+ function showcorrectionrow($id){
+ 	global $db;
+ 	$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 		JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 		JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 		where animal_case_correction.status = 1 and animal_case_correction.Animal_Case_Correction_ID ='.$id.'');
+ 	return $correction;
+ }
  function insert($tbl,$data){
  	global $db;
  	$query = $db->insert($tbl,$data);

@@ -1,3 +1,15 @@
+<?php
+require_once('code/mannageannimaledit/class.php');
+error_reporting (E_ALL ^ E_NOTICE);
+$listanimal = listanimal();
+if($_GET['annimal_name_search'] != ''){
+  $data = showcorrection($_GET['annimal_name_search']);
+}else{
+  $search = '';
+  $data = showcorrection($search);
+}
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,48 +39,59 @@
     
   </div>
 
-<?php include('menu.php');  ?>
+  <?php include('menu.php');  ?>
 
 
-<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
+  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100"> 
 
-  <div class="row mt-5">
-    <div class="col-1"></div>
-    <div class="col-10">
+    <div class="row mt-5">
+      <div class="col-1"></div>
+      <div class="col-10">
 
-      <center><form>
-        &nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา">
-      </form></center>
+        <center><form>
+          &nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label><input type="text" name="annimal_name_search" class="form">&nbsp;&nbsp;<input type="submit" class="btn btn-light" value="ค้นหา">
+        </form></center>
 
-      <p>ค้นหาสัตว์กรณีแก้ไขรายตัวมีชีวิต</p>
-      <table class="table mt-2">
-        <thead>
-          <tr>
-            <th scope="col">ลำดับที่</th>
-            <th scope="col">หมายเลขสัตว์</th>
-            <th scope="col">สะถานะ</th>
-            <th scope="col">ดูข้อมูล</th>
-            <th scope="col">แก้ไข</th>
-            <th scope="col">ลบ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
+        <p>ค้นหาสัตว์กรณีแก้ไขรายตัวมีชีวิต</p>
+        <table class="table mt-2">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับที่</th>
+              <th scope="col">หมายเลขสัตว์</th>
+              <th scope="col">สะถานะ</th>
+              <th scope="col">ดูข้อมูล</th>
+              <th scope="col">แก้ไข</th>
+              <th scope="col">ลบ</th>
+            </tr>
+          </thead>
+          <tbody>
+         <!--  <tr>
             <th>1</th>
             <td>-</td>
             <td>-</td>
             <td><a class="btn btn-light" href="addseehave.php"><img src="picture/magnifyingglass.png" width="20px" height="20px"></a></td>
             <td><a class="btn btn-light" href="addedit.php"><img src="picture/gg.png" width="20px" height="20px"></a></td>
             <td><button class="btn btn-light deleteannimal"><img src="picture/delete.png" width="20px" height="20px"></button></td>
-          </tr>
-        </tbody>
-      </table>
+          </tr> -->
 
-    </div>
-    <div class="col-1"></div>
-  </div>
+          <?php $i = 1; foreach ($data as $key => $value) { ?>
+            <tr>
+              <th><?php echo $i; ?></th>
+              <td><?php echo $value['Animal_number']; ?></td>
+              <td>มีชีวิต</td>
+              <td><a href="addseehave.php?Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID']; ?>" class="btn btn-light addhlive" href="#"><img src="picture/magnifyingglass.png" width="25px" ></a></td>
+              <td><a href="addedit.php?Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID']; ?>" class="btn btn-light addhlive" href="#"><img src="picture/gg.png" width="25px" ></a></td>
+             <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
+           </tr>
+         <?php } $i++;?>
+       </tbody>
+     </table>
 
-  <button class="btn btn-light float-left back">ย้อนกลับ</button>
+   </div>
+   <div class="col-1"></div>
+ </div>
+
+ <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -142,57 +165,57 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script type="text/javascript">
 
-  $(document).ready(function() {
+    $(document).ready(function() {
 
-          $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageuser.php");
+      $('.back').on('click', function (e) {
+        e.preventDefault()
+        window.location.replace("http://localhost/animal_manager/mannageuser.php");
 
-            })
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+      })
+      $('#myTab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
 
-          $('.deleteannimal').on('click', function () {
-            $('#deleteannimal').modal('show');
-          })
+      $('.deleteannimal').on('click', function () {
+        $('#deleteannimal').modal('show');
+      })
 
-           $('.showeditannimal').on('click', function () {
-            $('#showeditannimal').modal('show');
-          })
+      $('.showeditannimal').on('click', function () {
+        $('#showeditannimal').modal('show');
+      })
 
-           $('.showqr1').on('click', function () {
-            $('#showqr1').modal('show');
-          })
+      $('.showqr1').on('click', function () {
+        $('#showqr1').modal('show');
+      })
 
-          $('.mnl').click(function(event) {
+      $('.mnl').click(function(event) {
 
-            var page = 0;
-            var id = $(this).data('id');
-            var dism = document.getElementById("display-m");
-            var dis1 = document.getElementById("display-1");
-            var dis2 = document.getElementById("display-2");
+        var page = 0;
+        var id = $(this).data('id');
+        var dism = document.getElementById("display-m");
+        var dis1 = document.getElementById("display-1");
+        var dis2 = document.getElementById("display-2");
 
 
 
-            if (id==1) {
-              dis1.style.display = 'block';
-              dism.style.display = 'none';
-              dis2.style.display = 'none';
-              page == 1 ;
-            }
-            if (id==2) {
-              dism.style.display = 'none';
-              dis1.style.display = 'none';
-              dis2.style.display = 'block';
-            }
-            else{
+        if (id==1) {
+          dis1.style.display = 'block';
+          dism.style.display = 'none';
+          dis2.style.display = 'none';
+          page == 1 ;
+        }
+        if (id==2) {
+          dism.style.display = 'none';
+          dis1.style.display = 'none';
+          dis2.style.display = 'block';
+        }
+        else{
 
-            }
+        }
 
-          });
-        });
+      });
+    });
 
 
   </script>
