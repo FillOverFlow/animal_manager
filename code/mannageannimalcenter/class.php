@@ -3,8 +3,6 @@
  
 
  $db = new MysqliDb('localhost','root','','project');
-
-
  function showAnimalData($tbl,$type){
  	global $db;
 

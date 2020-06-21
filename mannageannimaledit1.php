@@ -3,10 +3,10 @@ require_once('code/mannageannimaledit/class.php');
 error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();
 if($_GET['annimal_name_search'] != ''){
-  $data = showcorrection($_GET['annimal_name_search']);
+  $data = showcorrectionall($_GET['annimal_name_search']);
 }else{
   $search = '';
-  $data = showcorrection($search);
+  $data = showcorrectionall($search);
 }
 
 ?>
@@ -81,17 +81,17 @@ if($_GET['annimal_name_search'] != ''){
               <td>มีชีวิต</td>
               <td><a href="addseehave.php?Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID']; ?>" class="btn btn-light addhlive" href="#"><img src="picture/magnifyingglass.png" width="25px" ></a></td>
               <td><a href="addedit.php?Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID']; ?>" class="btn btn-light addhlive" href="#"><img src="picture/gg.png" width="25px" ></a></td>
-             <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
-           </tr>
-         <?php } $i++;?>
-       </tbody>
-     </table>
+              <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
+            </tr>
+          <?php } $i++;?>
+        </tbody>
+      </table>
 
-   </div>
-   <div class="col-1"></div>
- </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
 
- <button class="btn btn-light float-left back">ย้อนกลับ</button>
+  <button class="btn btn-light float-left back">ย้อนกลับ</button>
 
 </div>
 <div class="col-1 p-5">
@@ -148,13 +148,16 @@ if($_GET['annimal_name_search'] != ''){
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <center><img src="picture/unnamed.png" width="100px" height="100px">
-          <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
-        </div>
-        <div class="mt-2">
-          <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
-        </div>
+      <form method="GET" action="code/mannageannimaledit/deleteedit.php"> 
+        <div class="modal-body">
+          <input type="hidden" name="Animal_Case_Correction_ID" id="Animal_Case_Correction_ID" value="">
+          <center><img src="picture/unnamed.png" width="100px" height="100px">
+            <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
+          </div>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -178,6 +181,8 @@ if($_GET['annimal_name_search'] != ''){
       })
 
       $('.deleteannimal').on('click', function () {
+        var id = $(this).data('id');
+        $('#Animal_Case_Correction_ID').val(id);
         $('#deleteannimal').modal('show');
       })
 

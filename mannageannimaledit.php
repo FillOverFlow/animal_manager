@@ -97,7 +97,7 @@ $data = showcorrection($search);
                   <a href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>&Animal_number=<?php echo $value['Animal_number'];?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a>
                 <?php } ?>
                 </td>
-                <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_Case_Correction_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
+                <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
               </tr>
             <?php } $i++;?>
           </tbody>
@@ -196,7 +196,7 @@ $data = showcorrection($search);
           </div>
           <form action="code/mannageannimaledit/delete.php" method="GET">
           <div class="modal-body">
-            <input type="hidden" name="Animal_Case_Correction_ID" id="Animal_Case_Correction_ID">
+            <input type="hidden" name="Animal_ID" id="Animal_ID">
             <center><img src="picture/unnamed.png" width="100px" height="100px">
               <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
             </div>
@@ -231,7 +231,7 @@ $data = showcorrection($search);
         $('.deleteannimal').on('click', function () {
           $('#deleteannimal').modal('show');
           var id = $(this).data('id');
-          $('#Animal_Case_Correction_ID').val(id);
+          $('#Animal_ID').val(id);
         })
 
         $('.addhlive').on('click', function () {

@@ -1,9 +1,36 @@
  <?php 
  require_once('MysqliDb.php');
- 
-
  $db = new MysqliDb('localhost','root','','project');
 
+
+ function getdb($tbl){
+ 	global $db;
+ 	$db->where("Authorities_Status",'1');
+ 	$data = $db->get($tbl);
+ 	return $data;
+ }
+ function chkanimalnum($oldnumber,$number,$animal_id){
+ 	global $db;
+ 	if($oldnumber == $number){
+ 		$word =  "No";
+ 		return $word;
+ 	}else{
+ 		$tbl = "animal_case_correction";
+ 		$db->where("Animal_number",$number);
+ 		$db->where("Animal_ID",$animal_id);
+ 		$db->where("status",1);
+ 		$animals = $db->get($tbl);
+
+ 		if($db->count == 0){
+ 			$word =  "No";
+ 			return $word;
+ 		}else{
+ 			$word =  "Have";
+ 			return $word;
+ 		}
+ 	}
+ 	
+ }
  function listanimal(){
  	global $db;
  	$tbl = "animal";
@@ -13,7 +40,6 @@
  		echo "<p> No animal </ps>";
  	}
  	return $animals;
-
  }
  function showcorrection($search){
  	global $db;
@@ -21,12 +47,28 @@
  		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
  			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
  			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
- 			where animal_case_correction.status = 1 and animal.Thai_Common_Name LIKE "%'.$search.'%" ');
+ 			where animal_case_correction.status = 1 and animal.Thai_Common_Name LIKE "%'.$search.'%" GROUP BY animal_case_correction.Animal_ID ');
  	}else{
  		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
  			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
  			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
- 			where animal_case_correction.status = 1');
+ 			where animal_case_correction.status = 1 GROUP BY animal_case_correction.Animal_ID');
+ 	}
+ 	
+ 	return $correction;
+ }
+ function showcorrectionall($search){
+ 	global $db;
+ 	if($search != ''){
+ 		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 			where animal_case_correction.status = 1 and animal.Thai_Common_Name LIKE "%'.$search.'%"');
+ 	}else{
+ 		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 			where animal_case_correction.status = 1 ');
  	}
  	
  	return $correction;
@@ -49,6 +91,7 @@
  	$tbl = "animal_case_correction";
  	$db->where("Animal_ID", $Animal_ID);
  	$db->where("Animal_Dead_ID", 0);
+ 	$db->where("status", 1);
  	$animals = $db->get($tbl);
  	$sum = count($animals);
  	return $sum;
@@ -58,6 +101,7 @@
  	$tbl = "animal_case_correction";
  	$db->where("Animal_ID", $Animal_ID);
  	$db->where("Animal_Dead_ID",0,">");
+ 	$db->where("status", 1);
  	$animals = $db->get($tbl);
  	$sum = count($animals);
  	return $sum;
@@ -74,6 +118,39 @@
  	$valwhere = array_values($id);
  	$update = $db->where($fieldwhere[0], $valwhere[0])->update($tbl, $data);
  	return $update;
+ }
+ function updatedt($data,$tbl,$id,$field){
+
+ 	global $db;
+ 	$db->where ($field, $id);
+ 	$db->update ($tbl, $data);
+    // header ("Location: ../../mannageannimaledit1.php");
+    // exit;
+ 	return true;
+ }
+ function getnamefile($files,$field){
+ 	$name = [];
+ 	$k = 0;
+ 	foreach ($files as $key => $value){
+ 		if($key == 'annimalimg'){
+ 			foreach ($value['name'] as $key => $val) {
+ 				$name[$field[$key]] = $val;
+ 				$coppy[] = coppypic($val,$value['tmp_name'][$key]);
+ 			}
+ 		}else{
+ 			$name[$key] = $value['name'];
+ 			coppyfiles($value['name'],$value['tmp_name']);
+ 		}
+ 	}
+ 	return $name;
+ }
+ function coppypic($namefiles,$temp){
+ 	$pathpic = 'picture';
+ 	copy($temp,$pathpic.'/'.$namefiles);
+ }
+ function coppyfiles($namefiles,$temp){
+ 	$pathfiles = 'files';
+ 	copy($temp,$pathfiles.'/'.$namefiles);
  }
  
  // function showAnimalData($tbl,$type){

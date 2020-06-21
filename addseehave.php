@@ -218,10 +218,10 @@ $data = showcorrectionrow($Animal_Case_Correction_ID);
           </th>
           <td><label class="float-left">&nbsp;&nbsp;
             <?php
-            if ($data[0][' A_C_C_DNA_File'] == '') {
+            if ($data[0]['A_C_C_DNA_File'] == '') {
               echo "-";
             }else{
-             echo $data[0][' A_C_C_DNA_File'];  
+             echo $data[0]['A_C_C_DNA_File'];  
            }
            ?>
          </label></td>
