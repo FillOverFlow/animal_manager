@@ -214,11 +214,11 @@ $authorities = getdb('authorities');
                   for ($i=0; $i < 4; $i++) {
                     if($i == $Category_Admission){ ?>
                       <option  value="<?php echo $var; ?>" selected><?php echo $list[$i]; ?></option>
-                    <?php }?>
-                    <option  value="<?php echo $var; ?>"><?php echo $list[$i]; ?></option>
-                    <?php $var++; } ?>
-                  </select></td>
-                </tr>
+                    <?php $var++; }else{?>
+                      <option  value="<?php echo $var; ?>"><?php echo $list[$i]; ?></option>
+                      <?php $var++; } }?>
+                    </select></td>
+                  </tr>
 
                 <!-- <tr>
                   <th><label class='float-right' disabled=''>หมายเหตุ :</label>

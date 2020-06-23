@@ -371,7 +371,7 @@ $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
         <tr>
           <th><label class="float-right">ผู้กรอกข้อมูล :</label>
           </th>
-          <td><input required type="text" class="fullinput" name="Animal_Dead_Fillers" value="ผู้กรอกข้อมูล"  placeholder="" disabled=""></td>
+          <td><input required type="text" class="fullinput" name="" value="ผู้กรอกข้อมูล"  placeholder="" disabled=""><input required type="hidden" class="fullinput" name="Animal_Dead_Fillers" value="ผู้กรอกข้อมูล"  placeholder="" ></td>
         </tr>
 
 

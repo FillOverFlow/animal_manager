@@ -10,6 +10,9 @@ $fieldPhoto = ['Animal_Dead_Photo_1','Animal_Dead_Photo_2','Animal_Dead_Photo_3'
 $Autopsy_date = $_POST['Autopsy_date'].":".$_POST['Autopsy_month'].":".$_POST['Autopsy_year'];
 $Animal_Dead_Date_of_Admission = $_POST['Animal_Dead_Date_of_Admission'].":".$_POST['Animal_Dead_month_of_Admission'].":".$_POST['Animal_Dead_year_of_Admission'];
 $Animal_Dead_Date = $_POST['Animal_Dead_Date'].":".$_POST['Animal_Dead_month'].":".$_POST['Animal_Dead_year'];
+// echo $Animal_Dead_Date_of_Admission;
+// echo "<br>";
+// echo $Animal_Dead_Date;
 // QR_Code_Animal_Dead
 //---------------------- files -------------------//
 $i = 0;

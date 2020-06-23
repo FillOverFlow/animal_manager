@@ -2,6 +2,7 @@
 require_once('code/mannageannimaledit/class.php');
 error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();
+$listanimaldead = listanimaldead();
 if($_GET['annimal_name_search'] != ''){
 $data = showcorrection($_GET['annimal_name_search']);
 }else{
@@ -80,7 +81,8 @@ $data = showcorrection($search);
                   echo $datacounthavelife; 
                   ?>
                 </td>
-                <td><a href="addehave.php?Animal_id=<?php echo $Animal_ID; ?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
+                <!-- addhlive -->
+                <td><a href="addehave.php?Animal_id=<?php echo $Animal_ID; ?>" class="btn btn-light " href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
                 <td>
                   <?php
                   $Animal_ID = $value['Animal_ID'];
@@ -94,7 +96,9 @@ $data = showcorrection($search);
                    echo "กรุณาเพิ่มสัตว์มีชีวิต";
                   }else{
                    ?>
-                  <a href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>&Animal_number=<?php echo $value['Animal_number'];?>" class="btn btn-light addhlive" href="#"><img src="picture/plus.png" width="25px" height="20px"></a>
+                   <!-- addhlive -->
+                   <!-- href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>&Animal_number=<?php echo $value['Animal_number'];?>" -->
+                  <a  class="btn btn-light adddead" href="#"><img src="picture/plus.png" width="25px" height="20px"></a>
                 <?php } ?>
                 </td>
                 <td><button class="btn btn-light deleteannimal" data-id=" <?php echo  $value['Animal_ID'];?>"> <img src="picture/delete.png" width="20px" height="20px"></button></td>
@@ -154,6 +158,52 @@ $data = showcorrection($search);
             </div>
             <div class="mt-2">
               <button type="submit" class="btn btn-light float-right">เพิ่มลงในตาราง</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="adddead" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title float-left" id="exampleModalCenterTitle">เพิ่มชื่อสามัญ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="code/mannageannimaledit/addanimal.php" method="POST">
+          <div class="modal-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ลำดับ</th>
+                  <th>ชื่อสามัญไทย</th>
+                  <th>ชื่อสามัญอังกฤษ</th>
+                  <th>เลือก</th>
+                </tr>
+
+              </thead>
+              <tbody>
+                <?php 
+                $i = 1;
+                foreach ($listanimaldead as $key => $value) { 
+                  ?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $value['Thai_Common_Name'];?></td>
+                    <td><?php echo $value['English_Common_Name'];?></td>
+                    <!-- <td><input type="checkbox" name="Animal_ID[]" value="<?php echo $value['Animal_ID'];?>"></td> -->
+                    <td><a class="btn btn-light"  href="addedead.php?Animal_id=<?php echo $Animal_ID;?>&Animal_Case_Correction_ID=<?php echo $value['Animal_Case_Correction_ID'];?>&Animal_number=<?php echo $value['Animal_number'];?>">เพิ่ม</a></td>
+                  </tr>
+                  <?php $i++; } ?>
+                </tbody>
+
+              </table>
+            </div>
+            <div class="mt-2">
+              <!-- <button type="submit" class="btn btn-light float-right">เพิ่มลงในตาราง</button> -->
             </div>
           </form>
         </div>
@@ -236,6 +286,9 @@ $data = showcorrection($search);
 
         $('.addhlive').on('click', function () {
           $('#addhlive').modal('show');
+        })
+        $('.adddead').on('click', function () {
+          $('#adddead').modal('show');
         })
 
         $('.showeditannimal').on('click', function () {

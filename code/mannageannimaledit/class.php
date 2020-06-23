@@ -1,11 +1,62 @@
- <?php 
+ <?php  
  require_once('MysqliDb.php');
  $db = new MysqliDb('localhost','root','','project');
+ function showAnimalData($tbl,$type){
+ 	global $db;
 
+ 	if($tbl == "authorities"){
+ 		$db->where("Authorities_Status",'1');
+ 		$animals = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+ 	}
+ 	else if ($tbl == "wild_animal_exhibits" AND $type == "0") {
+ 		$db->where("status",'1');
+ 		$db->where("Animal_Dead_ID",'0');
+ 		$animals = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+ 		
+ 	}
+ 	else if ($tbl == "wild_animal_exhibits" AND $type == "1") {
+ 		$db->where("status",'1');
+ 		$db->where("Animal_Dead_ID !=",'0');
+ 		$animals = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+ 		
+ 	}
+ 	else if($type == 'no'){
+ 		$db->where("status",'1');
+ 		$animals = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+ 	}
+ 	else{
+ 		$db->where("status",'1');
+ 		$animals = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+
+ 	}
+
+ 	return $animals;
+ }
 
  function getdb($tbl){
  	global $db;
  	$db->where("Authorities_Status",'1');
+ 	$data = $db->get($tbl);
+ 	return $data;
+ }
+ function getdbrow($tbl,$id,$field){
+ 	global $db;
+ 	$db->where($field,$id);
  	$data = $db->get($tbl);
  	return $data;
  }
@@ -34,12 +85,21 @@
  function listanimal(){
  	global $db;
  	$tbl = "animal";
+ 	
  	$db->where("status",'1');
  	$animals = $db->get($tbl);
  	if($db->count == 0){
  		echo "<p> No animal </ps>";
  	}
  	return $animals;
+ }
+ function listanimaldead(){
+ 	global $db;
+ 	$deaddata =  $db->rawQuery('SELECT * from animal_case_correction 
+ 		JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 		JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 		where animal_case_correction.status = 1 and animal_case_correction.Animal_Dead_ID = 0 ');
+ 	return $deaddata;
  }
  function showcorrection($search){
  	global $db;
@@ -63,21 +123,50 @@
  		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
  			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
  			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
- 			where animal_case_correction.status = 1 and animal.Thai_Common_Name LIKE "%'.$search.'%"');
+ 			where animal_case_correction.status = 1 and animal_case_correction.Animal_Dead_ID = 0 and animal.Thai_Common_Name LIKE "%'.$search.'%"');
  	}else{
  		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
  			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
  			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
- 			where animal_case_correction.status = 1 ');
+ 			where animal_case_correction.Animal_Dead_ID = 0 and animal_case_correction.status = 1 ');
  	}
  	
  	return $correction;
+ }
+ function showcorrectionalldead($search){
+
+ 	global $db;
+ 	if($search != ''){
+ 		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 			where animal_case_correction.status = 1 and animal_case_correction.Animal_Dead_ID != 0 and animal.Thai_Common_Name LIKE "%'.$search.'%"');
+ 	}else{
+ 		$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 			JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 			JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 			where animal_case_correction.status = 1 and animal_case_correction.Animal_Dead_ID != 0 ');
+ 	}
+ 	return $correction;
+
+ }
+ function showcordead(){
+ 	
  }
  function showcorrectionrow($id){
  	global $db;
  	$correction =  $db->rawQuery('SELECT * from animal_case_correction 
  		JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
  		JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 		where animal_case_correction.status = 1 and animal_case_correction.Animal_Case_Correction_ID ='.$id.'');
+ 	return $correction;
+ }
+ function showcorrectionrowdead($id){
+ 	global $db;
+ 	$correction =  $db->rawQuery('SELECT * from animal_case_correction 
+ 		JOIN animal on animal_case_correction.Animal_ID = animal.Animal_ID 
+ 		JOIN animal_type on animal.Animal_Type_ID = animal_type.Animal_Type_ID 
+ 		JOIN animal_dead on animal_case_correction.Animal_Dead_ID = animal_dead.Animal_Dead_ID
  		where animal_case_correction.status = 1 and animal_case_correction.Animal_Case_Correction_ID ='.$id.'');
  	return $correction;
  }
@@ -126,6 +215,13 @@
  	$db->update ($tbl, $data);
     // header ("Location: ../../mannageannimaledit1.php");
     // exit;
+ 	return true;
+ }
+
+ function updatestatus($tbl,$id,$field,$data){
+ 	global $db;
+ 	$db->where ($field, $id);
+ 	$db->update ($tbl, $data);
  	return true;
  }
  function getnamefile($files,$field){
