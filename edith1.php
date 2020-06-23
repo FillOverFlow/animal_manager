@@ -535,12 +535,12 @@ $datajoin = joinshowliverow($id);
             echo "havepic";
             $path ="code/picturemannageannimalcenterhlive/".$datajoin[0]['W_A_E_Photo_1'];
           }else{
-            $path ="picture/logo.png";
+            $path ="picture/nopicture.jpg";
 
           }
           ?>
 
-          <img id="img" align="center" src="<?php echo $path;?>"  width="300px" class="border border-dark"><br><br>
+          <img id="img" align="center" src="<?php echo $path;?>"  width="320px" class="border border-dark"><br><br>
           <?php
           $img = array(
             '0'=> $datajoin[0]['W_A_E_Photo_2'],

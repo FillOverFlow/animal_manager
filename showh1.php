@@ -53,7 +53,7 @@ $datajoin = joinshowliverow($id);
       <div class="col-3">
 
 
-        <table>
+        <table >
           <thead>
             <tr>
 
@@ -61,7 +61,7 @@ $datajoin = joinshowliverow($id);
           </thead>
           <tbody>
             <tr>
-              <th><label class="float-right">หมายเลขสัตว์ :</label>
+              <th><label>หมายเลขสัตว์ :</label>
               </th>
               <td><label><?php echo $datajoin[0]['W_A_E_number'];?></label></td>
             </tr>
