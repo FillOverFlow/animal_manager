@@ -55,7 +55,7 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
       <div class="col-4"></div>
     </div>
 
-    <form action="code/mannageannimaledit/addedead.php" method="POST" enctype="multipart/form-data" >
+    <form action="code/mannageannimaledit/adddeadedit.php" method="POST" enctype="multipart/form-data" >
       <div class="row p-5">
         <div class="col-4">
 
@@ -73,6 +73,7 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
                 <td><input class="w-100" type="text" class="fullinput" required   placeholder="" name="Animal_number" id="Animal_number" value="<?php echo $Animal_number ?>">
                   <input type="hidden" class="fullinput" id="Animal_Case_Correction_ID" name="Animal_Case_Correction_ID" value="<?php echo $_GET['Animal_Case_Correction_ID'] ?>">
                   <input type="hidden" value="<?php echo $id;?>" name="Animal_ID">
+                  <input type="hidden" value="<?php echo $data[0]['Animal_Dead_ID'] ?>" name="Animal_Dead_ID">
                 </td>
               </tr>
 
@@ -369,18 +370,12 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
         $Body_Integrity_Score = $list[$data[0]['Body_Integrity_Score']];
         ?>
         <td><select class="form-control w-100" name="Body_Integrity_Score" required>
-<!--           <option value="0" selected>ใส่คะแนน</option>
-          <option value="1">(แย่มาก)</option>
-          <option value="2">(แย่)</option>
-          <option value="3">(ปานกลาง)</option>
-          <option value="4">(ดี)</option>
-          <option value="5">(ดีมาก)</option> -->
           <?php 
           for ($i=0; $i < 6; $i++) { 
             if ($data[0]['Body_Integrity_Score'] == $i) {
               echo '<option value='.$i.' selected> '.$Body_Integrity_Score.'</option>';
             }else{
-             echo '<option value='.$i.'>'.$Body_Integrity_Score.'</option>';
+             echo '<option value='.$i.'>'.$list[$i].'</option>';
            }
          }
          ?>
@@ -474,13 +469,7 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
 
   </tbody>
 </table>
-
-
 </div>
-
-
-
-
 <div class="col-4 ">
 
 
@@ -514,8 +503,10 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
           for ($i=0; $i < 3; $i++) { 
             if($Destroy_The_Remains_Status == $i){
               echo '<option value='.$i.' selected> '.$list[$i].'</option>';
+            }else{
+              echo '<option value='.$i.'> '.$list[$i].'</option>';
             }
-            echo '<option value='.$i.'> '.$list[$i].'</option>';
+
           }
           ?>
         </select></td>
@@ -543,7 +534,7 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
       </tr>
 
       <tr align="center">
-        <th><input style="width: 150px;" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*" multiple></th>
+        <th><input style="width: 150px;" OnChange="Preview(this)"  class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*" multiple></th>
       </th>
       <td><button type="button" class="btn btn-light showqr1">สร้าง QR-code</button>
       </tr>
@@ -599,11 +590,11 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <img src="picture/logo.png" width="100%" height="100%" class="border border-dark">
+      <div class="modal-body" id="printimg">
+        <img id="imgQRmodel" src="picture/logo.png" width="100%" height="100%" class="border border-dark">
       </div>
       <div class="mt-2">
-        <center><button type="button" class="btn btn-light">ยืนยัน</button></center>
+        <center><button type="button" class="btn btn-light closs" data-dismiss="modal">ยืนยัน</button></center>
       </div>
     </div>
   </div>
@@ -630,9 +621,13 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script type="text/javascript">
 
 

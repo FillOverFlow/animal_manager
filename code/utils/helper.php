@@ -59,9 +59,7 @@ if ($uploadOK == 0) {
     echo "Sorry, there was an error uploading your file.";
   }
 }
-
 }
-
 function update($tbl,$var,$id){
   $field = array_keys($var);
   $idfield = array_keys($id);
@@ -114,9 +112,6 @@ function insert($tbl,$data){
   }else{
    return false;
  }
-
-
-
 }
 
 function getfield($tbl){

@@ -299,7 +299,7 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
             <tr >
              <th style="margin-top: 10px;">
               <?php
-              $photolist = [$data[0]['A_C_C_Photo_1'],$data[0]['A_C_C_Photo_2'],$data[0]['A_C_C_Photo_3'],$data[0]['A_C_C_Photo_4'],$data[0]['A_C_C_Photo_5']];
+              $photolist = [$data[0]['Animal_Dead_Photo_1'],$data[0]['Animal_Dead_Photo_2'],$data[0]['Animal_Dead_Photo_3'],$data[0]['Animal_Dead_Photo_4'],$data[0]['Animal_Dead_Photo_5']];
               for ($i=0; $i < 5; $i++) { 
                 if ($i < 3) {
                   if($photolist[$i] == ''){ ?> 

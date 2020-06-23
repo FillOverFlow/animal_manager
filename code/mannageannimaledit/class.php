@@ -85,7 +85,7 @@
  function listanimal(){
  	global $db;
  	$tbl = "animal";
- 	
+
  	$db->where("status",'1');
  	$animals = $db->get($tbl);
  	if($db->count == 0){
@@ -247,6 +247,12 @@
  function coppyfiles($namefiles,$temp){
  	$pathfiles = 'files';
  	copy($temp,$pathfiles.'/'.$namefiles);
+ }
+ function updatedead($data,$id){
+ 	global $db;
+ 	$db->where ('Animal_Dead_ID', $id);
+ 	$db->update ('animal_dead', $data);
+ 	return true;
  }
  
  // function showAnimalData($tbl,$type){
