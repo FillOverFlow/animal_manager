@@ -442,8 +442,8 @@ $authorities = showAnimalData($tblauthorities,'no');
       <div class="float-right">
         <label class="" disabled="">ผู้กรอกข้อมูล :</label>
 
-        <input type="text" name="W_A_E_Fillers"   placeholder="" disabled="">
-        <input type="hidden" name="W_A_E_Fillers"   value="tets">
+        <input type="text" name="W_A_E_Fillers"   placeholder="" disabled="" value="ผู้กรอกข้อมูล">
+        <input type="hidden" name="W_A_E_Fillers"   value="ผู้กรอกข้อมูล">
       </div>
       <center><button type="submit" class="btn btn-light">บันทึก</button></center>
 

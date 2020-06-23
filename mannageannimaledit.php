@@ -178,7 +178,7 @@ $data = showcorrection($search);
             <table class="table">
               <thead>
                 <tr>
-                  <th>ลำดับ</th>
+                  <th>หมายเลข</th>
                   <th>ชื่อสามัญไทย</th>
                   <th>ชื่อสามัญอังกฤษ</th>
                   <th>เลือก</th>
@@ -187,11 +187,11 @@ $data = showcorrection($search);
               </thead>
               <tbody>
                 <?php 
-                $i = 1;
+
                 foreach ($listanimaldead as $key => $value) { 
                   ?>
                   <tr>
-                    <td><?php echo $i; ?></td>
+                    <td><?php echo $value['Animal_number']; ?></td>
                     <td><?php echo $value['Thai_Common_Name'];?></td>
                     <td><?php echo $value['English_Common_Name'];?></td>
                     <!-- <td><input type="checkbox" name="Animal_ID[]" value="<?php echo $value['Animal_ID'];?>"></td> -->

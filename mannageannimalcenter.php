@@ -118,7 +118,7 @@ $dataanimaldead = showAnimalDeadData();
                 <td><button class="btn btn-light adddead" href="#" data-id="<?php echo $row['Case_Animal_ID']?>"><img src="picture/plus.png" width="25px" ></button></td>
                 <th>
                  <?php
-                 $sqlcountd = "SELECT * FROM wild_animal_exhibits WHERE  status ='1'";
+                 $sqlcountd = "SELECT * FROM wild_animal_exhibits WHERE  status ='1' AND Case_Animal_ID = '".$row['Case_Animal_ID']."'";
                  $resultd = $db->query($sqlcountd);
                  $countd = count($resultd);
                  echo $countd;
@@ -137,6 +137,7 @@ $dataanimaldead = showAnimalDeadData();
    </div>
 
    <button class="btn btn-light float-left back">ย้อนกลับ</button>
+   <button class='btn btn-light float-right'>รายงานการนำไปใช้ประโชยน์<br>ของสัตว์กรณีแก้ไข</button>
 
  </div>
  <div class="col-1 p-5">
@@ -252,7 +253,7 @@ $dataanimaldead = showAnimalDeadData();
             <table class="table">
               <thead>
                 <tr>
-                  <th>ลำดับ</th>
+                  <th>หมายเลข</th>
                   <th>ชื่อสามัญไทย</th>
                   <th>ชื่อสามัญอังกฤษ</th>
                   <th>เลือก</th>
@@ -268,7 +269,7 @@ $dataanimaldead = showAnimalDeadData();
                  $i = 1;
                  foreach($dataanimaldead as $key => $value){?>
                   <tr>
-                   <td><?php echo $i;?></td>
+                   <td><?php echo $value['W_A_E_number'];?></td>
                    <td><?php echo $value['Thai_Common_Name'];?></td>
                    <td><?php echo $value['English_Common_Name'];?></td>
                    <td><button class="btn btn-primary animaldead" type="btn" data-id="[<?php echo $value['Wild_Animal_Exhibits_ID'];?>,<?php echo $value['Animal_ID'];?>]">เพิ่ม</button></td>

@@ -447,7 +447,7 @@ $datajoin = joinshowliverow($id);
         var divToPrint = document.getElementById('print'); // เลือก div id ที่เราต้องการพิมพ์
         var html =  '<html>'+ // 
         '<head>'+
-        '<link href="css/print.css" rel="stylesheet" type="text/css">'+
+        '<link href="css/css.css" rel="stylesheet" type="text/css">'+
         '</head>'+
         '<body onload="window.print(); window.close();">'
         + divToPrint.innerHTML + 

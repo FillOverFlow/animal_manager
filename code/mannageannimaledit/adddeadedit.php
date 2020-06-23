@@ -32,30 +32,34 @@ foreach ($_POST as $key => $value) {
 		$data['Autopsy_date'] = $Autopsy_date;
 		$data['Animal_Dead_Date_of_Admission'] = $Animal_Dead_Date_of_Admission;
 		$data['Animal_Dead_Date'] = $Animal_Dead_Date;
+
 	}else{
 		$data[$key] = $value;
 		$data['Authorities_ID'] = $Animal_Dead_Consignee;
 		$data['Animal_ID'] = $Animal_ID;
+		$data['status'] = '1';
 	}
 }
 // echo "<pre>";
 // var_dump($data);
 // echo "</pre>";
 
-// $tbl = 'animal_dead';
-// $insert = insert($tbl,$data);
-
-// $tblupdate = 'animal_case_correction';
-// $idupdate = array('Animal_Case_Correction_ID' => $Animal_Case_Correction_ID);
-// $dataupdate = array('Animal_Dead_ID' => $insert);
+$tbl = 'animal_dead';
+$insert = insert($tbl,$data);
+$Animal_number = $_POST['Animal_number'];
+$animaldt = array('Animal_number' => $Animal_number);
+$animal_case_correction = updatedt($animaldt,'animal_case_correction',$_POST['Animal_Case_Correction_ID'],'Animal_Case_Correction_ID');
+$tblupdate = 'animal_case_correction';
+$idupdate = array('Animal_Case_Correction_ID' => $Animal_Case_Correction_ID);
+$dataupdate = array('Animal_Dead_ID' => $insert);
 $updatedead = updatedead($data,$_POST['Animal_Dead_ID']);
-var_dump($updatedead);
 // var_dump($updatedead);
-// if ($updatedead = true) {
-// 	echo "<script>alert('เพิ่มข้อมูลสำเร็จ');</script>";
-// 	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimaleditdead1.php'>";
-// }else{
-// 	echo "<script>alert('ข้อมูลผิดพลาด');</script>";
-// 	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimaleditdead1.php'>";
-// }
+// var_dump($updatedead);
+if ($updatedead = true) {
+	echo "<script>alert('เพิ่มข้อมูลสำเร็จ');</script>";
+	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimaleditdead1.php'>";
+}else{
+	echo "<script>alert('ข้อมูลผิดพลาด');</script>";
+	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimaleditdead1.php'>";
+}
 ?>

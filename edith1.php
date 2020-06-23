@@ -494,7 +494,7 @@ $datajoin = joinshowliverow($id);
                 '1' => 'สัตว์พ่อ-แม่พันธุ์',
                 '2' => 'ปล่อยคืนสู่ธรรมชาติ',
                 '3' => 'นำไปใช้ทางวิชาการ',
-                '5' => 'อื่น ๆ'
+                '4' => 'อื่น ๆ'
               );
               foreach ($option as $key=> $value) { ?>
                 <?php if ($key == $datajoin[0]['Utilization_Status']) { ?>

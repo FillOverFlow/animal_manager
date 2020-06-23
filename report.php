@@ -94,7 +94,7 @@
 
               $(document).ready(function() {
                 $('.report').click(function(event) {
-                  window.location.assign("http://localhost/project/reportprint.php")
+                  window.location.assign("http://localhost/animal_manager/reportprint.php")
                });
               });
 

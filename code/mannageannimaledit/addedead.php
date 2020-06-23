@@ -36,10 +36,15 @@ foreach ($_POST as $key => $value) {
 		$data[$key] = $value;
 		$data['Authorities_ID'] = $Animal_Dead_Consignee;
 		$data['Animal_ID'] = $Animal_ID;
+		$data['status'] = '1';
 	}
 
 }
 
+
+// echo "<pre>";
+// var_dump($data);
+// echo "</pre>";
 $tbl = 'animal_dead';
 $insert = insert($tbl,$data);
 

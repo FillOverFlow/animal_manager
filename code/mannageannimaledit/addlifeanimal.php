@@ -6,7 +6,7 @@ $data=[];
 $A_C_C_Date_of_Admission = $_POST['A_C_C_Date_of_Admission'].":".$_POST['A_C_C_month_of_Admission'].":".$_POST['A_C_C_year_of_Admission'];
 $A_C_C_Date_Pin_Number = $_POST['A_C_C_Date_of_Admission'].":".$_POST['A_C_C_month_Pin_Number'].":".$_POST['A_C_C_year_Pin_Number'];
 $namefiles = [];
-$path = "files";
+$path = "files"; 
 $pathpic = "picture";
 $fieldPhoto = ['A_C_C_Photo_1','A_C_C_Photo_2','A_C_C_Photo_3','A_C_C_Photo_4','A_C_C_Photo_5'];
 $i = 0;
@@ -29,6 +29,7 @@ foreach ($_POST as $key => $value) {
 			$data['A_C_C_Date_of_Admission'] = $A_C_C_Date_of_Admission;
 		}else if($key == 'A_C_C_Date_Pin_Number'){
 			$data['A_C_C_Date_Pin_Number'] = $A_C_C_Date_Pin_Number;
+			$data['status'] = 1;
 		}
 	}else{
 		$data[$key] = $value;
