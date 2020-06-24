@@ -7,11 +7,13 @@ $Password = $_POST["Password"];
 $sql = "SELECT * FROM authorities WHERE Username = '".$_POST["Username"]."' 
 AND Password = '".md5($_POST["Password"])."'";
 $result = $conn->query($sql);
-
-if (mysqli_num_rows($result) == 1) 
+// $test = mysqli_num_rows($result);
+// echo $test;
+if (mysqli_num_rows($result) > 0) 
 {
 	$row = mysqli_fetch_array($result);
 	$_SESSION["Username"] = $row['Username'];
+	$_SESSION["authorities"] = $row;
 			// $_SESSION["name_teacher"] = $row['name_teacher'] ;
 			// $_SESSION["usertype_teacher"] = $row["usertype_teacher"];
 
