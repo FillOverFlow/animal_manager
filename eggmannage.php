@@ -1,3 +1,10 @@
+<?php 
+session_start();
+include'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>

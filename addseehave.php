@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 require_once('code/mannageannimaledit/class.php');
 error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();

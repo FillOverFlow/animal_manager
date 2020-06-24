@@ -1,6 +1,9 @@
 <?php
-  require_once('code/connect.php');
- ?>
+require_once('code/connect.php');
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,17 +37,17 @@
 
   <?php
       //check last Data
-      $sql_check_maxID = "SELECT max(Authorities_ID) from authorities";
-      $query_check_maxID = $conn->query($sql_check_maxID);
-      $result = $query_check_maxID->fetch_assoc();
-      $maxID  = $result['max(Authorities_ID)'];
+  $sql_check_maxID = "SELECT max(Authorities_ID) from authorities";
+  $query_check_maxID = $conn->query($sql_check_maxID);
+  $result = $query_check_maxID->fetch_assoc();
+  $maxID  = $result['max(Authorities_ID)'];
 
       //check show view
-      $id = $_GET['id'];
-      $sql_view = "SELECT * FROM authorities WHERE Authorities_ID = '".$id."'";
-      $query = $conn->query($sql_view);
-      $data  = $query->fetch_assoc();
-   ?>
+  $id = $_GET['id'];
+  $sql_view = "SELECT * FROM authorities WHERE Authorities_ID = '".$id."'";
+  $query = $conn->query($sql_view);
+  $data  = $query->fetch_assoc();
+  ?>
   <div id="display-2" class="col-9 p-2 border border-dark rounded h-80 w-100">
 
     <div class="row">
@@ -62,336 +65,336 @@
           <tbody>
             <tr>
               <td>
-                 <label> test:  <?php echo $maxID; ?></label>
-              </td>
-            </tr>
-            <tr>
-              <th><label class="float-right">รหัสเจ้าหน้าที่ :</label>
-              </th>
-              <td><label><?php echo $data['Authorities_ID']; ?></label></td>
-            </tr>
+               <label> test:  <?php echo $maxID; ?></label>
+             </td>
+           </tr>
+           <tr>
+            <th><label class="float-right">รหัสเจ้าหน้าที่ :</label>
+            </th>
+            <td><label><?php echo $data['Authorities_ID']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right">รหัสบัตรประชาชน :</label>
-              </th>
-              <td><label><?php echo $data['ID_card']; ?></label></td>
-            </tr>
+          <tr>
+            <th><label class="float-right">รหัสบัตรประชาชน :</label>
+            </th>
+            <td><label><?php echo $data['ID_card']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right">ชื่อผู้ใช้ :</label>
-              </th>
-              <td><label><?php echo $data['Username']; ?></label></td>
-            </tr>
+          <tr>
+            <th><label class="float-right">ชื่อผู้ใช้ :</label>
+            </th>
+            <td><label><?php echo $data['Username']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right">รหัสผ่าน :</label>
-              </th>
-             <td><label><?php echo $data['Password']; ?></label></td>
-            </tr>
+          <tr>
+            <th><label class="float-right">รหัสผ่าน :</label>
+            </th>
+            <td><label><?php echo $data['Password']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right">ตำแหน่ง :</label>
-              </th>
-             <td><label><?php echo $data['Position']; ?></label></td>
-            </tr>
+          <tr>
+            <th><label class="float-right">ตำแหน่ง :</label>
+            </th>
+            <td><label><?php echo $data['Position']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right">เพศ :</label>
-              </th>
-              <td><label><?php echo $data['Authorities_Sex']; ?></label></td>
-            </tr>
-            <tr>
-              <th><label class="float-right" disabled="">ชื่อ :</label>
-              </th>
-              <td><label><?php echo $data['Authorities_First_Name']; ?></label></td>
-            </tr>
+          <tr>
+            <th><label class="float-right">เพศ :</label>
+            </th>
+            <td><label><?php echo $data['Authorities_Sex']; ?></label></td>
+          </tr>
+          <tr>
+            <th><label class="float-right" disabled="">ชื่อ :</label>
+            </th>
+            <td><label><?php echo $data['Authorities_First_Name']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right" disabled="">นามสกุล :</label>
-              </th>
-              <td><label><?php echo $data['Authorities_Last_Name']; ?></label></td>
-            </tr>
+          <tr>
+            <th><label class="float-right" disabled="">นามสกุล :</label>
+            </th>
+            <td><label><?php echo $data['Authorities_Last_Name']; ?></label></td>
+          </tr>
 
-            <tr>
-              <th><label class="float-right">ว/ด/ป เกิด :</label>
-              </th>
-             <td><label><?php echo $data['Birthday']; ?></label></td>
-            </tr>
-          </tbody>
-        </table>
+          <tr>
+            <th><label class="float-right">ว/ด/ป เกิด :</label>
+            </th>
+            <td><label><?php echo $data['Birthday']; ?></label></td>
+          </tr>
+        </tbody>
+      </table>
 
 
-      </div>
-
-      <div class="col-sm">
-
-        <table>
-          <thead>
-          </thead>
-          <tbody>
-            <tr>
-              <th><label class="float-right">เบอร์โทร :</label>
-              </th>
-            <td><label><?php echo $data['Telephone_Number']; ?></label></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">สถานะการทำงาน :</label>
-              </th>
-             <td><label><?php echo $data['Authorities_Status']; ?></label></td>
-            </tr>
-
-            <tr>
-              <th><label class="float-right">ที่อยู่ :</label>
-              </th>
-              <td><textarea><?php echo $data['Authorities_Address']; ?></textarea></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-sm" align="center">
-        <table>
-          <thead>
-          </thead>
-          <tbody>
-            <tr>
-              <th>
-                <img src="code/pictureAuthorities/<?php echo $data['Authorities_Photo']; ?>" width="200px" class="border border-dark">
-              </th>
-            </tr>
-          </tbody>
-        </table>
-
-        <button class="btn btn-light" style="margin-top: 10px;">แก้ไข</button>&nbsp;<button class="btn btn-light" style="margin-top: 10px;">ลบ</button>
-
-      </div>
-
-      <div class="row container-fluid mt-5">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4" align="center">
-          <button class="btn btn-light backButton" >กลับ</button>&nbsp;
-          <button class="btn btn-light nextButton" >ถัดไป</button>
-        </div>
-        <div class="col-sm-4"></div>
-      </div>
-      <div class="row container-fluid mt-5">
-        <div class="col-sm-4">
-          <button class="btn btn-light float-left ">ย้อนกลับ</button>
-        </div>
-        <div class="col-sm-4" align="center">
-        </div>
-        <div class="col-sm-4"></div>
-      </div>
     </div>
 
+    <div class="col-sm">
+
+      <table>
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <th><label class="float-right">เบอร์โทร :</label>
+            </th>
+            <td><label><?php echo $data['Telephone_Number']; ?></label></td>
+          </tr>
+
+          <tr>
+            <th><label class="float-right">สถานะการทำงาน :</label>
+            </th>
+            <td><label><?php echo $data['Authorities_Status']; ?></label></td>
+          </tr>
+
+          <tr>
+            <th><label class="float-right">ที่อยู่ :</label>
+            </th>
+            <td><textarea><?php echo $data['Authorities_Address']; ?></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm" align="center">
+      <table>
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <th>
+              <img src="code/pictureAuthorities/<?php echo $data['Authorities_Photo']; ?>" width="200px" class="border border-dark">
+            </th>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="btn btn-light" style="margin-top: 10px;">แก้ไข</button>&nbsp;<button class="btn btn-light" style="margin-top: 10px;">ลบ</button>
+
+    </div>
+
+    <div class="row container-fluid mt-5">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4" align="center">
+        <button class="btn btn-light backButton" >กลับ</button>&nbsp;
+        <button class="btn btn-light nextButton" >ถัดไป</button>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+    <div class="row container-fluid mt-5">
+      <div class="col-sm-4">
+        <button class="btn btn-light float-left ">ย้อนกลับ</button>
+      </div>
+      <div class="col-sm-4" align="center">
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
 
 
 
 
-    <div class="modal fade" id="showqr1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content p-3">
-          <div class="modal-header">
-            <h5 class="modal-title float-left" id="exampleModalCenterTitle">สร้าง QR-code</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img src="picture/logo.png" width="100%" height="100%" class="border border-dark">
+
+  <div class="modal fade" id="showqr1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title float-left" id="exampleModalCenterTitle">สร้าง QR-code</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="picture/logo.png" width="100%" height="100%" class="border border-dark">
+        </div>
+        <div class="mt-2">
+          <center><button type="button" class="btn btn-light">ยืนยัน</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="deleteannimal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title float-left" id="exampleModalCenterTitle">ลบ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <center><img src="picture/unnamed.png" width="100px" height="100px">
+            <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
           </div>
           <div class="mt-2">
-            <center><button type="button" class="btn btn-light">ยืนยัน</button></center>
+            <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
           </div>
         </div>
       </div>
     </div>
-
-
-    <div class="modal fade" id="deleteannimal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="addbreeder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content p-3">
           <div class="modal-header">
-            <h5 class="modal-title float-left" id="exampleModalCenterTitle">ลบ</h5>
+            <h5 class="modal-title float-left" id="exampleModalCenterTitle">เพิ่มชื่อพ่อ-แม่พันธ์</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <center><img src="picture/unnamed.png" width="100px" height="100px">
-              <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
-            </div>
-            <div class="mt-2">
-              <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
-            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ลำดับ</th>
+                  <th>ชื่อสัตว์</th>
+                  <th>ดูข้อมูล</th>
+                  <th>เลือก</th>
+                </tr>
+
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>เสือกำ</td>
+                  <td><a href="#"><img src="picture/magnifyingglass.png" width="20px"></a></td>
+                  <td><input type="checkbox" name="เสือดำ" value=""></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+          <div class="mt-2" align="center">
+            <button type="button" class="btn btn-light">ตกลง</button>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="addbreeder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content p-3">
-            <div class="modal-header">
-              <h5 class="modal-title float-left" id="exampleModalCenterTitle">เพิ่มชื่อพ่อ-แม่พันธ์</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>ลำดับ</th>
-                    <th>ชื่อสัตว์</th>
-                    <th>ดูข้อมูล</th>
-                    <th>เลือก</th>
-                  </tr>
+    </div>
 
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>เสือกำ</td>
-                    <td><a href="#"><img src="picture/magnifyingglass.png" width="20px"></a></td>
-                    <td><input type="checkbox" name="เสือดำ" value=""></td>
-                  </tr>
-                </tbody>
+    <div class="modal fade" id="addbreederedit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content p-3">
+          <div class="modal-header">
+            <h5 class="modal-title float-left" id="exampleModalCenterTitle">เลือกสัตว์พ่อแม่พันธ์-กรณีแก้ไข</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ลำดับที่</th>
+                  <th>หมายเลขสัตว์</th>
+                  <th>ดูข้อมูล</th>
+                  <th>เลือก</th>
+                </tr>
 
-              </table>
-            </div>
-            <div class="mt-2" align="center">
-              <button type="button" class="btn btn-light">ตกลง</button>
-            </div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>เสือกำ</td>
+                  <td><a href="#"><img src="picture/magnifyingglass.png" width="20px"></a></td>
+                  <td><input type="checkbox" name="เสือดำ" value=""></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+          <div class="mt-2" align="center">
+            <button type="button" class="btn btn-light">ตกลง</button>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="modal fade" id="addbreederedit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content p-3">
-            <div class="modal-header">
-              <h5 class="modal-title float-left" id="exampleModalCenterTitle">เลือกสัตว์พ่อแม่พันธ์-กรณีแก้ไข</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>ลำดับที่</th>
-                    <th>หมายเลขสัตว์</th>
-                    <th>ดูข้อมูล</th>
-                    <th>เลือก</th>
-                  </tr>
-
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>เสือกำ</td>
-                    <td><a href="#"><img src="picture/magnifyingglass.png" width="20px"></a></td>
-                    <td><input type="checkbox" name="เสือดำ" value=""></td>
-                  </tr>
-                </tbody>
-
-              </table>
-            </div>
-            <div class="mt-2" align="center">
-              <button type="button" class="btn btn-light">ตกลง</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-      <script type="text/javascript">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript">
 
 
-        $(document).ready(function() {
+      $(document).ready(function() {
 
-          $('.back').on('click', function (e) {
-               e.preventDefault()
-                window.location.replace("http://localhost/animal_manager/authorities.php");
-              })
+        $('.back').on('click', function (e) {
+         e.preventDefault()
+         window.location.replace("http://localhost/animal_manager/authorities.php");
+       })
 
-          $('.nextButton').on('click',function (e){
+        $('.nextButton').on('click',function (e){
             //call next Query Here
-             <?php
-              if($id < $maxID){
-                $id++;
-              }
-             ?>
-             window.location.replace("http://localhost/animal_manager/authoritiessee.php?id="+<?php echo $id; ?>);
+            <?php
+            if($id < $maxID){
+              $id++;
+            }
+            ?>
+            window.location.replace("http://localhost/animal_manager/authoritiessee.php?id="+<?php echo $id; ?>);
           })
 
-          $('.backButton').on('click',function (e){
+        $('.backButton').on('click',function (e){
             //call back Query Here
             <?php
-              $checkID = $_GET['id'];
-              if($checkID > 1){
-                $checkID--;
-              }
-             ?>
+            $checkID = $_GET['id'];
+            if($checkID > 1){
+              $checkID--;
+            }
+            ?>
             window.location.replace("http://localhost/animal_manager/authoritiessee.php?id="+<?php echo $checkID; ?>);
           })
 
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+        $('#myTab a').on('click', function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+        })
 
-          $('.addbreeder').on('click',function (){
-            $('#addbreeder').modal('show');
-          })
+        $('.addbreeder').on('click',function (){
+          $('#addbreeder').modal('show');
+        })
 
-          $('.addbreederedit').on('click',function (){
-            $('#addbreederedit').modal('show');
-          })
+        $('.addbreederedit').on('click',function (){
+          $('#addbreederedit').modal('show');
+        })
 
-          $('.showqr1').on('click', function () {
-            $('#showqr1').modal('show');
-          })
+        $('.showqr1').on('click', function () {
+          $('#showqr1').modal('show');
+        })
 
-          $('.deleteannimal').on('click', function () {
-            $('#deleteannimal').modal('show');
-          })
+        $('.deleteannimal').on('click', function () {
+          $('#deleteannimal').modal('show');
+        })
 
-          $('.showeditannimal').on('click', function () {
-            $('#showeditannimal').modal('show');
-          })
+        $('.showeditannimal').on('click', function () {
+          $('#showeditannimal').modal('show');
+        })
 
-          $('.mnl').click(function(event) {
+        $('.mnl').click(function(event) {
 
-            var page = 0;
-            var id = $(this).data('id');
-            var dism = document.getElementById("display-m");
-            var dis1 = document.getElementById("display-1");
-            var dis2 = document.getElementById("display-2");
+          var page = 0;
+          var id = $(this).data('id');
+          var dism = document.getElementById("display-m");
+          var dis1 = document.getElementById("display-1");
+          var dis2 = document.getElementById("display-2");
 
 
 
-            if (id==1) {
-              dis1.style.display = 'block';
-              dism.style.display = 'none';
-              dis2.style.display = 'none';
-              page == 1 ;
-            }
-            if (id==2) {
-              dism.style.display = 'none';
-              dis1.style.display = 'none';
-              dis2.style.display = 'block';
-            }
-            else{
+          if (id==1) {
+            dis1.style.display = 'block';
+            dism.style.display = 'none';
+            dis2.style.display = 'none';
+            page == 1 ;
+          }
+          if (id==2) {
+            dism.style.display = 'none';
+            dis1.style.display = 'none';
+            dis2.style.display = 'block';
+          }
+          else{
 
-            }
+          }
 
-          });
         });
+      });
 
 
-      </script>
-    </body>
-    </html>
+    </script>
+  </body>
+  </html>

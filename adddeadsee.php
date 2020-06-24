@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('code/mannageannimaledit/class.php');
 error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();
@@ -7,6 +8,9 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
 // echo "<pre>";
 // var_dump($data);
 // echo "</pre>";
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 
 ?>
 
@@ -305,41 +309,41 @@ $data = showcorrectionrowdead($Animal_Case_Correction_ID);
                   if($photolist[$i] == ''){ ?> 
                   <?php  }else{ ?> 
                     <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="100px" class="border border-dark">
-                 <?php  }
-               }else if ($i >= 3){ 
-                if($photolist[$i] == ''){}
-                  else{
-                    if($i == 3){?> 
-                      <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="100px" style="margin-left: 50px;" class="border border-dark">
-                    <?php }else{ ?>
-                     <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="100px" class="border border-dark">
-                   <?php } 
+                  <?php  }
+                }else if ($i >= 3){ 
+                  if($photolist[$i] == ''){}
+                    else{
+                      if($i == 3){?> 
+                        <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="100px" style="margin-left: 50px;" class="border border-dark">
+                      <?php }else{ ?>
+                       <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="100px" class="border border-dark">
+                     <?php } 
+                   }
                  }
                }
-             }
-             ?> 
-           </th>
-         </tr>
+               ?> 
+             </th>
+           </tr>
 
 
 
-       </tbody>
-     </table>
+         </tbody>
+       </table>
 
-     <button class="btn btn-light">แก้ไข</button>&nbsp;
-     <button class="btn btn-light">ลบ</button>
+       <button class="btn btn-light">แก้ไข</button>&nbsp;
+       <button class="btn btn-light">ลบ</button>
+     </div>
+
+
+
+
+
    </div>
 
-
-
-
-
- </div>
-
- <div class="mt-5 row">
-  <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
-  <div class="col float-right" align="right"><img class="" src="picture/prin.png" width="50" height="50">  </div>
-</div>
+   <div class="mt-5 row">
+    <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
+    <div class="col float-right" align="right"><img class="" src="picture/prin.png" width="50" height="50">  </div>
+  </div>
 
 
 </div>

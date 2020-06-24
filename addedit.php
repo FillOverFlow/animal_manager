@@ -1,10 +1,14 @@
 <?php
+session_start();
 require_once('code/mannageannimaledit/class.php');
 error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();
 $Animal_Case_Correction_ID = $_GET['Animal_Case_Correction_ID'];
 $data = showcorrectionrow($Animal_Case_Correction_ID);
 $authorities = getdb('authorities');
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang='en'>

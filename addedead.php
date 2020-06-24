@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('code/mannageannimalcenter/class.php');
 $id = $_GET['Animal_id'];
 $Animal_number = $_GET['Animal_number'];
@@ -11,7 +12,9 @@ $animaldata = animalshow($id);
 // $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
 $authorities = showAnimalData($tblauthorities,'no');
 $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
-
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 ?>
 <!doctype html>
 <html lang="en">

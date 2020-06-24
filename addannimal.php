@@ -1,5 +1,8 @@
 <?php 
 require_once "code/connect.php";
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,7 @@ require_once "code/connect.php";
           <h4>ระบบจัดการข้อมูลสัตว์ สถานีเพาะเลี้ยงนกน้ำบางพระ จังหวัดชลบุรี</h4>
         </div>
         <div class="float-right">
-          <button class="btn-light user">ผู้ใช้งาน</button>&nbsp;<b>|</b>&nbsp;<a class="btn-light" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="#" class="btn-light">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="btn-light" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <hr class="float-left" width="94%" size="20" color="black">
       </div>
@@ -201,42 +204,42 @@ require_once "code/connect.php";
 
 
               $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageuser.php");
+                e.preventDefault()
+                window.location.replace("http://localhost/animal_manager/mannageuser.php");
 
-            })
+              })
 
 
-             $('#myTab a').on('click', function (e) {
-              e.preventDefault()
-              $(this).tab('show')
-            })
+              $('#myTab a').on('click', function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+              })
 
-             $('.deleteannimal').on('click', function () {
-              $('#deleteannimal').modal('show');
-              var id = $(this).data('id');
-              $('#idupdate').val(id);
+              $('.deleteannimal').on('click', function () {
+                $('#deleteannimal').modal('show');
+                var id = $(this).data('id');
+                $('#idupdate').val(id);
               // alert(name);
             })
 
-             $('.user').on('click', function () {
-              $('#user').modal('show');
-            })
+              $('.user').on('click', function () {
+                $('#user').modal('show');
+              })
 
 
-             $('.showeditannimal').on('click', function () {
-              $('#showeditannimal').modal('show');
-              var name = $(this).data('id');
-              $('#nameannimal_edit').val(name);
-              $('#nameannimal_old').val(name);
-            })
-             $('.editamnimal').on('click', function(event) {
-              var nameedit = $("#nameannimal_edit").val();
-            });
+              $('.showeditannimal').on('click', function () {
+                $('#showeditannimal').modal('show');
+                var name = $(this).data('id');
+                $('#nameannimal_edit').val(name);
+                $('#nameannimal_old').val(name);
+              })
+              $('.editamnimal').on('click', function(event) {
+                var nameedit = $("#nameannimal_edit").val();
+              });
 
-             $('#search').on('click', function(event) {
-              $('#tb1').hide();
-              var namesearch = $("#annimal_name_search").val();
+              $('#search').on('click', function(event) {
+                $('#tb1').hide();
+                var namesearch = $("#annimal_name_search").val();
             // console.log(namesearch);
             $.ajax({
               url: 'code/annimal_search.php',
@@ -255,8 +258,8 @@ require_once "code/connect.php";
 
 
 
-           });
+            });
 
-         </script>
-       </body>
-       </html>
+          </script>
+        </body>
+        </html>

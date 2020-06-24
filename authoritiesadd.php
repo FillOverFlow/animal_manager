@@ -1,4 +1,9 @@
-<?php require_once "code/connect.php"; ?>
+<?php
+ require_once "code/connect.php";
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+  ?>
 <!doctype html>
 <html lang="en">
 <head>

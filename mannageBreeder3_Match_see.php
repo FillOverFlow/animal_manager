@@ -1,3 +1,9 @@
+<?php
+require_once 'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -221,7 +227,7 @@
       </div>
     </div>
     <div class="row">
-        <div class="col-sm">
+      <div class="col-sm">
         <img class="float-right" src="picture/prin.png" width="50px" height="50px">
       </div>
     </div>
@@ -313,9 +319,9 @@
         $(document).ready(function() {
 
           $('.back').on('click', function (e) {
-               e.preventDefault()
-                window.location.replace("http://localhost/animal_manager/mannageBreeder3.php");
-              })
+           e.preventDefault()
+           window.location.replace("http://localhost/animal_manager/mannageBreeder3.php");
+         })
           $('#myTab a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

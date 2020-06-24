@@ -1,6 +1,9 @@
 <?php
-  require_once 'code/connect.php';
- ?>
+require_once 'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +33,14 @@
 
   </div>
 
-<?php include('menu.php');  ?>
+  <?php include('menu.php');  ?>
 
-<div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100">
+  <div id="display-2" class="col-9 p-5 border border-dark rounded h-80 w-100">
 
-  <div class="row mt-5">
-    <div class="col-1"></div>
-    <div class="col-10">
-      <?php
+    <div class="row mt-5">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <?php
         $search ="";
         if(isset($_POST['annimal_name_search'])){
           $search = $_POST['annimal_name_search'];
@@ -46,15 +49,15 @@
 
 
 
-       ?>
+        ?>
 
         <div class="row" align="center">
-           <button class="btn btn-light addhlive">เพิ่มชื่อสามัญ</button>  &nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label>
-            <form action="mannageBreeder.php" method="post">
-              <input type="text" name="annimal_name_search" class="form" value="<?php echo $search; ?>">&nbsp;&nbsp;
-              <input type="submit" class="btn btn-light" value="ค้นหา">
-            </form>
-        </div>
+         <button class="btn btn-light addhlive">เพิ่มชื่อสามัญ</button>  &nbsp;&nbsp;<label>ค้นหา :&nbsp;&nbsp;</label>
+         <form action="mannageBreeder.php" method="post">
+          <input type="text" name="annimal_name_search" class="form" value="<?php echo $search; ?>">&nbsp;&nbsp;
+          <input type="submit" class="btn btn-light" value="ค้นหา">
+        </form>
+      </div>
 
 
       <p class="mt-5">ค้นหาข้อมูลสัตว์พ่อ-แม่พันธ์</p>
@@ -73,43 +76,43 @@
         </thead>
         <tbody>
           <?php
-            $db->where('status',1);
-            $db->getLastError();
-            $animal_breeder = $db->get('animal');
+          $db->where('status',1);
+          $db->getLastError();
+          $animal_breeder = $db->get('animal');
 
-            $i=1;
-            foreach ($animal_breeder as $animal ) {
+          $i=1;
+          foreach ($animal_breeder as $animal ) {
 
            ?>
-          <tr>
+           <tr>
             <?php
-               $db->where("Animal_ID",$animal['Animal_ID']);
-               $data = $db->getOne("animal");
-             ?>
+            $db->where("Animal_ID",$animal['Animal_ID']);
+            $data = $db->getOne("animal");
+            ?>
             <th><?php echo $i; ?></th>
             <td><?php echo $data['Thai_Common_Name']; ?></td>
             <td><?php echo $data['English_Common_Name']; ?></td>
             <?php
               //count animal have life
-              $db->where("Animal_ID",$animal['Animal_ID']);
-              $db->where("Animal_Dead_ID",0);
-              $db->get('animal_breeder');
-              $countLife = $db->count;
-             ?>
+            $db->where("Animal_ID",$animal['Animal_ID']);
+            $db->where("Animal_Dead_ID",0);
+            $db->get('animal_breeder');
+            $countLife = $db->count;
+            ?>
             <td><?php echo $countLife; ?></td>
             <td><a href="addsbhave.php?animal_id=<?php echo $data['Animal_ID']; ?>&&animal_type=<?php echo $data['Animal_Type_ID']; ?>" class="btn btn-light "><img src="picture/plus.png" width="25px" height="20px"></a></td>
             <?php
               //count animal  dead
-              $db->where("Animal_ID",$animal['Animal_ID']);
-              $db->where("Animal_Dead_ID",!0);
-              $db->get('animal_breeder');
-              $countDead = $db->count;
-             ?>
+            $db->where("Animal_ID",$animal['Animal_ID']);
+            $db->where("Animal_Dead_ID",!0);
+            $db->get('animal_breeder');
+            $countDead = $db->count;
+            ?>
             <td><?php echo $countDead; ?></td>
             <td><a href="addsbdead.php?animal_id=<?php echo $data['Animal_ID']; ?>&&animal_type=<?php echo $data['Animal_Type_ID']; ?>" class="btn btn-light " href="#"><img src="picture/plus.png" width="25px" height="20px"></a></td>
             <td><button class="btn btn-light deleteannimal"><img src="picture/delete.png" width="20px" height="20px"></button></td>
           </tr>
-        <?php $i++;} ?>
+          <?php $i++;} ?>
         </tbody>
       </table>
 
@@ -148,26 +151,26 @@
             </thead>
             <tbody>
               <?php
-                $animals = $db->get("animal");
-                foreach ($animals as $animal ) {
+              $animals = $db->get("animal");
+              foreach ($animals as $animal ) {
                ?>
-              <tr>
+               <tr>
                 <td><?php echo $animal['Animal_ID']; ?></td>
                 <td><?php echo $animal['Thai_Common_Name']; ?></td>
                 <td><?php echo $animal['English_Common_Name']; ?></td>
                 <td><input type="checkbox" name="animal[]" value="<?php echo $animal['Animal_ID']; ?>"></td>
               </tr>
             <?php } ?>
-            </tbody>
+          </tbody>
 
-          </table>
-        </div>
-        <div class="mt-2">
-          <button type="submit" class="btn btn-light float-right">เพิ่มลงในตาราง</button>
-        </div>
+        </table>
       </div>
-    </form>
-  </div>
+      <div class="mt-2">
+        <button type="submit" class="btn btn-light float-right">เพิ่มลงในตาราง</button>
+      </div>
+    </div>
+  </form>
+</div>
 </div>
 
 
@@ -223,59 +226,59 @@
   <script type="text/javascript">
 
 
-     $(document).ready(function() {
-          $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageuser.php");
+   $(document).ready(function() {
+    $('.back').on('click', function (e) {
+      e.preventDefault()
+      window.location.replace("http://localhost/animal_manager/mannageuser.php");
 
-            })
-
-
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
-
-          $('.addhlive').on('click', function () {
-            $('#addhlive').modal('show');
-          })
-
-          $('.deleteannimal').on('click', function () {
-            $('#deleteannimal').modal('show');
-          })
-
-           $('.showeditannimal').on('click', function () {
-            $('#showeditannimal').modal('show');
-          })
-
-          $('.mnl').click(function(event) {
-
-            var page = 0;
-            var id = $(this).data('id');
-            var dism = document.getElementById("display-m");
-            var dis1 = document.getElementById("display-1");
-            var dis2 = document.getElementById("display-2");
+    })
 
 
+    $('#myTab a').on('click', function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
 
-            if (id==1) {
-              dis1.style.display = 'block';
-              dism.style.display = 'none';
-              dis2.style.display = 'none';
-              page == 1 ;
-            }
-            if (id==2) {
-              dism.style.display = 'none';
-              dis1.style.display = 'none';
-              dis2.style.display = 'block';
-            }
-            else{
+    $('.addhlive').on('click', function () {
+      $('#addhlive').modal('show');
+    })
 
-            }
+    $('.deleteannimal').on('click', function () {
+      $('#deleteannimal').modal('show');
+    })
 
-          });
-        });
+    $('.showeditannimal').on('click', function () {
+      $('#showeditannimal').modal('show');
+    })
 
-  </script>
+    $('.mnl').click(function(event) {
+
+      var page = 0;
+      var id = $(this).data('id');
+      var dism = document.getElementById("display-m");
+      var dis1 = document.getElementById("display-1");
+      var dis2 = document.getElementById("display-2");
+
+
+
+      if (id==1) {
+        dis1.style.display = 'block';
+        dism.style.display = 'none';
+        dis2.style.display = 'none';
+        page == 1 ;
+      }
+      if (id==2) {
+        dism.style.display = 'none';
+        dis1.style.display = 'none';
+        dis2.style.display = 'block';
+      }
+      else{
+
+      }
+
+    });
+  });
+
+</script>
 </body>
 </html>

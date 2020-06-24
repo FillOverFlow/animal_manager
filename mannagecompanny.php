@@ -1,4 +1,9 @@
-<?php include 'code/connect.php'; ?>
+<?php
+require_once 'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -74,20 +79,20 @@
                 if ($search != "") {
                   $sql = "SELECT * FROM arrest_deparment WHERE arrest_deparment like '%".$search."%' AND status = '1'";
                 }else{
-                   $sql = "SELECT * FROM arrest_deparment WHERE status = '1'";
-                }
+                 $sql = "SELECT * FROM arrest_deparment WHERE status = '1'";
+               }
                
-                $result = $conn->query($sql);
-                $i = 1;
-                while($row = $result->fetch_assoc()) {
-                  ?>
-                  <tr>
-                    <th><?php echo $i;?></th>
-                    <td><?php echo $row['Arrest_Deparment']?></td>
-                    <td align="center"><button class="btn btn-light showeditannimal" data-id="<?php  echo $row['Arrest_Deparment']; ?>"><img src="picture/gg.png" width="20px" height="20px"></button></td>
-                    <td align="center"> <button class="btn btn-light deleteannimal" data-id="<?php echo $row['ID_Arrest_Deparment']; ?>"><img src="picture/delete.png" width="20px" height="20px"></button></td>
-                  </tr>
-                  <?php $i++; } ?>
+               $result = $conn->query($sql);
+               $i = 1;
+               while($row = $result->fetch_assoc()) {
+                ?>
+                <tr>
+                  <th><?php echo $i;?></th>
+                  <td><?php echo $row['Arrest_Deparment']?></td>
+                  <td align="center"><button class="btn btn-light showeditannimal" data-id="<?php  echo $row['Arrest_Deparment']; ?>"><img src="picture/gg.png" width="20px" height="20px"></button></td>
+                  <td align="center"> <button class="btn btn-light deleteannimal" data-id="<?php echo $row['ID_Arrest_Deparment']; ?>"><img src="picture/delete.png" width="20px" height="20px"></button></td>
+                </tr>
+                <?php $i++; } ?>
                  <!--  <th>1</th>
                   <td>A companny</td>
                   <td><button class="btn btn-light showeditannimal"><img src="picture/gg.png" width="20px" height="20px"></button></td>

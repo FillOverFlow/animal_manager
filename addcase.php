@@ -1,4 +1,9 @@
-<?php include 'code/connect.php'; ?>
+<?php 
+include 'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -138,12 +143,12 @@
                $query = $conn->query($sql);?>
                <select style="width: 100%;" name="Department_Case_Animal">
                  <?php  while($row = $query->fetch_assoc()) { ?>
-                 <option value="<?php echo $row['ID_Deliver_Department']; ?>"><?php echo $row['Deliver_Department']; ?></option> 
-             <?php   } ?>
-              </select></td>
-            </tr>
+                   <option value="<?php echo $row['ID_Deliver_Department']; ?>"><?php echo $row['Deliver_Department']; ?></option> 
+                 <?php   } ?>
+               </select></td>
+             </tr>
 
-            <tr>
+             <tr>
               <th><label class="float-right">รายละเอียดของกลางที่รับมอบ :</label>
               </th>
               <td><textarea style="width: 100%;" name="Description_exhibit"></textarea></td>
@@ -248,12 +253,12 @@
               </th>
               <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Recording_Document[]" style="width: 210px;"></td>
             </tr>
-             <tr class="mt-2">
+            <tr class="mt-2">
               <th><label class="float-right"></label>
               </th>
               <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Arrest_Document[]" style="width: 210px;"></td>
             </tr>
-             <tr class="mt-2">
+            <tr class="mt-2">
               <th><label class="float-right"></label>
               </th>
               <td><input  OnChange="Preview(this)" class="form-control"  type="file" name="Deliver_Document[]" style="width: 210px;"></td>

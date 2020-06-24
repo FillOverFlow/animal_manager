@@ -1,5 +1,8 @@
 <?php 
-// include 'code/connect.php';
+session_start();
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 require_once('code/mannageannimalcenter/class.php');
 error_reporting (E_ALL ^ E_NOTICE);
 $tblanimal = 'animal';

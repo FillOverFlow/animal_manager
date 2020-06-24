@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('code/mannageannimalcenter/class.php');
 $id = $_GET['id'];
 $tbldeliver_department = "deliver_department";
@@ -8,6 +9,10 @@ $dataanimal = joinshowwild($id);
 $deliver_department = showAnimalData($tbldeliver_department,'no');
 $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
 $authorities = showAnimalData($tblauthorities,'no');
+
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 
 ?>
 

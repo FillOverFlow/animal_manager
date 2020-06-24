@@ -1,7 +1,8 @@
 <?php 
 require_once "code/connect.php";
-
-// $fetchname = mysqli_fetch_array($result);
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

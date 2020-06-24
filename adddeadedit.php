@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('code/mannageannimaledit/class.php');
 $id = $_GET['Animal_ID'];
 $Animal_number = $_GET['Animal_number'];
@@ -13,6 +14,10 @@ $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
 $authorities = showAnimalData($tblauthorities,'no');
 // $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
 $data = showcorrectionrowdead($Animal_Case_Correction_ID);
+
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 
 ?>
 <!doctype html>

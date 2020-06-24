@@ -1,3 +1,10 @@
+<?php
+require_once 'code/connect.php';
+session_start();
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -240,17 +247,17 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
-    $(document).ready(function() {
-      $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageBreeder1.php");
-            })
-      
+  $(document).ready(function() {
+    $('.back').on('click', function (e) {
+      e.preventDefault()
+      window.location.replace("http://localhost/animal_manager/mannageBreeder1.php");
+    })
+    
 
-    });
+  });
 
 
-  </script>
+</script>
 
 </body>
 </html>

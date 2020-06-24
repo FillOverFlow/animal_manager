@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 require_once('code/mannageannimalcenter/class.php');
 $id = $_GET['id'];
 $tbldeliver_department = "deliver_department";

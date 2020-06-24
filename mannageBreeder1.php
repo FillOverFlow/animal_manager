@@ -1,6 +1,9 @@
 <?php
-  require_once 'code/connect.php';
- ?>
+require_once 'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,13 +61,13 @@
         <tbody>
           <!-- count animalBreeder have life  -->
           <?php
-            $db->where("Animal_Dead_ID",0);
-            $animals = $db->get('animal_breeder');
-            $i =1;
-            foreach ($animals as $animal ) {
+          $db->where("Animal_Dead_ID",0);
+          $animals = $db->get('animal_breeder');
+          $i =1;
+          foreach ($animals as $animal ) {
 
            ?>
-          <tr>
+           <tr>
             <th><?php echo $i; ?></th>
             <td><?php echo $animal['Animal_Breeder_ID']; ?></td>
             <td><?php echo $animal['Animal_Breeder_Animal_Status']; ?></td>
@@ -72,7 +75,7 @@
             <td><a class="btn btn-light" href="mannageBreeder1_edithave.php"><img src="picture/gg.png" width="20px" height="20px"></a></td>
             <td><button class="btn btn-light deleteannimal"><img src="picture/delete.png" width="20px" height="20px"></button></td>
           </tr>
-        <?php $i++;} ?>
+          <?php $i++;} ?>
         </tbody>
       </table>
 
@@ -156,9 +159,9 @@
 
     $(document).ready(function() {
       $('.back').on('click', function (e) {
-              e.preventDefault()
-              window.location.replace("http://localhost/animal_manager/mannageuser.php");
-            })
+        e.preventDefault()
+        window.location.replace("http://localhost/animal_manager/mannageuser.php");
+      })
 
       $('#myTab a').on('click', function (e) {
         e.preventDefault()

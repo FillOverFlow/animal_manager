@@ -1,3 +1,4 @@
+
 <?php
 require_once "code/login/class.php";
 $authorities = $_SESSION["authorities"];

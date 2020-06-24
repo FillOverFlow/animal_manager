@@ -7,6 +7,9 @@ require_once('code/connect.php');
 // }else{
 //   // var_dump($authorities);
 // }
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
 ?>
 <!doctype html>
 <html lang="en">

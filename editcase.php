@@ -1,4 +1,9 @@
-<?php include'code/connect.php'; ?>
+<?php 
+include'code/connect.php';
+if (empty($_SESSION["authorities"])) {
+ header ("Location: index.php");
+}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -63,7 +68,7 @@
                 </th>
                 <td><input style="width:100%;" type="text
                   " disabled   placeholder="" value="<?php echo $row['Case_Animal_ID']; ?>">
-                <input style="width:100%;" type="hidden" placeholder="" value="<?php echo $row['Case_Animal_ID']; ?>" name="Case_Animal_ID"></td>
+                  <input style="width:100%;" type="hidden" placeholder="" value="<?php echo $row['Case_Animal_ID']; ?>" name="Case_Animal_ID"></td>
                 </tr>
 
                 <tr>
