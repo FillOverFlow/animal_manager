@@ -9,8 +9,33 @@ $tblanimal = 'animal';
 $tblwild_animal_exhibits = 'wild_animal_exhibits';
 $id = $_GET['id'];
 $datajoin = joinshowliverow($id);
+$dataall = showAnimalData($tblwild_animal_exhibits,0);
+$max = count($dataall);
+$list = [];
+$next;
+$last;
+$page;
+foreach ($dataall as $key => $value) {
+  if($value['Wild_Animal_Exhibits_ID'] == $id){
+    $next = $key+1;
+    $page = $key+1;
+    $last = $key-1;
+    if ($last < 0) {
+      $last = 0;
+    }
+    if($next > $max-1){
+      $next = $max-1;
+    }
+    $list[] = $value['Wild_Animal_Exhibits_ID'];
+  }else{
+    $list[] = $value['Wild_Animal_Exhibits_ID'];
+  }
+          // print_r($value[0]);
+}
+$nextshow = $list[$next];
+$lastshow = $list[$last];
 // echo "<pre>";
-// var_dump($datajoin);
+// var_dump($dataall);
 // echo "</pre>";
 ?>
 <!doctype html>
@@ -55,8 +80,6 @@ $datajoin = joinshowliverow($id);
 
     <div class="row p-5" id="print">
       <div class="col-3">
-
-
         <table >
           <thead>
             <tr>
@@ -273,13 +296,6 @@ $datajoin = joinshowliverow($id);
         }
         ?></label></td>
       </tr>
-
-<!--       <tr>
-        <th><label class="float-right"></label>
-        </th>
-        <td><img class="float-right" src="picture/+file.png" width="20px" height="20px"><hr></td>
-      </tr> -->
-
     </tbody>
   </table>
 
@@ -290,64 +306,47 @@ $datajoin = joinshowliverow($id);
 
 
 <div class="col-3">
+  <div class="row m-10">
+      <img id="img" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $datajoin[0]['W_A_E_Photo_1'] ;?>"  width="30%" class="border border-dark">
+      <?php
+      $img = array(
+        '0'=> $datajoin[0]['W_A_E_Photo_2'],
+        '1'=> $datajoin[0]['W_A_E_Photo_3'],
+        '2'=> $datajoin[0]['W_A_E_Photo_4'],
+        '3'=> $datajoin[0]['W_A_E_Photo_5'],
+      );
+      for ($i=0; $i < 5; $i++) {  
+        if($img[$i] == ""){
 
-  <div class="row m-10 ">
-    <center><tr>
-      <th>
-        <img id="img" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $datajoin[0]['W_A_E_Photo_1'] ;?>"  width="300px" class="border border-dark">
-        <?php
-        $img = array(
-          '0'=> $datajoin[0]['W_A_E_Photo_2'],
-          '1'=> $datajoin[0]['W_A_E_Photo_3'],
-          '2'=> $datajoin[0]['W_A_E_Photo_4'],
-          '3'=> $datajoin[0]['W_A_E_Photo_5'],
-        );
-        for ($i=0; $i < 5; $i++) {  
-          if($img[$i] == ""){
-
-          }else{?>
-            <img id="img" style="margin: 2px 0 0 0;" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $img[$i] ;?>"  height="50px" class="border border-dark">
-          <?php  }
-        } ?>
-
-
-      </th>
-    </tr></center>
-
+        }else{?>
+          <img id="img" style="margin: 2px 0 0 0;" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $img[$i] ;?>"  width="30%" class="border border-dark">
+        <?php  }
+      } ?>
   </div>
+  <center><div class="row mt-5">
+    <a href="edith1.php?" class="btn btn-light" style="margin: auto;">แก้ไข</a>
+  </div></center>
   <div class="row mt-2">
-    <a href="edith1.php?" class="btn btn-light" style="margin-left: 125px">แก้ไข</a>
+    <button class="btn btn-light deleteannimal" style="margin: auto;">ลบ</button>
   </div>
-  <div class="row mt-2">
-    <button class="btn btn-light deleteannimal" style="margin-left: 135px">ลบ</button>
-  </div>
-
-
-
 </div>
-
-
-</div>
-
 <div class="float-right row">
   <label class="" disabled="">ผู้กรอกข้อมูล :</label>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+</div><br>
+<div>
+  <center><button class="btn btn-light backButton" ><<</button>&nbsp;
+    <button class="btn btn-light nextButton " >>></button></center>
+  </div>
+  <div class="mt-5 row">
+    <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
+    <div class="col float-right" align="right">
+      <label><?php echo $page; echo "/"; echo $max; ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-light" target="_blank" href="code/report/reportshowh1.php?id=<?php echo $id;?>"><img class="" src="picture/prin.png" width="50" height="50"></a>
+    </div>
+
+  </div>
 
 </div>
-
-
-<div class="mt-5 row">
-  <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
-  <div class="col float-right" align="right"><button class="btn btn-light" onclick="PrintDiv();"><img class="" src="picture/prin.png" width="50" height="50"></button></div>
-</div>
-
-</div>
-
-<div class="col-1 p-5">
-</div>
-
-
-
-
 
 <div class="modal fade" id="showqr1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -419,6 +418,16 @@ $datajoin = joinshowliverow($id);
       $('#showqr1').modal('show');
     })
 
+    $('.nextButton').on('click',function (e){
+            //call next Query Here
+            window.location.replace("http://localhost/animal_manager/showh1.php?id="+<?php echo $nextshow; ?>);
+          })
+
+    $('.backButton').on('click',function (e){
+            //call back Query Here
+            window.location.replace("http://localhost/animal_manager/showh1.php?id="+<?php echo $lastshow; ?>);
+          })
+
     $('.mnl').click(function(event) {
 
       var page = 0;
@@ -447,7 +456,7 @@ $datajoin = joinshowliverow($id);
     });
   });
 
-    function PrintDiv() {
+   function PrintDiv() {
         var divToPrint = document.getElementById('print'); // เลือก div id ที่เราต้องการพิมพ์
         var html =  '<html>'+ // 
         '<head>'+
@@ -465,6 +474,6 @@ $datajoin = joinshowliverow($id);
       }
 
 
-</script>
-</body>
-</html>
+    </script>
+  </body>
+  </html>

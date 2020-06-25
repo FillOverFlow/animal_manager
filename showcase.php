@@ -235,9 +235,8 @@ if (empty($_SESSION["authorities"])) {
     </div>
     <center><a class="btn btn-light" href="editcase.php?id=<?php echo $_GET['id'];?>">แก้ไข</a>&nbsp;&nbsp;<a class="btn btn-light" href="code/mannageannimalcenter/delete.php?id=<?php echo $_GET['id'];?>">ลบ</a></center>
     <br>
-    <center><button class="btn btn-light backButton" >กลับ</button>&nbsp;
-      <button class="btn btn-light nextButton" >ถัดไป</button></center>
-
+    <center><button class="btn btn-light backButton" ><<</button>&nbsp;
+      <button class="btn btn-light nextButton " >>></button></center>
       <button class="btn btn-light float-left back">ย้อนกลับ</button>
       <label class="float-right"><?php echo $page; echo "/"; echo $max; ?></label>
     </div>

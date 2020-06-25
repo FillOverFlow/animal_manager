@@ -32,7 +32,7 @@ if (empty($_SESSION["authorities"])) {
         <h4>ระบบจัดการข้อมูลสัตว์ สถานีเพาะเลี้ยงนกน้ำบางพระ จังหวัดชลบุรี</h4>
       </div>
       <div class="float-right">
-        <a class="text-dark" href="usermanage.php?id=<?php echo $_GET['id']; ?>">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="text-dark" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="text-dark" href="usermanage.php">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="text-dark" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <hr class="float-left" width="94%" size="20" color="black">
 
@@ -52,7 +52,8 @@ if (empty($_SESSION["authorities"])) {
     $maxID  = $result['max(Authorities_ID)'];
 
       //check show view
-    $id = $_GET['id'];
+
+    $id = $_SESSION["authorities"]['Authorities_ID'];
     $sql_view = "SELECT * FROM authorities WHERE Authorities_ID = '".$id."'";
     $query = $conn->query($sql_view);
     $data  = $query->fetch_assoc();

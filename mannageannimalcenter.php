@@ -30,7 +30,7 @@ $dataanimaldead = showAnimalDeadData();
         <h4>ระบบจัดการข้อมูลสัตว์ สถานีเพาะเลี้ยงนกน้ำบางพระ จังหวัดชลบุรี</h4>
       </div>
       <div class="float-right">
-        <a class="text-dark" href="#">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="text-dark" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="text-dark" href="usermanage.php">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="text-dark" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <hr class="float-left" width="94%" size="20" color="black">
 
@@ -140,7 +140,7 @@ $dataanimaldead = showAnimalDeadData();
    </div>
 
    <button class="btn btn-light float-left back">ย้อนกลับ</button>
-   <button class='btn btn-light float-right'>รายงานการนำไปใช้ประโชยน์<br>ของสัตว์กรณีแก้ไข</button>
+   <a href="reportcenter.php" target="_blank"  class='btn btn-light float-right report'>รายงานการนำไปใช้ประโชยน์<br>ของสัตว์ป่าของกลาง</a>
 
  </div>
  <div class="col-1 p-5">
@@ -305,7 +305,6 @@ $dataanimaldead = showAnimalDeadData();
       window.location.replace("http://localhost/animal_manager/mannageuser.php");
 
     })
-
     $('#myTab a').on('click', function (e) {
       e.preventDefault()
       $(this).tab('show')

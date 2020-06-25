@@ -44,39 +44,53 @@ foreach ($_POST as $key => $value) {
 	else{
 	}
 }
+
+$updatepic = update($tbl,$data,$id);
+$updatefiles = update($tbl,$datafield,$id);
+
+if($conn->query($updatefiles)){
+	$targetfile = "FilesAndPiture/";
+	for ($i=0; $i < 2; $i++) { 
+		$path =  $targetfile.$filesdata[$i]['name'];
+		$temp =  $filesdata[$i]['tmp_name'];
+		if ($path == '' or $temp == '') {
+
+		}else{
+			copy($temp,$path);
+		}
+	}
+	$files = true;
+}
 $updatedata = update($tbl,$picnameupdate,$id);
 if ($conn->query($updatedata)){
 	if(!empty($_FILES)){
-		$targetfile = "picture";
+		$targetfile = "picture/";
 		$file = [];
 		for ($i=0; $i <=5 ; $i++) { 
 			if (!empty($annimalimg['name'][$i])) {
 				$path =  $targetfile.$annimalimg['name'][$i];
 				$temp =  $annimalimg['tmp_name'][$i];
-				copy($temp,$path);
+				if ($path == '' or $temp == '') {
+					
+				}else{
+					copy($temp,$path);
+				}
+				
 			}
 		}
-		$updatepic = update($tbl,$data,$id);
-		$updatefiles = update($tbl,$datafield,$id);
-		if($conn->query($updatepic)){
-			$pic = true;
-		}
-		if($conn->query($updatefiles)){
-			$targetfile = "FilesAndPiture";
-			for ($i=0; $i < 3; $i++) { 
-				$path =  $targetfile.$filesdata['name'][$i];
-				$temp =  $filesdata['tmp_name'][$i];
-				copy($temp,$path);
-			}
-			$files = true;
-		}
-
-		// echo "<script>alert('แก้ไขข้อมูลเรียบร้อย');</script>";
-		// echo "<meta http-equiv='refresh' content='0;url=../../mannageannimalcenterhdead1.php'>";
 	}
 
+}
+if($conn->query($updatepic)){
+	$pic = true;
+
+	echo "<script>alert('แก้ไขข้อมูลเรียบร้อย');</script>";
+	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimalcenterhdead1.php'>";
 }else{
 	echo "<script>alert('ผิดพลาด');</script>";
 	echo "<meta http-equiv='refresh' content='0;url=../../mannageannimalcenterhdead1.php'>";
 }
+
+
+
 ?>

@@ -38,7 +38,7 @@ if (empty($_SESSION["authorities"])) {
           <h4>ระบบจัดการข้อมูลสัตว์ สถานีเพาะเลี้ยงนกน้ำบางพระ จังหวัดชลบุรี</h4>
         </div>
         <div class="float-right">
-          <a href="#" class="btn-light">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="btn-light" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="usermanage.php" class="btn-light">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="btn-light" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <hr class="float-left" width="94%" size="20" color="black">
       </div>

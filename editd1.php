@@ -31,7 +31,7 @@ $datajoin = joinshowliverow($id);
         <h4>ระบบจัดการข้อมูลสัตว์ สถานีเพาะเลี้ยงนกน้ำบางพระ จังหวัดชลบุรี</h4>
       </div>
       <div class="float-right">
-        <a class="text-dark" href="#">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="text-dark" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="text-dark" href="usermanage.php">ผู้ใช้งาน</a>&nbsp;<b>|</b>&nbsp;<a class="text-dark" href="code/login/logout.php">ออกจากระบบ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <hr class="float-left" width="94%" size="20" color="black">
 
@@ -531,15 +531,14 @@ $datajoin = joinshowliverow($id);
         <th>
           <?php 
           if($datajoin[0]['W_A_E_Photo_1']){
-            echo "havepic";
-            $path ="code/picturemannageannimalcenterhlive/".$datajoin[0]['W_A_E_Photo_1'];
+            $path ="code/mannageannimalcenterhdead/picture/".$datajoin[0]['W_A_E_Photo_1'];
           }else{
             $path ="picture/logo.png";
 
           }
           ?>
 
-          <img id="img" align="center" src="<?php echo $path;?>"  width="300px" class="border border-dark"><br><br>
+          <img id="img" align="center" src="<?php echo $path;?>"  width="30%" class="border border-dark"><br><br>
           <?php
           $img = array(
             '0'=> $datajoin[0]['W_A_E_Photo_2'],
@@ -551,7 +550,7 @@ $datajoin = joinshowliverow($id);
             if($img[$i] == ""){
 
             }else{?>
-              <img id="img" style="margin: 2px 0 0 0;" align="center" src="code/picturemannageannimalcenterhlive/<?php echo $img[$i] ;?>"  height="50px" class="border border-dark"><br>
+              <img id="img" style="margin: 2px 0 0 0;" align="center" src="code/mannageannimalcenterhdead/picture/<?php echo $img[$i] ;?>"  width="30%" class="border border-dark"><br>
             <?php  }
           } ?>
 
@@ -563,7 +562,7 @@ $datajoin = joinshowliverow($id);
     <div class="row mt-2">
 
       <tr>
-        <th><input style="width: 100%;" width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*" multiple></th>
+        <th><input style="width: 100%;" width="100px" OnChange="Preview(this)"  class="form-control"   type="file" name="annimalimg[]" accept="image/*" multiple></th>
       </tr>
 
     </div>
@@ -577,8 +576,8 @@ $datajoin = joinshowliverow($id);
 
 <div class="float-right">
   <label class="">ผู้กรอกข้อมูล :</label>
-  <input type="text"   disabled="" value="ผู้กรอกข้อมูล">
-  <input type="hidden" namหe="W_A_E_Fillers"   value="ผู้กรอกข้อมูล">
+  <input type="text"   disabled="" value="<?php echo $_SESSION["authorities"]["Authorities_First_Name"]; ?>">
+  <input type="hidden" name="W_A_E_Fillers"   value="<?php echo $_SESSION["authorities"]["Authorities_First_Name"]; ?>">
 </div>
 
 
