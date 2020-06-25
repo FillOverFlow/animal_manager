@@ -568,7 +568,7 @@ $datajoin = joinshowliverow($id);
     <div class="row mt-2">
 
       <tr>
-        <th><input style="width: 100%;" width="100px" OnChange="Preview(this)" required class="form-control" required="เพิ่มรูป"   type="file" name="annimalimg[]" accept="image/*" multiple></th>
+        <th><input style="width: 100%;" width="100px" OnChange="Preview(this)"  class="form-control"   type="file" name="annimalimg[]" accept="image/*" multiple></th>
       </tr>
 
     </div>
@@ -584,8 +584,8 @@ $datajoin = joinshowliverow($id);
 
 <div class="float-right">
   <label class="">ผู้กรอกข้อมูล :</label>
-  <input type="text"   disabled="" value="ผู้กรอกข้อมูล">
-  <input type="hidden" namหe="W_A_E_Fillers"   value="ผู้กรอกข้อมูล">
+  <input type="text"   disabled="" value="<?php echo $_SESSION['authorities']['Authorities_First_Name']; ?>">
+  <input type="hidden" namหe="W_A_E_Fillers"  value="<?php echo $_SESSION['authorities']['Authorities_First_Name']; ?>">
 </div>
 
 

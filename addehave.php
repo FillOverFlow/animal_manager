@@ -386,8 +386,8 @@ if (empty($_SESSION["authorities"])) {
 
   <div style="margin-top: 160px;" class="col-sm" align="center" position="relative" top="100px">
     <label class="float-left">ผู้กรอกข้อมูล :</label>
-    <input type="text" value="ผู้กรอกข้อมูล"   placeholder="" disabled="disabled">
-    <input type="text" value="ผู้กรอกข้อมูล" name="A_C_C_Fillers"   placeholder="" style="display: none;">
+    <input type="text" value="<?php echo $_SESSION['authorities']['Authorities_First_Name'];?>"   placeholder="" disabled="disabled">
+    <input type="text" value="<?php echo $_SESSION['authorities']['Authorities_First_Name'];?>" name="A_C_C_Fillers"   placeholder="" style="display: none;">
   </div>
 
 </div>

@@ -9,11 +9,9 @@ $dataanimal = joinshowwild($id);
 $deliver_department = showAnimalData($tbldeliver_department,'no');
 $arrest_deparment = showAnimalData($tblarrest_deparment,'no');
 $authorities = showAnimalData($tblauthorities,'no');
-
 if (empty($_SESSION["authorities"])) {
  header ("Location: index.php");
 }
-
 ?>
 
 <!doctype html>
@@ -400,8 +398,8 @@ if (empty($_SESSION["authorities"])) {
                 <tr>
                   <th><label class="float-right">ผู้กรอกข้อมูล :</label>
                   </th> 
-                  <td><input type="text" disabled="" value="ผู้กรอกข้อมูล">
-                    <input type="hidden" name="Animal_Dead_Fillers" value="ผู้กรอกข้อมูล"></td>
+                  <td><input type="text" disabled="" value="<?php echo $_SESSION['authorities']['Authorities_First_Name'];?>">
+                    <input type="hidden" name="Animal_Dead_Fillers" value="<?php echo $_SESSION['authorities']['Authorities_First_Name'];?>"></td>
                   </tr>
 
 

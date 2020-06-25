@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 if (empty($_SESSION["authorities"])) {
  header ("Location: index.php");
@@ -8,10 +8,32 @@ error_reporting (E_ALL ^ E_NOTICE);
 $listanimal = listanimal();
 $Animal_Case_Correction_ID = $_GET['Animal_Case_Correction_ID'];
 $data = showcorrectionrow($Animal_Case_Correction_ID);
-// echo "<pre>";
-// var_dump($data);
-// echo "</pre>";
-
+$Animal_Case_Correction = 'animal_case_correction';
+$dataall = showAnimalDataedit($Animal_Case_Correction,0);
+$max = count($dataall);
+$list = [];
+$next;
+$last;
+$page;
+foreach ($dataall as $key => $value) {
+  if($value['Animal_Case_Correction_ID'] == $Animal_Case_Correction_ID){
+    $next = $key+1;
+    $page = $key+1;
+    $last = $key-1;
+    if ($last < 0) {
+      $last = 0;
+    }
+    if($next > $max-1){
+      $next = $max-1;
+    }
+    $list[] = $value['Animal_Case_Correction_ID'];
+  }else{
+    $list[] = $value['Animal_Case_Correction_ID'];
+  }
+          // print_r($value[0]);
+}
+$nextshow = $list[$next];
+$lastshow = $list[$last];
 ?>
 <!doctype html>
 <html lang="en">
@@ -329,15 +351,15 @@ $data = showcorrectionrow($Animal_Case_Correction_ID);
           if ($i < 3) {
             if($photolist[$i] == ''){ ?> 
             <?php  }else{ ?> 
-             <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="127px" class="border border-dark">
+             <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="30%" class="border border-dark">
            <?php  }
          }else if ($i >= 3){ 
           if($photolist[$i] == ''){}
             else{
               if($i == 3){?> 
-                <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="127px" style="margin-left: 50px;" class="border border-dark">
+                <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="30%" style="margin-left: 50px;" class="border border-dark">
               <?php }else{ ?>
-               <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="127px" class="border border-dark">
+               <img src="code/mannageannimaledit/picture/<?php echo $photolist[$i];?>" width="30%" class="border border-dark">
              <?php } 
            }
          }
@@ -358,113 +380,126 @@ $data = showcorrectionrow($Animal_Case_Correction_ID);
 
 
 </div>
-
-<div class="mt-5 row">
-  <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
-  <div class="col float-right" align="right"><img class="" src="picture/prin.png" width="50" height="50">  </div>
-</div>
-
-
-
-<div class="modal fade" id="showqr1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content p-3">
-      <div class="modal-header">
-        <h5 class="modal-title float-left" id="exampleModalCenterTitle">สร้าง QR-code</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="picture/logo.png" width="100%" height="100%" class="border border-dark">
-      </div>
-      <div class="mt-2">
-        <center><button type="button" class="btn btn-light">ยืนยัน</button></center>
-      </div>
+<center><button class="btn btn-light backButton" ><<</button>&nbsp;
+  <button class="btn btn-light nextButton" >>></button></center>
+  <div class="mt-5 row">
+    <div class="col float-left"><button class="btn btn-light back">ย้อนกลับ</button></div>
+    <div class="col float-right" align="right">
+      <label><?php echo $page; echo "/"; echo $max; ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="code/report/reportaddseehave.php?Animal_Case_Correction_ID=<?php echo $Animal_Case_Correction_ID; ?>"><img class="" src="picture/prin.png" width="50" height="50"></a>
     </div>
   </div>
-</div>
 
 
-<div class="modal fade" id="deleteannimal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content p-3">
-      <div class="modal-header">
-        <h5 class="modal-title float-left" id="exampleModalCenterTitle">ลบ</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <center><img src="picture/unnamed.png" width="100px" height="100px">
-          <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
+
+  <div class="modal fade" id="showqr1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title float-left" id="exampleModalCenterTitle">สร้าง QR-code</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="picture/logo.png" width="100%" height="100%" class="border border-dark">
         </div>
         <div class="mt-2">
-          <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+          <center><button type="button" class="btn btn-light">ยืนยัน</button></center>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <script type="text/javascript">
+
+  <div class="modal fade" id="deleteannimal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title float-left" id="exampleModalCenterTitle">ลบ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <center><img src="picture/unnamed.png" width="100px" height="100px">
+            <h1>ต้องการลบ<br>ข้อมูลหรือไม่</h1></center>
+          </div>
+          <div class="mt-2">
+            <button type="button" class="btn btn-light float-left">ยืนยัน</button><button type="button" class="btn btn-light float-right" data-dismiss="modal" aria-label="Close">ยกเลิก</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript">
 
 
-   $(document).ready(function() {
+     $(document).ready(function() {
 
-    $('.back').on('click', function (e) {
-      e.preventDefault()
-      window.location.replace("http://localhost/animal_manager/mannageannimaledit1.php");
+      $('.back').on('click', function (e) {
+        e.preventDefault()
+        window.location.replace("http://localhost/animal_manager/mannageannimaledit1.php");
 
-    })
-    $('#myTab a').on('click', function (e) {
-      e.preventDefault()
-      $(this).tab('show')
-    })
+      })
 
-    $('.showqr1').on('click', function () {
-      $('#showqr1').modal('show');
-    })
+      $('.nextButton').on('click',function (e){
+            //call next Query Here
+            window.location.replace("http://localhost/animal_manager/addseehave.php?Animal_Case_Correction_ID="+<?php echo $nextshow; ?>);
+          })
 
-    $('.deleteannimal').on('click', function () {
-      $('#deleteannimal').modal('show');
-    })
+      $('.backButton').on('click',function (e){
+            //call back Query Here
+            window.location.replace("http://localhost/animal_manager/addseehave.php?Animal_Case_Correction_ID="+<?php echo $lastshow; ?>);
+          })
+      $('#myTab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
 
-    $('.showeditannimal').on('click', function () {
-      $('#showeditannimal').modal('show');
-    })
+      $('.showqr1').on('click', function () {
+        $('#showqr1').modal('show');
+      })
 
-    $('.mnl').click(function(event) {
+      $('.deleteannimal').on('click', function () {
+        $('#deleteannimal').modal('show');
+      })
 
-      var page = 0;
-      var id = $(this).data('id');
-      var dism = document.getElementById("display-m");
-      var dis1 = document.getElementById("display-1");
-      var dis2 = document.getElementById("display-2");
+      $('.showeditannimal').on('click', function () {
+        $('#showeditannimal').modal('show');
+      })
+
+      $('.mnl').click(function(event) {
+
+        var page = 0;
+        var id = $(this).data('id');
+        var dism = document.getElementById("display-m");
+        var dis1 = document.getElementById("display-1");
+        var dis2 = document.getElementById("display-2");
 
 
 
-      if (id==1) {
-        dis1.style.display = 'block';
-        dism.style.display = 'none';
-        dis2.style.display = 'none';
-        page == 1 ;
-      }
-      if (id==2) {
-        dism.style.display = 'none';
-        dis1.style.display = 'none';
-        dis2.style.display = 'block';
-      }
-      else{
+        if (id==1) {
+          dis1.style.display = 'block';
+          dism.style.display = 'none';
+          dis2.style.display = 'none';
+          page == 1 ;
+        }
+        if (id==2) {
+          dism.style.display = 'none';
+          dis1.style.display = 'none';
+          dis2.style.display = 'block';
+        }
+        else{
 
-      }
+        }
 
+      });
     });
-  });
 
 
-</script>
+  </script>
 </body>
 </html>

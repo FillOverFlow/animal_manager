@@ -446,8 +446,8 @@ $authorities = showAnimalData($tblauthorities,'no');
       <div class="float-right">
         <label class="" disabled="">ผู้กรอกข้อมูล :</label>
 
-        <input type="text" name="W_A_E_Fillers"   placeholder="" disabled="" value="ผู้กรอกข้อมูล">
-        <input type="hidden" name="W_A_E_Fillers"   value="ผู้กรอกข้อมูล">
+        <input type="text" name="W_A_E_Fillers"   placeholder="" disabled="" value="<?php echo $_SESSION['authorities']['Authorities_First_Name']; ?>">
+        <input type="hidden" name="W_A_E_Fillers" value="<?php echo $_SESSION['authorities']['Authorities_First_Name']; ?>">
       </div>
       <center><button type="submit" class="btn btn-light">บันทึก</button></center>
 

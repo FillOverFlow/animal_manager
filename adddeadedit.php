@@ -467,7 +467,7 @@ if (empty($_SESSION["authorities"])) {
     <tr>
       <th><label class="float-right">ผู้กรอกข้อมูล :</label>
       </th>
-      <td><input required value="<?php echo $data[0]['Animal_Dead_Fillers']; ?>" type="text" class="w-100" name="" value="ผู้กรอกข้อมูล"  placeholder="" disabled=""><input required type="hidden" class="fullinput" name="Animal_Dead_Fillers" value="<?php echo $data[0]['Animal_Dead_Fillers']; ?>"  placeholder="" ></td>
+      <td><input required value="<?php echo $_SESSION['authorities']['Authorities_First_Name'];?>" type="text" class="w-100" name=""   placeholder="" disabled=""><input required type="hidden" class="fullinput" name="Animal_Dead_Fillers" value="<?php echo $_SESSION['authorities']['Authorities_First_Name'];?>"  placeholder="" ></td>
     </tr>
 
 

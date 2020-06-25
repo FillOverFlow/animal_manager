@@ -1,4 +1,4 @@
-<?php 
+<?php  
 session_start();
 if (empty($_SESSION["authorities"])) {
  header ("Location: index.php");
@@ -37,6 +37,7 @@ $lastshow = $list[$last];
 // echo "<pre>";
 // var_dump($dataall);
 // echo "</pre>";
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -331,7 +332,7 @@ $lastshow = $list[$last];
   </div>
 </div>
 <div class="float-right row">
-  <label class="" disabled="">ผู้กรอกข้อมูล :</label>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <label class="" disabled="">ผู้กรอกข้อมูล : <?php echo $datajoin[0]['W_A_E_Fillers'];?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 </div><br>
 <div>

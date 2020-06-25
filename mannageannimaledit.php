@@ -116,7 +116,7 @@ $data = showcorrection($search);
     </div>
 
     <button class="btn btn-light float-left back">ย้อนกลับ</button>
-    <button class='btn btn-light float-right'>รายงานการนำไปใช้ประโชยน์<br>ของสัตว์กรณีแก้ไข</button>
+    <a class='btn btn-light float-right' target="_blank" href="code/report/reportmannageannimaledit.php">รายงานการนำไปใช้ประโชยน์<br>ของสัตว์กรณีแก้ไข</a>
 
   </div>
   <div class="col-1 p-5">

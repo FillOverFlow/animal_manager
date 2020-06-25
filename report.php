@@ -54,6 +54,9 @@ if (empty($_SESSION["authorities"])) {
             <tr>
               <th><label class="float-right">ประเภทข้อมูล :</label>
               </th>
+              <?php
+              $list = ['ทั้งหมด','รายงานจ้ำานวนสัตว์ป่ากรณีแก้ไข','รายงานจ้ำานวนสัตว์ป่าที่เกิดสะสมทังหมด','รายงานชนิด',];
+              ?>
               <td><select class="form-control">
                 <option>กรุณาเลือก</option></select></td>
               </tr>

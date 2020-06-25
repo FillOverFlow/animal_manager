@@ -22,7 +22,7 @@
  	}
  	else if ($tbl == "wild_animal_exhibits" AND $type == "1") {
  		$db->where("status",'1');
- 		$db->where("Animal_Dead_ID !=",'0');
+ 		$db->where("Animal_Dead_ID",'0','>');
  		$animals = $db->get("$tbl");
  		if($db->count == 0){
  		// echo "<p> No animal </ps>";
@@ -46,6 +46,29 @@
  	}
 
  	return $animals;
+ }
+ function showAnimalDataedit($tbl,$type){
+ 	global $db;
+
+ 	if($tbl == "animal_case_correction" AND $type == "0") {
+ 		$db->where("status",'1');
+ 		$db->where("Animal_Dead_ID",'0');
+ 		$data = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+ 		
+ 	}
+ 	else if ($tbl == "animal_case_correction" AND $type == "1") {
+ 		$db->where("status",'1');
+ 		$db->where("Animal_Dead_ID",'0','>');
+ 		$data = $db->get("$tbl");
+ 		if($db->count == 0){
+ 		// echo "<p> No animal </ps>";
+ 		}
+ 		
+ 	}
+ 	return $data;
  }
 
  function getdb($tbl){
